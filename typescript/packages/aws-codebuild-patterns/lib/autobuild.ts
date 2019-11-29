@@ -61,6 +61,7 @@ export class ScheduledBuild extends cdk.Construct {
       projectName: props.projectName,
       source: this.source,
       timeout: props.timeout,
+      badge: true,
       // Enable Docker AND custom caching
       cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
       environment: props.buildEnvironment ? props.buildEnvironment :
@@ -72,7 +73,7 @@ export class ScheduledBuild extends cdk.Construct {
     });
     this.project = project
     this.buildEnvironment = props.buildEnvironment
-    this.ecrRepository.grantPull(project.role!)
+    this.ecrRepository.grantPullPush(project.role!)
     rule.addTarget(new targets.CodeBuildProject(project));
   }
 }
@@ -113,6 +114,7 @@ export class ScheduledDockerBuild extends cdk.Construct {
       projectName: props.projectName,
       source: this.source,
       timeout: props.timeout,
+      badge: true,
       // Enable Docker AND custom caching
       cache: codebuild.Cache.local(codebuild.LocalCacheMode.DOCKER_LAYER, codebuild.LocalCacheMode.CUSTOM),
       environment: {
@@ -145,7 +147,7 @@ export class ScheduledDockerBuild extends cdk.Construct {
       })
     });
 
-    this.ecrRepository.grantPull(project.role!);
-    rule.addTarget(new targets.CodeBuildProject(project));
+    this.ecrRepository.grantPullPush(project.role!);
+    rule.addTarget(new targets.CodeBuildProject(project))
   }
 }
