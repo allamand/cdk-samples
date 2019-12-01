@@ -238,8 +238,6 @@ export class AutoBuild extends cdk.Stack {
           build: {
             commands: [
               'echo "Building image now"',
-              // 'wget https://raw.githubusercontent.com/aws/aws-cdk/5f2025583dba511dc6430f889eed01c53c1ba5aa/Dockerfile -O Dockerfile.new',
-              // 'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" -f Dockerfile.new .',
               'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" .',
               `docker push pahud/aws-cdk-autobuild:latest`,
             ]
