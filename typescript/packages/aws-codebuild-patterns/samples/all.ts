@@ -238,9 +238,15 @@ export class AutoBuild extends cdk.Stack {
           build: {
             commands: [
               'echo "Building image now"',
-              'wget https://raw.githubusercontent.com/aws/aws-cdk/5f2025583dba511dc6430f889eed01c53c1ba5aa/Dockerfile -O Dockerfile.new',
-              'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" -f Dockerfile.new .',
+              // 'wget https://raw.githubusercontent.com/aws/aws-cdk/5f2025583dba511dc6430f889eed01c53c1ba5aa/Dockerfile -O Dockerfile.new',
+              // 'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" -f Dockerfile.new .',
+              'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" .',
               `docker push pahud/aws-cdk-autobuild:latest`,
+            ]
+          },
+          post_build: {
+            commands: [
+              `aws --region ${region} sns publish --topic-arn $SNS_TOPIC_ARN --message "[OK] awscdk-docker-autobuild autobuild completed"`
             ]
           }
         }
@@ -263,7 +269,7 @@ export class AutoBuild extends cdk.Stack {
         }
       },
       schedule: events.Schedule.rate(cdk.Duration.days(1)),
-      timeout: cdk.Duration.hours(6)
+      timeout: cdk.Duration.hours(2)
     })
     // allow codebuild role to ssm get parameters
     awscdkAutoBuild.project.role!.addToPolicy(new iam.PolicyStatement({
@@ -273,6 +279,9 @@ export class AutoBuild extends cdk.Stack {
         `arn:aws:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_PASSWORD`,
       ]
     }))
+
+    // allow codebuild role to publish SNS topic to notify the autobuild result
+    topic.grantPublish(awscdkAutoBuild.project.role!)
 
     /**
      * pahud/sam-cli-docker
