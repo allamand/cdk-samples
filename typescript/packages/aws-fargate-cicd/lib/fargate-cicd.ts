@@ -9,7 +9,6 @@ import ecs = require('@aws-cdk/aws-ecs');
 import ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
 import codecommit = require('@aws-cdk/aws-codecommit');
 import { CodeBuildProject } from '@aws-cdk/aws-events-targets';
-import { Duration, RemovalPolicy } from '@aws-cdk/core';
 import { Vpc } from '@aws-cdk/aws-ec2';
 
 const DOCKER_IMAGE_PREFIX = 'fargate-cicd-sample'
@@ -134,11 +133,11 @@ export class FargateCICD extends cdk.Stack {
         fargatesvc.targetGroup.setAttribute('deregistration_delay.timeout_seconds', '30')
         // customize the healthcheck to speed up the ecs rolling update
         fargatesvc.targetGroup.configureHealthCheck({
-            interval: Duration.seconds(5),
+            interval: cdk.Duration.seconds(5),
             healthyHttpCodes: '200',
             healthyThresholdCount: 2,
             unhealthyThresholdCount: 3,
-            timeout: Duration.seconds(4),
+            timeout: cdk.Duration.seconds(4),
         })
 
         // CodePipeline
@@ -220,6 +219,16 @@ Create a "imagedefinitions.json" file and git add/push into CodeCommit repositor
 
         new cdk.CfnOutput(this, 'CodeBuildProjectName', {
             value: CodeBuildProject.name
+        })
+
+        new cdk.CfnOutput(this, 'EcrRepoName', {
+            value: this.ecrRepository.repositoryName
+        })
+
+        new cdk.CfnOutput(this, 'DeleteEcrRepoCommand', {
+            value: `
+            aws ecr --region ${this.region} delete-repository --repository-name ${this.ecrRepository.repositoryName} --force
+            `
         })
     }
 }
