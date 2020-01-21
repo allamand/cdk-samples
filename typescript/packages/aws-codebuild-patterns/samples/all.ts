@@ -213,6 +213,21 @@ export class AutoBuild extends cdk.Stack {
     })
 
     /**
+    *  mreferre/eksutils
+    */
+    new ScheduledDockerBuild(this, 'BuildEksUtils', {
+      projectName: 'eksutils-autobuild',
+      source: codebuild.Source.gitHub({
+        owner: 'mreferre',
+        repo: 'eksutils'
+      }),
+      schedule: events.Schedule.rate(cdk.Duration.days(1)),
+      repositoryName: 'eksutils-docker-autobuild',
+      timeout: cdk.Duration.hours(4),
+      ecrRepoRemovalPolicy: cdk.RemovalPolicy.DESTROY
+    })
+
+    /**
      * aws/aws-cdk
      */
     const awscdkAutoBuild = new ScheduledBuild(this, 'AwscdkAutoBuild', {
