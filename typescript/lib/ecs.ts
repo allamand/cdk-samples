@@ -42,9 +42,11 @@ export class EcsEc2Stack extends cdk.Stack {
 
     const taskDefinition = new ecs.TaskDefinition(this, 'Task', {
       compatibility: ecs.Compatibility.EC2,
-      memoryMiB: '512',
-      cpu: '256'
+      memoryMiB: '1024',
+      cpu: '512',
     })
+
+    const logGroupName = this.stackName
 
     taskDefinition
       .addContainer('flask', {
@@ -53,15 +55,30 @@ export class EcsEc2Stack extends cdk.Stack {
         environment: {
           PLATFORM: 'Amazon ECS'
         },
+        logging: ecs.LogDrivers.firelens({
+          options: {
+            Name: 'cloudwatch',
+            region: this.region,
+            // disable the log_key to send full JSON event log to cloudwatch
+            // log_key: 'log',
+            log_group_name: logGroupName,
+            auto_create_group: 'true',
+            log_stream_prefix: 'flask-'
+          }
+        })
       })
       .addPortMappings({
         containerPort: 5000
       });
 
+    new cdk.CfnOutput(this, 'CloudwatchLogGrupURL', {
+      value: `https://${this.region}.console.aws.amazon.com/cloudwatch/home?region=${this.region}#logStream:group=${logGroupName}`
+    })
+
     const webSvc = new ecsPatterns.ApplicationLoadBalancedEc2Service(this, 'webSvc', {
       cluster,
       taskDefinition,
-      desiredCount: 3,
+      desiredCount: 2,
     })
 
     new cdk.CfnOutput(this, 'ALBSvcURL', {
