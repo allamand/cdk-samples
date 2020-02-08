@@ -3,6 +3,7 @@ import cdk = require('@aws-cdk/core');
 import lambda = require('@aws-cdk/aws-lambda');
 import path = require('path');
 import apigateway = require('@aws-cdk/aws-apigateway');
+import * as logs from '@aws-cdk/aws-logs';
 import { Vpc, SubnetType } from '@aws-cdk/aws-ec2';
 
 export class ServerlessRestApiStack extends cdk.Stack {
@@ -45,8 +46,13 @@ export class ServerlessRestApiStack extends cdk.Stack {
         },
       });`),
       handler: 'index.handler',
-      runtime: lambda.Runtime.NODEJS_8_10,
+      runtime: lambda.Runtime.NODEJS_12_X,
+      logRetention: logs.RetentionDays.ONE_MONTH,
     });
+
+    new cdk.CfnOutput(this, 'LambdaCloudwatchLogGroupURL', {
+      value: `https://${this.region}.console.aws.amazon.com/cloudwatch/home?region=${this.region}#logStream:group=${fn.logGroup.logGroupName}`
+    })
 
     new apigateway.LambdaRestApi(this, 'NodeRestAPI', {
       handler: fn,
