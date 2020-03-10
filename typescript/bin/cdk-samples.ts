@@ -14,6 +14,7 @@ import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
 import { EksNginxStack } from '../lib/eks-nginx-svc';
 import { ClientVpn } from '../lib/vpc-client-vpn';
+import { SARStack } from '../lib/serverlessApp;'
 
 
 const app = new cdk.App();
@@ -109,3 +110,10 @@ const apiGatewayCustomDomain = new ApiGatewayCustomDomainStack(app, 'apiGatewayC
  */
 
 const cvpn = new ClientVpn(app, 'ClientVpn', { env })
+
+
+/**
+ * Serverless Application from SAR
+ */
+
+ const serverlessApp = new SARStack(app, 'ServerlessApp', { env })
