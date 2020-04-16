@@ -4,7 +4,6 @@ import cdk = require('@aws-cdk/core');
 import { FargateAlbSvcStack } from '../lib/fargate-alb-svc';
 import { FargateCICDStack } from '../lib/fargate-cicd';
 import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
-// import { AwsFireLensStack } from '../lib/awsfirelens';
 import { FargateEventTarget } from '../lib/fargate-event-targets';
 import { EksIrsaStack } from '../lib/eks-irsa';
 import { EcsEc2Stack } from '../lib/ecs';
@@ -14,8 +13,7 @@ import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
 import { EksNginxStack } from '../lib/eks-nginx-svc';
 import { ClientVpn } from '../lib/vpc-client-vpn';
-import { SARStack } from '../lib/serverlessApp;'
-
+import { SARStack } from '../lib/serverless-app';
 
 const app = new cdk.App();
 

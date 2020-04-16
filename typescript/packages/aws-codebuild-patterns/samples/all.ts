@@ -15,7 +15,7 @@ export class AutoBuild extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps = {}) {
     super(scope, id, props)
 
-    const topicArn = `arn:aws:sns:${Stack.of(this).region}:${Stack.of(this).account}:SNS2IM`
+    const topicArn = `arn:${Stack.of(this).partition}:sns:${Stack.of(this).region}:${Stack.of(this).account}:SNS2IM`
     const topic = Topic.fromTopicArn(this, 'Topic', topicArn);
     const region = Stack.of(this).region
     const account = Stack.of(this).account
@@ -42,7 +42,7 @@ export class AutoBuild extends cdk.Stack {
             value: 'us-east-1'
           },
           SNS_TOPIC_ARN: {
-            value: `arn:aws:sns:${region}:${account}:SNS2IM`
+            value: `arn:${Stack.of(this).partition}:sns:${region}:${account}:SNS2IM`
           }
         }
       },
@@ -62,11 +62,11 @@ export class AutoBuild extends cdk.Stack {
     // allow codebuild role to publish/update app to SAR
     build.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:CreateApplication'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/*`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/*`]
     }))
     build.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:UpdateApplication', 'serverlessrepo:CreateApplicationVersion'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/aws-lambda-layer-eksctl`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/aws-lambda-layer-eksctl`]
     }))
 
 
@@ -91,7 +91,7 @@ export class AutoBuild extends cdk.Stack {
             value: 'us-east-1'
           },
           SNS_TOPIC_ARN: {
-            value: `arn:aws:sns:${region}:${account}:SNS2IM`
+            value: `arn:${Stack.of(this).partition}:sns:${region}:${account}:SNS2IM`
           }
         }
       },
@@ -111,11 +111,11 @@ export class AutoBuild extends cdk.Stack {
     // allow codebuild role to publish/update app to SAR
     buildAwsSdkBotocore.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:CreateApplication'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/*`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/*`]
     }))
     buildAwsSdkBotocore.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:UpdateApplication', 'serverlessrepo:CreateApplicationVersion'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/lambda-layer-botocore`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/lambda-layer-botocore`]
     }))
 
     /**
@@ -139,7 +139,7 @@ export class AutoBuild extends cdk.Stack {
             value: 'us-east-1'
           },
           SNS_TOPIC_ARN: {
-            value: `arn:aws:sns:${region}:${account}:SNS2IM`
+            value: `arn:${Stack.of(this).partition}:sns:${region}:${account}:SNS2IM`
           }
         }
       },
@@ -159,11 +159,11 @@ export class AutoBuild extends cdk.Stack {
     // allow codebuild role to publish/update app to SAR
     buildAwsSdkJs.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:CreateApplication'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/*`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/*`]
     }))
     buildAwsSdkJs.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['serverlessrepo:UpdateApplication', 'serverlessrepo:CreateApplicationVersion'],
-      resources: [`arn:aws:serverlessrepo:us-east-1:${account}:applications/lambda-layer-aws-sdk-js`]
+      resources: [`arn:${Stack.of(this).partition}:serverlessrepo:us-east-1:${account}:applications/lambda-layer-aws-sdk-js`]
     }))
 
 
@@ -252,9 +252,17 @@ export class AutoBuild extends cdk.Stack {
           },
           build: {
             commands: [
-              'echo "Building image now"',
+              'echo "Building pahud/aws-cdk-autobuild:latest now"',
               'docker build -t pahud/aws-cdk-autobuild --build-arg BUILD_ARGS="--skip-test" .',
               `docker push pahud/aws-cdk-autobuild:latest`,
+              'echo "Building pahud/aws-cdk-runtime now"',
+              'wget https://raw.githubusercontent.com/pahud/aws-cdk-autobuild/master/Dockerfile.runtime -O Dockerfile.runtime',
+              'docker build -t pahud/aws-cdk-autobuild  -f Dockerfile.runtime .',
+              'docker tag pahud/aws-cdk-autobuild:latest pahud/aws-cdk-autobuild:latest-node-lts ',
+              'docker tag pahud/aws-cdk-autobuild:latest pahud/aws-cdk-autobuild:latest-typescript ',
+              `docker push pahud/aws-cdk-autobuild:latest`,
+              `docker push pahud/aws-cdk-autobuild:latest-node-lts`,
+              `docker push pahud/aws-cdk-autobuild:latest-typescript`
             ]
           },
           post_build: {
@@ -277,7 +285,7 @@ export class AutoBuild extends cdk.Stack {
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE
           },
           SNS_TOPIC_ARN: {
-            value: `arn:aws:sns:${region}:${account}:SNS2IM`
+            value: `arn:${Stack.of(this).partition}:sns:${region}:${account}:SNS2IM`
           }
         }
       },
@@ -288,8 +296,8 @@ export class AutoBuild extends cdk.Stack {
     awscdkAutoBuild.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['ssm:GetParameters'],
       resources: [
-        `arn:aws:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_USERNAME`,
-        `arn:aws:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_PASSWORD`,
+        `arn:${Stack.of(this).partition}:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_USERNAME`,
+        `arn:${Stack.of(this).partition}:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_PASSWORD`,
       ]
     }))
 
@@ -319,7 +327,7 @@ export class AutoBuild extends cdk.Stack {
             type: codebuild.BuildEnvironmentVariableType.PARAMETER_STORE
           },
           SNS_TOPIC_ARN: {
-            value: `arn:aws:sns:${region}:${account}:SNS2IM`
+            value: `arn:${Stack.of(this).partition}:sns:${region}:${account}:SNS2IM`
           }
         }
       },
@@ -330,8 +338,8 @@ export class AutoBuild extends cdk.Stack {
     samcliBuild.project.role!.addToPolicy(new iam.PolicyStatement({
       actions: ['ssm:GetParameters'],
       resources: [
-        `arn:aws:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_USERNAME`,
-        `arn:aws:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_PASSWORD`,
+        `arn:${Stack.of(this).partition}:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_USERNAME`,
+        `arn:${Stack.of(this).partition}:ssm:${region}:${account}:parameter/CodeBuild/DOCKER_PASSWORD`,
       ]
     }))
 

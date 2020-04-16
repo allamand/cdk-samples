@@ -2,14 +2,16 @@ import cdk = require('@aws-cdk/core');
 import { Vpc } from '@aws-cdk/aws-ec2';
 import { Cluster, ContainerImage, TaskDefinition, Compatibility } from '@aws-cdk/aws-ecs';
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns';
-import { EcsTask } from '@aws-cdk/aws-events-targets';
 
 export class FargateAlbSvcStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const vpc = Vpc.fromLookup(this, 'VPC', {
+    const vpc = this.node.tryGetContext('use_default_vpc') ? Vpc.fromLookup(this, 'VPC', {
       isDefault: true
+    }) : new Vpc(this, 'VPC', {
+      maxAzs: 3,
+      natGateways:1
     })
 
     const cluster = new Cluster(this, 'Cluster', {
