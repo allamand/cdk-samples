@@ -7,7 +7,7 @@ import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
 import { FargateEventTarget } from '../lib/fargate-event-targets';
 import { EksIrsaStack } from '../lib/eks-irsa';
 import { EcsEc2Stack } from '../lib/ecs';
-import { EksStack } from '../lib/eks';
+import { EksStack, Bottlerocket } from '../lib/eks';
 import { TranscribeStack } from '../lib/transcribe';
 import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
@@ -75,9 +75,11 @@ const t = new TranscribeStack(app, 'TranscribeStack', { env })
 
 
 /**
- *  Amazon EkS with Fargate profile
+ *  Amazon EkS
  */
-const eks = new EksStack(app, app.node.tryGetContext('stack_name') ?? 'EksStack', { env })
+const eks = new EksStack(app, app.node.tryGetContext('eks_stack_name') ?? 'EksStack', { env })
+const eksBottlerocket = new Bottlerocket(app, app.node.tryGetContext('bottlerocket_stack_name') ?? 'Bottlerocket', { env })
+
 
 
 /**

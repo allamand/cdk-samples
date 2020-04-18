@@ -20,9 +20,38 @@ export class EksStack extends cdk.Stack {
     const cluster = new eks.Cluster(this, 'EKSCluster', {
       vpc,
       mastersRole,
-      version: '1.15',
-      defaultCapacity: 2,
-      defaultCapacityInstance: new ec2.InstanceType('t3.large')
+    });
+
+    new cdk.CfnOutput(this, 'Region', { value: this.region })
+  }
+}
+
+export class Bottlerocket extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const vpc = this.node.tryGetContext('use_default_vpc') ? ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
+      new ec2.Vpc(this, 'Vpc', {
+        maxAzs: 3,
+        natGateways: 1
+      });
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const cluster = new eks.Cluster(this, 'EKSCluster', {
+      vpc,
+      mastersRole,
+      defaultCapacity: 0
+    });
+
+    // add bottlerocket nodes
+    cluster.addCapacity('BottlerocketNodes', {
+      instanceType: new ec2.InstanceType('t3.small'),
+      minCapacity: 2,
+      machineImageType: eks.MachineImageType.BOTTLEROCKET,
+      spotPrice: '0.0272'
     });
 
     new cdk.CfnOutput(this, 'Region', { value: this.region })
