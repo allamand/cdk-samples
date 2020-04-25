@@ -40,10 +40,17 @@ export class EksFargate extends cdk.Stack {
       assumedBy: new iam.AccountRootPrincipal()
     });
 
-    const cluster = new eks.FargateCluster(this, 'EKSFargateCluster', {
+    const cluster = new eks.Cluster(this, 'Cluster', {
       vpc,
       mastersRole,
     });
+
+    cluster.addFargateProfile('FargateProfile', {
+      selectors: [
+        { namespace: 'default' },
+        { namespace: 'kube-system' },
+      ]
+    })
 
     new cdk.CfnOutput(this, 'Region', { value: this.region })
   }
