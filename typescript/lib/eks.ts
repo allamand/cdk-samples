@@ -26,6 +26,29 @@ export class EksStack extends cdk.Stack {
   }
 }
 
+export class EksFargate extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const vpc = this.node.tryGetContext('use_default_vpc') ? ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
+      new ec2.Vpc(this, 'Vpc', {
+        maxAzs: 3,
+        natGateways: 1
+      });
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const cluster = new eks.FargateCluster(this, 'EKSFargateCluster', {
+      vpc,
+      mastersRole,
+    });
+
+    new cdk.CfnOutput(this, 'Region', { value: this.region })
+  }
+}
+
 export class Bottlerocket extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -47,12 +70,16 @@ export class Bottlerocket extends cdk.Stack {
     });
 
     // add bottlerocket nodes
-    cluster.addCapacity('BottlerocketNodes', {
+    const bottlerocketAsg = cluster.addCapacity('BottlerocketNodes', {
       instanceType: new ec2.InstanceType('t3.small'),
       minCapacity: 2,
       machineImageType: eks.MachineImageType.BOTTLEROCKET,
-      spotPrice: '0.0272'
+      spotPrice: '0.0272',
+      keyName: 'aws-pahud'
     });
+
+    // enable SSM agent for the bottlerocket IAM instance role
+    bottlerocketAsg.role.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSSMManagedInstanceCore'))
 
     new cdk.CfnOutput(this, 'Region', { value: this.region })
   }
