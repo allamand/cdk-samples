@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
+import { CdkVpcOnlyStack } from '../lib/vpc';
 import { FargateAlbSvcStack } from '../lib/fargate-alb-svc';
 import { FargateCICDStack } from '../lib/fargate-cicd';
 import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
 import { FargateEventTarget } from '../lib/fargate-event-targets';
 import { EksIrsaStack } from '../lib/eks-irsa';
 import { EcsEc2Stack } from '../lib/ecs';
-import { EksStack, Bottlerocket, EksFargate } from '../lib/eks';
+import { EksFargate } from '../lib/eks';
 import { TranscribeStack } from '../lib/transcribe';
 import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
@@ -21,6 +22,11 @@ const env = {
     region: app.node.tryGetContext('region') || process.env.CDK_INTEG_REGION || process.env.CDK_DEFAULT_REGION,
     account: app.node.tryGetContext('account') || process.env.CDK_INTEG_ACCOUNT || process.env.CDK_DEFAULT_ACCOUNT
 };
+
+/**
+ * Get or Create VPC
+ */
+const vpc = new CdkVpcOnlyStack(app, 'CdkVpcOnly', { env })
 
 
 /**
@@ -77,9 +83,9 @@ const t = new TranscribeStack(app, 'TranscribeStack', { env })
 /**
  *  Amazon EkS
  */
-const eks = new EksStack(app, app.node.tryGetContext('eks_stack_name') ?? 'EksStack', { env })
-const eksBottlerocket = new Bottlerocket(app, app.node.tryGetContext('bottlerocket_stack_name') ?? 'Bottlerocket', { env })
-const eksFargate = new EksFargate(app, app.node.tryGetContext('eksfargate_stack_name') ?? 'EksFargate', { env })
+// const eks = new EksStack(app, app.node.tryGetContext('eks_stack_name') ?? 'EksStack', { env })
+// const eksBottlerocket = new Bottlerocket(app, app.node.tryGetContext('bottlerocket_stack_name') ?? 'Bottlerocket', { env })
+const eksFargate = new EksFargate(app, app.node.tryGetContext('eksfargate_stack_name') ?? 'EksFgStack', { env })
 
 
 
