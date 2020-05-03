@@ -33,7 +33,16 @@ cdk deploy EksStack -c enable_stack=EksStack
 cdk diff 'Eks*' -c enable_stack=EksStack,EksFargate
 ```
 
+# Deploy in the default VPC or any existing VPC
 
+You may deploy the stack in your existing VPC to save the deployment time
+```bash
+
+# enable and deploy the EksStack in my default vpc
+cdk deploy EksStack -c enable_stack=EksStack -c use_default_vpc=1
+# enable and deploy the EksStack in vpc-123456
+cdk deploy EksStack -c enable_stack=EksStack -c use_vpc_id=vpc-123456
+```
 
 
 # Available NPM Packages
