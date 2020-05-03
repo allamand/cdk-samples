@@ -44,6 +44,19 @@ cdk deploy EksStack -c enable_stack=EksStack -c use_default_vpc=1
 cdk deploy EksStack -c enable_stack=EksStack -c use_vpc_id=vpc-123456
 ```
 
+# Deploy with different AWS_PROFILE
+
+```bash
+cdk --profile another diff EksStack -c enable_stack=EksStack
+```
+# Deploy into a different AWS region
+
+```bash
+# let's presume the default region is us-east-1 and we are deploying to ap-northeast-1
+AWS_REGION=ap-northeast-1 cdk diff EksStack -c enable_stack=EksStack
+```
+ 
+
 
 # Available NPM Packages
 
