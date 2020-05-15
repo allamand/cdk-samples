@@ -23,7 +23,7 @@ const env = {
     account: app.node.tryGetContext('account') || process.env.CDK_INTEG_ACCOUNT || process.env.CDK_DEFAULT_ACCOUNT
 };
 
-const enabledStacks = app.node.tryGetContext('enable_stack').split(',')
+const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetContext('enable_stack').split(',') : ''
 
 var factory = {
     'CdkVpcOnlyStack': CdkVpcOnlyStack,
