@@ -1,6 +1,6 @@
 # cdk-samples in TypeScript
 
-A curated list of AWS CDK samples in **TypeScript**. Check [bin/cdk-samples.ts](bin/cdk-samples.ts) for all available samples and usage.
+A curated list of AWS CDK samples in **TypeScript**. 
 
 Make sure you run `npm install` to instrall required packages defined in `packages.json` and `npm run build` to compile typescript to javascript.
 
@@ -10,35 +10,52 @@ For example:
 $ cd cdk-samples/typescript
 # install the latest aws-cdk in typescript
 $ npm i -g aws-cdk
-# run 'cdk bootstrap' to generate the staging s3 bucket(only for the 1st time)
-$ cdk bootstrap
 # install all required packages
 $ npm i
-# compile typescript to javascript
-$ npm run build  // alternatively you can open another terminal and run 'npm run watch'
-# list all available stacks
-$ cdk list
-# Now you can 'cdk deploy' your favorite stack from the list
-# e.g. cdk deploy -c region=ap-northeast-1 fargateAlbSvc
+# run 'cdk bootstrap' to generate the staging s3 bucket(only for the 1st time)
+$ cdk bootstrap
+
 ```
-
-
-
 
 # Available Sample Libraries
 
-- [x] **EcsEc2Service** Amazon ECS running with EC2
-- [x] **FargateAlbService** - A simple PHP service running with AWS Fargate and ALB
-- [x] **FargateCICD** - Building Fargate CI/CD pipelines from scratch with AWS CDK([README](./packages/aws-fargate-cicd/README.md))
-- [x] **ServerlessRestAPI** - Serverless REST API with AWS Lambda in VPC and Amazon API Gateweway([tweet](https://twitter.com/pahudnet/status/1192283115793764352))
-- [x] **fargateEventTarget** - Fargate as CloudWatch Events target 
-- [x] **APISIX** - [APISIX refarch on AWS](apisix/README.md)([tweet](https://twitter.com/pahudnet/status/1187770945471049729)) 
-- [x] **apiGatewayCustomDomain** API Gateway wildcard custom domain with ACM and Route53 sample([tweet](https://twitter.com/pahudnet/status/1186471121769525249))
-- [x] **TranscribeStack** - Amazon Transcribe with Auto SRT generation refarch([tweet](https://twitter.com/pahudnet/status/1183307485035151360)|[tweet](https://twitter.com/pahudnet/status/1183607846425903104))
-- [x] **LambdaRestApiStack** - API Gateway REST API with AWS Lambda as backend handler([tweet](https://twitter.com/pahudnet/status/1192283115793764352))
-- [ ] **awsFireLensDemo** - [WIP] AWS Fargate with Firelens log driver
-- [ ] **EksIrsaStack** - [WIP] Amazon EKS with IRSA support
+check the list defined in the [factory](https://github.com/pahud/cdk-samples/blob/2c253c2e9293c72de47e4150d3a7d333648567cd/typescript/bin/cdk-samples.ts#L28)
 
+# Deploy Stack(s)
+
+As all stack classes are imported into a single [cdk-samples.ts](bin/cdk-samples.ts) yet will not initiate the object unless you enable it. That being said, you need enable the stack before you can deploy it, e.g.
+
+```bash
+# enable and deploy the EksStack 
+cdk diff EksStack -c enable_stack=EksStack   
+cdk deploy EksStack -c enable_stack=EksStack
+# in some cases, you might need enable multiple stacks
+cdk diff 'Eks*' -c enable_stack=EksStack,EksFargate
+```
+
+# Deploy in the default VPC or any existing VPC
+
+You may deploy the stack in your existing VPC to save the deployment time
+```bash
+
+# enable and deploy the EksStack in my default vpc
+cdk deploy EksStack -c enable_stack=EksStack -c use_default_vpc=1
+# enable and deploy the EksStack in vpc-123456
+cdk deploy EksStack -c enable_stack=EksStack -c use_vpc_id=vpc-123456
+```
+
+# Deploy with different AWS_PROFILE
+
+```bash
+cdk --profile another diff EksStack -c enable_stack=EksStack
+```
+# Deploy into a different AWS region
+
+```bash
+# let's presume the default region is us-east-1 and we are deploying to ap-northeast-1
+AWS_REGION=ap-northeast-1 cdk diff EksStack -c enable_stack=EksStack
+```
+ 
 
 
 # Available NPM Packages
