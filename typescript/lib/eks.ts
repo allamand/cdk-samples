@@ -4,7 +4,7 @@ import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 import { Stack } from '@aws-cdk/core';
 
-const DEFAULT_CLUSTER_VERSION = '1.15'
+const DEFAULT_CLUSTER_VERSION = '1.16'
 
 export class EksStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
