@@ -28,7 +28,7 @@ cdk diff -c use_default_vpc=1
 cdk diff -c use_vpc_id=vpc-xxxxxxx
 ```
 
-or jsut create a new VPC with single NAT Gateway if you do not pass the context 
+or just create a new VPC with single NAT Gateway if you do not pass the context 
 variables as above.
 
 ## Passing and Retrieving Variables
