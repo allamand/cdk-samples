@@ -46,13 +46,13 @@ const config_json_path = path.join(__dirname + '/' + 'custom.config.json')
 const cm: {[key:string]:string} = JSON.parse(fs.readFileSync(config_json_path).toString())
 
 // get the var 
-function get_var(scope: Scope, key: string, configMap: { [key: string]: string } ): string {
+function get_var(scope: Scope, configMap: { [key: string]: string }, key: string): string {
   return scope.node.tryGetContext(key) ?? process.env[key] ?? configMap[key] ?? undefined
 }
 
-const clusterName = get_var(this, 'clusterName', cm)
-const clusterArn = get_var(this, 'clusterArn', cm)
-const clusterEndpoint = get_var(this, 'clusterEndpoint', cm)
+const clusterName = get_var(this, cm, 'clusterName')
+const clusterArn = get_var(this, cm, 'clusterArn')
+const clusterEndpoint = get_var(this, cm, 'clusterEndpoint')
 ```
 
 Similarly, it's also very straight-forward to load your custom configuration from provided YAML file.
