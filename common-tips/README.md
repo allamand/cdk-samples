@@ -31,7 +31,7 @@ cdk diff -c use_vpc_id=vpc-xxxxxxx
 or just create a new VPC with single NAT Gateway if you do not pass the context 
 variables as above.
 
-## Passing and Retrieving Variables
+## Passing Variables
 
 In AWS CDK, you can get variables from context variables or enveironment variables.
 Some production workload even load parameters from external managed service such as 
