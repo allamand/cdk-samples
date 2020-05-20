@@ -119,6 +119,7 @@ npx cdk —app 'npx ts-node demo.ts' diff -c foo=bar
 
 <details>
     <summary>And we get the cdk output immediately</summary>
+    
 ```
 Resources
 [+] AWS::SQS::Queue Foo/FooQueue FooFooQueue09977CB5 
@@ -126,6 +127,7 @@ Resources
 [+] AWS::SNS::Subscription Foo/FooQueue/FooStackFooFooTopic92385123 FooFooQueueFooStackFooFooTopic923851233A020E7E 
 [+] AWS::SNS::Topic Foo/FooTopic FooFooTopicA67D0BD0 
 ```
+    
 </details>
 
 
