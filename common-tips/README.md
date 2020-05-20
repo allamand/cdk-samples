@@ -60,7 +60,7 @@ Similarly, it's also very straight-forward to load your custom configuration fro
 ```ts
 const config = yaml.safeLoad(fs.readFileSync("./config/" + configFileName + ".yaml", "utf8"));
 ```
-_yaml sample provided by [Noah Liu](https://t.me/AWSCDK/2348)_
+_yaml sample provided by [Noah Liu](https://t.me/AWSCDK/2348) and [Angus Lee](https://t.me/angusfz)_
 
 TODO: extend this sample to get `AWS SSM Parameter Store`.
 
