@@ -3,6 +3,8 @@ import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 import { Stack } from '@aws-cdk/core';
+import { VpcProvider } from './vpc';
+
 
 const DEFAULT_CLUSTER_VERSION = '1.16'
 
@@ -13,11 +15,31 @@ export class EksStack extends cdk.Stack {
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
-    const vpc = this.node.tryGetContext('use_default_vpc') === '1' ?
-      ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
-      this.node.tryGetContext('use_vpc_id') ?
-        ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
-        new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
+    const vpc = VpcProvider.getOrCreate(this)
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    new eks.Cluster(this, 'EKSCluster', {
+      vpc,
+      mastersRole,
+      version: clusterVersion,
+    });
+
+    new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
+    new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
+  }
+}
+
+export class EksIrsa extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
 
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()
@@ -29,8 +51,27 @@ export class EksStack extends cdk.Stack {
       version: clusterVersion,
     });
 
+    const sa = cluster.addServiceAccount('MyServiceAccount', {});
+
+    cluster.addResource('mypod2', {
+      apiVersion: 'v1',
+      kind: 'Pod',
+      metadata: { name: 'mypod2' },
+      spec: {
+        serviceAccountName: sa.serviceAccountName,
+        containers: [
+          {
+            name: 'main',
+            image: 'pahud/aws-whoami',
+            ports: [{ containerPort: 5000 }],
+          }
+        ]
+      }
+    });
+
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
     new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
+    new cdk.CfnOutput(this, 'SARoleArn', { value: sa.role.roleArn })
   }
 }
 
@@ -41,11 +82,7 @@ export class EksFargate extends cdk.Stack {
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
-    const vpc = this.node.tryGetContext('use_default_vpc') === '1' ?
-      ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
-      this.node.tryGetContext('use_vpc_id') ?
-        ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
-        new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
+    const vpc = VpcProvider.getOrCreate(this)
 
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()

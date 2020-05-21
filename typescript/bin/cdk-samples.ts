@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
-import { CdkVpcOnlyStack } from '../lib/vpc';
+import { VpcProvider } from '../lib/vpc';
 import { FargateAlbSvcStack } from '../lib/fargate-alb-svc';
 import { FargateCICDStack } from '../lib/fargate-cicd';
 import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
 import { FargateEventTarget } from '../lib/fargate-event-targets';
-// import { EksIrsaStack } from '../lib/eks-irsa';
 import { EcsEc2Stack } from '../lib/ecs';
-import { EksStack, EksFargate, Bottlerocket } from '../lib/eks';
+import { EksStack, EksFargate, Bottlerocket, EksIrsa } from '../lib/eks';
 import { TranscribeStack } from '../lib/transcribe';
 import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
 import { EksNginxStack } from '../lib/eks-nginx-svc';
 import { ClientVpn } from '../lib/vpc-client-vpn';
 import { SARStack } from '../lib/serverless-app';
+import { GlobalAcceleratorStack } from '../lib/global-accelerator';
 
 const app = new cdk.App();
 
@@ -26,7 +26,7 @@ const env = {
 const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetContext('enable_stack').split(',') : ''
 
 var factory = {
-    'CdkVpcOnlyStack': CdkVpcOnlyStack,
+    'CdkVpcOnlyStack': VpcProvider,
     'FargateAlbSvcStack': FargateAlbSvcStack,
     'FargateCICDStack': FargateCICDStack,
     'ServerlessRestApiStack': ServerlessRestApiStack,
@@ -40,7 +40,9 @@ var factory = {
     'ApiSixStack': ApiSixStack,
     'EksNginxStack': EksNginxStack,
     'ClientVpn': ClientVpn,
-    'SARStack': SARStack
+    'SARStack': SARStack,
+    'GlobalAcceleratorStack': GlobalAcceleratorStack,
+    'EksIrsa': EksIrsa,
 }
 
 function activateIfEnabled(stackName: string) {

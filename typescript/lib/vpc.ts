@@ -1,18 +1,29 @@
 import cdk = require('@aws-cdk/core');
 import ec2 = require('@aws-cdk/aws-ec2');
 
-export class CdkVpcOnlyStack extends cdk.Stack {
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-        super(scope, id, props);
+export class VpcProvider extends cdk.Stack {
+    public static getOrCreate(scope: cdk.Construct) {
+        const stack = cdk.Stack.of(scope)
+        const vpc = stack.node.tryGetContext('use_default_vpc') === '1' ?
+            ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
+            stack.node.tryGetContext('use_vpc_id') ?
+                ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
+                new ec2.Vpc(stack, 'Vpc', { maxAzs: 3, natGateways: 1 });
 
-        // use an existing vpc or create a new one
-        const vpc = this.node.tryGetContext('use_default_vpc') === '1' ?
-            ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
-            this.node.tryGetContext('use_vpc_id') ?
-                ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
-                new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
-        
-        new cdk.CfnOutput(this, 'Region', { value: cdk.Stack.of(this).region })
-        new cdk.CfnOutput(this, 'VpcId', { value: vpc.vpcId, exportName: 'CdkVpcOnly' })
+    return vpc
     }
 }
+
+// const vpc = VpcProvider.getOrCreate(this)
+
+
+// function getOrCreateVpc(stack: cdk.Stack): ec2.IVpc {
+//     // use an existing vpc or create a new one
+//     const vpc = stack.node.tryGetContext('use_default_vpc') === '1' ?
+//         ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
+//         stack.node.tryGetContext('use_vpc_id') ?
+//             ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
+//             new ec2.Vpc(stack, 'Vpc', { maxAzs: 3, natGateways: 1 });
+
+//     return vpc
+// }
