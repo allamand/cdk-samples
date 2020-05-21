@@ -10,13 +10,22 @@ your development iteration.
 Consider the code below
 
 ```ts
-// use an existing vpc or create a new one
-const vpc = this.node.tryGetContext('use_default_vpc') === '1' ?
-    ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
-    this.node.tryGetContext('use_vpc_id') ?
-    ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
-    new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
+function getOrCreateVpc(stack: cdk.Stack): ec2.IVpc {
+  // use an existing vpc or create a new one
+  const vpc = stack.node.tryGetContext('use_default_vpc') === '1' ?
+    ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
+    stack.node.tryGetContext('use_vpc_id') ?
+      ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
+      new ec2.Vpc(stack, 'Vpc', { maxAzs: 3, natGateways: 1 });  
+      
+  return vpc
+}
+```
 
+And create your `vpc` in your construct class like this
+
+```ts
+const vpc = getOrCreateVpc(this);
 ```
 
 Now you can use any existing VPC 
