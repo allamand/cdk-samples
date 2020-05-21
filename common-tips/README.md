@@ -28,6 +28,23 @@ And create your `vpc` in your construct class like this
 const vpc = getOrCreateVpc(this);
 ```
 
+To even simplify it
+
+```ts
+import { VpcProvider } from './vpc';
+
+export class Foo extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
+  }
+}
+```
+
+
+
 Now you can use any existing VPC 
 
 ```sh
