@@ -5,6 +5,8 @@ import iam = require('@aws-cdk/aws-iam');
 import autoscaling = require('@aws-cdk/aws-autoscaling');
 import ecsPatterns = require('@aws-cdk/aws-ecs-patterns');
 import { EcsOptimizedAmi } from '@aws-cdk/aws-ecs';
+import { VpcProvider } from './vpc';
+
 
 export class EcsEc2Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -18,9 +20,8 @@ export class EcsEc2Stack extends cdk.Stack {
       return s.charAt(0).toUpperCase() + s.slice(1);
     }
 
-    const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
-      isDefault: true
-    })
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
 
     const cluster = new ecs.Cluster(this, 'Cluster', {
       vpc

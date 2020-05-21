@@ -4,15 +4,15 @@ import lambda = require('@aws-cdk/aws-lambda');
 import path = require('path');
 import apigateway = require('@aws-cdk/aws-apigateway');
 import * as logs from '@aws-cdk/aws-logs';
-import { Vpc, SubnetType } from '@aws-cdk/aws-ec2';
+import { SubnetType } from '@aws-cdk/aws-ec2';
+import { VpcProvider } from './vpc';
 
 export class ServerlessRestApiStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const vpc = Vpc.fromLookup(this, 'VPC', {
-      isDefault: true
-    })
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
 
     /**
      * Running Lambda in Python and enable the VPC support

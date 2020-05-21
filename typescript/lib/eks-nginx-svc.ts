@@ -1,19 +1,15 @@
 import cdk = require('@aws-cdk/core');
 import eks = require('@aws-cdk/aws-eks');
-import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
+import { VpcProvider } from './vpc';
+
 
 export class EksNginxStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const vpc = ec2.Vpc.fromLookup(this, 'VPC', {
-      isDefault: true
-    })
-
-    // const vpc = new ec2.Vpc(this, 'VPC', {
-    //   natGateways: 1
-    // });
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
 
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()

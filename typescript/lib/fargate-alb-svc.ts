@@ -4,17 +4,15 @@ import * as route53 from '@aws-cdk/aws-route53'
 import * as acm from '@aws-cdk/aws-certificatemanager';
 import { Cluster, ContainerImage, TaskDefinition, Compatibility } from '@aws-cdk/aws-ecs';
 import * as ecsPatterns from '@aws-cdk/aws-ecs-patterns';
+import { VpcProvider } from './vpc';
+
 
 export class FargateAlbSvcStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     // use an existing vpc or create a new one
-    const vpc = this.node.tryGetContext('use_default_vpc') === '1' ?
-      ec2.Vpc.fromLookup(this, 'Vpc', { isDefault: true }) :
-      this.node.tryGetContext('use_vpc_id') ?
-        ec2.Vpc.fromLookup(this, 'Vpc', { vpcId: this.node.tryGetContext('use_vpc_id') }) :
-        new ec2.Vpc(this, 'Vpc', { maxAzs: 3, natGateways: 1 });
+    const vpc = VpcProvider.getOrCreate(this)
 
     const cluster = new Cluster(this, 'Cluster', {
       vpc
