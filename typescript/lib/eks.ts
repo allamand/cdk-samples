@@ -74,6 +74,34 @@ export class EksIrsa extends cdk.Stack {
   }
 }
 
+// Stack with one spot instance only. Ideal for testing only.
+export class EksMini extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+
+    const vpc = VpcProvider.getOrCreate(this)
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const cluster = new eks.Cluster(this, 'EKSCluster', {
+      vpc,
+      mastersRole,
+      version: clusterVersion,
+      defaultCapacity: 0
+    });
+
+    cluster.addCapacity('Spot', {
+      instanceType: new ec2.InstanceType('t3.medium'),
+      maxInstanceLifetime: cdk.Duration.days(7),
+      minCapacity: 1,
+    })
+  }
+}
+
 export class EksFargate extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
