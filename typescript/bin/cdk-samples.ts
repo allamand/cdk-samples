@@ -7,7 +7,7 @@ import { FargateCICDStack } from '../lib/fargate-cicd';
 import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
 import { FargateEventTarget } from '../lib/fargate-event-targets';
 import { EcsEc2Stack } from '../lib/ecs';
-import { EksStack, EksFargate, Bottlerocket, EksIrsa, EksMini } from '../lib/eks';
+import { EksStack, EksFargate, Bottlerocket, EksIrsa, EksMini, EksSpot } from '../lib/eks';
 import { TranscribeStack } from '../lib/transcribe';
 import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
 import { ApiSixStack } from '../lib/apisix';
@@ -44,6 +44,7 @@ var factory = {
     'GlobalAcceleratorStack': GlobalAcceleratorStack,
     'EksIrsa': EksIrsa,
     'EksMini': EksMini,
+    'EksSpot': EksSpot,
 }
 
 function activateIfEnabled(stackName: string) {

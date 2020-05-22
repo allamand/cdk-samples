@@ -12,10 +12,7 @@ export class EksStack extends cdk.Stack {
     super(scope, id, props);
 
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-
-    // use an existing vpc or create a new one
     const vpc = VpcProvider.getOrCreate(this)
-
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()
     });
@@ -25,6 +22,39 @@ export class EksStack extends cdk.Stack {
       mastersRole,
       version: clusterVersion,
     });
+
+    new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
+    new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
+  }
+}
+
+
+// cluster with 2 x m5.large spot instances
+export class EksSpot extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+
+    // use an existing vpc or create a new one
+    const vpc = VpcProvider.getOrCreate(this)
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const cluster = new eks.Cluster(this, 'EKSCluster', {
+      vpc,
+      mastersRole,
+      version: clusterVersion,
+      defaultCapacity: 0
+    });
+
+    cluster.addCapacity('Spot', {
+      instanceType: new ec2.InstanceType('m5.large'),
+      maxInstanceLifetime: cdk.Duration.days(7),
+      spotPrice: '0.1',
+    })
 
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
     new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
@@ -52,7 +82,7 @@ export class EksIrsa extends cdk.Stack {
 
     const sa = cluster.addServiceAccount('MyServiceAccount', {});
 
-    cluster.addResource('mypod2', {
+    const pod = cluster.addResource('mypod2', {
       apiVersion: 'v1',
       kind: 'Pod',
       metadata: { name: 'mypod2' },
@@ -68,37 +98,11 @@ export class EksIrsa extends cdk.Stack {
       }
     });
 
+    pod.node.addDependency(sa);
+
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
     new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
-    new cdk.CfnOutput(this, 'SARoleArn', { value: sa.role.roleArn })
-  }
-}
-
-// Stack with one spot instance only. Ideal for testing only.
-export class EksMini extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-
-    const vpc = VpcProvider.getOrCreate(this)
-
-    const mastersRole = new iam.Role(this, 'AdminRole', {
-      assumedBy: new iam.AccountRootPrincipal()
-    });
-
-    const cluster = new eks.Cluster(this, 'EKSCluster', {
-      vpc,
-      mastersRole,
-      version: clusterVersion,
-      defaultCapacity: 0
-    });
-
-    cluster.addCapacity('Spot', {
-      instanceType: new ec2.InstanceType('t3.medium'),
-      maxInstanceLifetime: cdk.Duration.days(7),
-      minCapacity: 1,
-    })
+    // new cdk.CfnOutput(this, 'SARoleArn', { value: sa.role.roleArn })
   }
 }
 
@@ -167,6 +171,39 @@ export class Bottlerocket extends cdk.Stack {
 
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
     new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
+  }
+}
+
+// Stack with one spot instance only. Ideal for testing only.
+export class EksMini extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+
+    const vpc = VpcProvider.getOrCreate(this)
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const cluster = new eks.Cluster(this, 'EKSMiniCluster', {
+      vpc,
+      mastersRole,
+      version: clusterVersion,
+      defaultCapacity: 0
+    });
+
+    cluster.addCapacity('Spot', {
+      instanceType: new ec2.InstanceType('t3.medium'),
+      maxInstanceLifetime: cdk.Duration.days(7),
+      machineImageType: eks.MachineImageType.BOTTLEROCKET,
+      minCapacity: 1,
+      spotPrice: '0.05',
+    })
+
+    new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
+    new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })    
   }
 }
 
