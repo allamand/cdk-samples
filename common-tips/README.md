@@ -10,15 +10,15 @@ your development iteration.
 Consider the code below
 
 ```ts
-function getOrCreateVpc(stack: cdk.Stack): ec2.IVpc {
+function getOrCreateVpc(scope: cdk.Construct): ec2.IVpc {
   // use an existing vpc or create a new one
-  const vpc = stack.node.tryGetContext('use_default_vpc') === '1' ?
-    ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
-    stack.node.tryGetContext('use_vpc_id') ?
-      ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
-      new ec2.Vpc(stack, 'Vpc', { maxAzs: 3, natGateways: 1 });  
-      
-  return vpc
+  const vpc = scope.node.tryGetContext('use_default_vpc') === '1' ?
+    ec2.Vpc.fromLookup(scope, 'Vpc', { isDefault: true }) :
+    scope.node.tryGetContext('use_vpc_id') ?
+      ec2.Vpc.fromLookup(scope, 'Vpc', { vpcId: scope.node.tryGetContext('use_vpc_id') }) :
+      new ec2.Vpc(scope, 'Vpc', { maxAzs: 3, natGateways: 1 });
+
+  return vpc;
 }
 ```
 
