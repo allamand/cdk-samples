@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
+import { AutoscalingGroupStack } from '../lib/autoscaling-group';
 import { VpcProvider } from '../lib/vpc';
 import { FargateAlbSvcStack } from '../lib/fargate-alb-svc';
 import { FargateCICDStack } from '../lib/fargate-cicd';
@@ -26,6 +27,7 @@ const env = {
 const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetContext('enable_stack').split(',') : ''
 
 var factory = {
+    'AutoscalingGroupStack': AutoscalingGroupStack,
     'CdkVpcOnlyStack': VpcProvider,
     'FargateAlbSvcStack': FargateAlbSvcStack,
     'FargateCICDStack': FargateCICDStack,
