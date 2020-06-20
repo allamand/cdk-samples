@@ -1,21 +1,14 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
-import { AutoscalingGroupStack } from '../lib/autoscaling-group';
-import { VpcProvider } from '../lib/vpc';
-import { FargateAlbSvcStack } from '../lib/fargate-alb-svc';
-import { FargateCICDStack } from '../lib/fargate-cicd';
-import { ServerlessRestApiStack } from '../lib/serverless-rest-api';
-import { FargateEventTarget } from '../lib/fargate-event-targets';
-import { EcsEc2Stack } from '../lib/ecs';
-import { EksStack, EksFargate, Bottlerocket, EksIrsa, EksMini, EksSpot } from '../lib/eks';
-import { TranscribeStack } from '../lib/transcribe';
-import { ApiGatewayCustomDomainStack } from '../lib/apig-custom-domain';
-import { ApiSixStack } from '../lib/apisix';
-import { EksNginxStack } from '../lib/eks-nginx-svc';
-import { ClientVpn } from '../lib/vpc-client-vpn';
-import { SARStack } from '../lib/serverless-app';
-import { GlobalAcceleratorStack } from '../lib/global-accelerator';
+import {
+    ApiGatewayCustomDomainStack, ApiSixStack, AutoscalingGroupStack, BastionHost, EcsEc2Stack,
+    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack 
+    } from '../lib';
+// Amaozn EKS
+import { EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
+// AWS Fargate
+import { FargateCICDStack, FargateAlbSvcStack, FargateEventTarget } from '../lib';
 
 const app = new cdk.App();
 
@@ -28,6 +21,7 @@ const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetCo
 
 var factory = {
     'AutoscalingGroupStack': AutoscalingGroupStack,
+    'BastionHost': BastionHost,
     'CdkVpcOnlyStack': VpcProvider,
     'FargateAlbSvcStack': FargateAlbSvcStack,
     'FargateCICDStack': FargateCICDStack,
@@ -43,7 +37,6 @@ var factory = {
     'EksNginxStack': EksNginxStack,
     'ClientVpn': ClientVpn,
     'SARStack': SARStack,
-    'GlobalAcceleratorStack': GlobalAcceleratorStack,
     'EksIrsa': EksIrsa,
     'EksMini': EksMini,
     'EksSpot': EksSpot,
