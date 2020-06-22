@@ -26,7 +26,7 @@ In the remote VSCode, open the built-in terminal and install required packages:
 
 ```bash
 # install git
-sudo yum install -y git python3
+sudo yum install -y git python3 docker
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 # reload the shell
@@ -37,8 +37,18 @@ nvm install --lts
 npm install -g yarn
 ```
 
-# build aws-cdk
+# Add ec2-user into docker group
+```
+sudo  usermod -a -G docker ec2-user
+```
+
+# start docker serivce
+```
+sudo service docker start
+```
+
+# build aws-cdk with jsii/superchain
 ```bash
 cd aws-cdk
-yarn install && yarn build --skip-test
+docker run -ti -w /app -v $PWD:/app --entrypoint='' jsii/superchain ./build.sh --skip-test
 ```
