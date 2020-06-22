@@ -35,5 +35,10 @@ exec $SHELL
 nvm install --lts
 # install yarn
 npm install -g yarn
+```
 
+# build aws-cdk
+```bash
+cd aws-cdk
+yarn install && yarn build --skip-test
 ```
