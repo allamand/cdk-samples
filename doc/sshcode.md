@@ -26,7 +26,7 @@ In the remote VSCode, open the built-in terminal and install required packages:
 
 ```bash
 # install git
-sudo yum install -y git
+sudo yum install -y git python3
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 # reload the shell
