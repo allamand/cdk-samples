@@ -50,5 +50,5 @@ sudo service docker start
 # build aws-cdk with jsii/superchain
 ```bash
 cd aws-cdk
-docker run -ti -u $(id -u) -w /app -v $PWD:/app --entrypoint='' jsii/superchain ./build.sh --skip-test
+docker run -ti -e HOME=/tmp -u $(id -u) -w /app -v $PWD:/app --entrypoint='' jsii/superchain ./build.sh --skip-test
 ```
