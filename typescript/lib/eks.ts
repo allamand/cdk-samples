@@ -20,7 +20,7 @@ export class EksStack extends cdk.Stack {
     new eks.Cluster(this, 'EKSCluster', {
       vpc,
       mastersRole,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
     });
 
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
@@ -46,7 +46,7 @@ export class EksSpot extends cdk.Stack {
     const cluster = new eks.Cluster(this, 'EKSCluster', {
       vpc,
       mastersRole,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
       defaultCapacity: 0
     });
 
@@ -77,7 +77,7 @@ export class EksIrsa extends cdk.Stack {
     const cluster = new eks.Cluster(this, 'EKSCluster', {
       vpc,
       mastersRole,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
     });
 
     const sa = cluster.addServiceAccount('MyServiceAccount', {});
@@ -122,7 +122,7 @@ export class EksFargate extends cdk.Stack {
     const cluster = new eks.Cluster(this, 'Cluster', {
       vpc,
       mastersRole,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
     });
 
     cluster.addFargateProfile('FargateProfile', {
@@ -154,7 +154,7 @@ export class Bottlerocket extends cdk.Stack {
       vpc,
       mastersRole,
       defaultCapacity: 0,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
     });
 
     // add bottlerocket nodes
@@ -190,7 +190,7 @@ export class EksMini extends cdk.Stack {
     const cluster = new eks.Cluster(this, 'EKSMiniCluster', {
       vpc,
       mastersRole,
-      version: clusterVersion,
+      version: eks.KubernetesVersion.of(clusterVersion),
       defaultCapacity: 0
     });
 

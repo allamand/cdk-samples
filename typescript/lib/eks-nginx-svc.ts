@@ -3,7 +3,6 @@ import eks = require('@aws-cdk/aws-eks');
 import iam = require('@aws-cdk/aws-iam');
 import { VpcProvider } from './vpc';
 
-
 export class EksNginxStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -17,7 +16,8 @@ export class EksNginxStack extends cdk.Stack {
 
     const cluster = new eks.Cluster(this, 'EKSCluster', {
       vpc,
-      mastersRole
+      mastersRole,
+      version: eks.KubernetesVersion.V1_16,
     });
 
     const appLabel = { app: "nginx" };
