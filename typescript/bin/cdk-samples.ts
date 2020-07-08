@@ -3,10 +3,11 @@ import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
 import {
     ApiGatewayCustomDomainStack, ApiSixStack, AutoscalingGroupStack, BastionHost, EcsEc2Stack,
-    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack 
+    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, AccessPointProvider, 
+    LambdaEfsStack
     } from '../lib';
 // Amaozn EKS
-import { EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
+import { AlbIngressControllerStack, EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
 // AWS Fargate
 import { FargateCICDStack, FargateAlbSvcStack, FargateEventTarget } from '../lib';
 
@@ -20,6 +21,8 @@ const env = {
 const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetContext('enable_stack').split(',') : ''
 
 var factory = {
+    'AccessPointProvider': AccessPointProvider,
+    'AlbIngressControllerStack': AlbIngressControllerStack,
     'AutoscalingGroupStack': AutoscalingGroupStack,
     'BastionHost': BastionHost,
     'CdkVpcOnlyStack': VpcProvider,
@@ -40,6 +43,7 @@ var factory = {
     'EksIrsa': EksIrsa,
     'EksMini': EksMini,
     'EksSpot': EksSpot,
+    'LambdaEfsStack': LambdaEfsStack,
 }
 
 function activateIfEnabled(stackName: string) {

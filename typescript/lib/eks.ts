@@ -6,6 +6,7 @@ import { Stack } from '@aws-cdk/core';
 import { VpcProvider } from './vpc';
 
 const DEFAULT_CLUSTER_VERSION = '1.16'
+const DEFAULT_CLUSTER_NAME = 'default-cluster-name'
 
 export class EksStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -176,6 +177,7 @@ export class Bottlerocket extends cdk.Stack {
 
 // Stack with one spot instance only. Ideal for testing only.
 export class EksMini extends cdk.Stack {
+  readonly cluster: eks.Cluster;
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -187,14 +189,14 @@ export class EksMini extends cdk.Stack {
       assumedBy: new iam.AccountRootPrincipal()
     });
 
-    const cluster = new eks.Cluster(this, 'EKSMiniCluster', {
+    this.cluster = new eks.Cluster(this, 'EKSMiniCluster', {
       vpc,
       mastersRole,
       version: eks.KubernetesVersion.of(clusterVersion),
       defaultCapacity: 0
     });
 
-    cluster.addCapacity('Spot', {
+    this.cluster.addCapacity('Spot', {
       instanceType: new ec2.InstanceType('t3.medium'),
       maxInstanceLifetime: cdk.Duration.days(7),
       machineImageType: eks.MachineImageType.BOTTLEROCKET,
@@ -207,3 +209,131 @@ export class EksMini extends cdk.Stack {
   }
 }
 
+export class AlbIngressControllerStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props: cdk.StackProps = {}) {
+    super(scope, id, props);
+
+    const mastersRole = new iam.Role(this, 'AdminRole', {
+      assumedBy: new iam.AccountRootPrincipal()
+    });
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
+
+    const vpc = new ec2.Vpc(this, 'Vpc', {
+      maxAzs: 3, 
+      natGateways: 1,
+    })
+
+    const cluster = new eks.Cluster(this, 'EKSMiniCluster', {
+      vpc,
+      mastersRole,
+      version: eks.KubernetesVersion.of(clusterVersion),
+      defaultCapacity: 0,
+      clusterName,
+    });
+
+    cluster.addCapacity('Spot', {
+      instanceType: new ec2.InstanceType('t3.medium'),
+      maxInstanceLifetime: cdk.Duration.days(7),
+      minCapacity: 1,
+      spotPrice: '0.05',
+    })
+
+    cluster.addChart('alb-ingress-controller', {
+      chart: 'aws-alb-ingress-controller',
+      repository: 'https://kubernetes-charts-incubator.storage.googleapis.com',
+      version: '1.0.1',
+      values: {
+        clusterName: cluster.clusterName,
+        awsRegion: cdk.Stack.of(this).region,
+        awsVpcID: vpc.vpcId,
+        rbac: {
+          create: true,
+          serviceAccount: {
+            create: false,
+            name: 'alb-ingress',
+          }
+        },
+      }
+    })
+
+    const sa = cluster.addServiceAccount('sa-alb-ingress', {
+      name: 'alb-ingress',
+    })
+
+    // https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+    sa.role.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        "acm:DescribeCertificate",
+        "acm:ListCertificates",
+        "acm:GetCertificate",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DeleteSecurityGroup",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeTags",
+        "ec2:DescribeVpcs",
+        "ec2:ModifyInstanceAttribute",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:RevokeSecurityGroupIngress",
+        "elasticloadbalancing:AddListenerCertificates",
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:CreateTargetGroup",
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:DeregisterTargets",
+        "elasticloadbalancing:DescribeListenerCertificates",
+        "elasticloadbalancing:DescribeListeners",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeSSLPolicies",
+        "elasticloadbalancing:DescribeTags",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "elasticloadbalancing:DescribeTargetGroupAttributes",
+        "elasticloadbalancing:DescribeTargetHealth",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:RemoveListenerCertificates",
+        "elasticloadbalancing:RemoveTags",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets",
+        "elasticloadbalancing:SetWebACL",
+        "iam:CreateServiceLinkedRole",
+        "iam:GetServerCertificate",
+        "iam:ListServerCertificates",
+        "cognito-idp:DescribeUserPoolClient",
+        "waf-regional:GetWebACLForResource",
+        "waf-regional:GetWebACL",
+        "waf-regional:AssociateWebACL",
+        "waf-regional:DisassociateWebACL",
+        "tag:GetResources",
+        "tag:TagResources",
+        "waf:GetWebACL",
+      ],
+      resources: [ '*' ],
+    }))
+    new cdk.CfnOutput(this, 'PodRole', { value: sa.role.roleName })
+  }
+}
