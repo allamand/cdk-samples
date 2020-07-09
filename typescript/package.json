@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.50.0",
+    "@aws-cdk/aws-apigatewayv2": "^1.50.0",
     "@aws-cdk/aws-autoscaling": "^1.50.0",
     "@aws-cdk/aws-certificatemanager": "^1.50.0",
     "@aws-cdk/aws-cloudformation": "^1.50.0",
@@ -33,6 +34,7 @@
     "@aws-cdk/aws-ecr": "^1.50.0",
     "@aws-cdk/aws-ecs": "^1.50.0",
     "@aws-cdk/aws-ecs-patterns": "^1.50.0",
+    "@aws-cdk/aws-efs": "^1.50.0",
     "@aws-cdk/aws-eks": "^1.50.0",
     "@aws-cdk/aws-elasticloadbalancing": "^1.50.0",
     "@aws-cdk/aws-events": "^1.50.0",
@@ -50,8 +52,10 @@
     "@aws-cdk/aws-sqs": "^1.50.0",
     "@aws-cdk/core": "^1.50.0",
     "@aws-cdk/custom-resources": "^1.50.0",
+    "@types/js-yaml": "^3.12.5",
     "minimatch": "^3.0.4",
     "source-map-support": "^0.5.16",
+    "sync-request": "^6.1.0",
     "uuid": "^3.3.3"
   }
 }

@@ -213,12 +213,14 @@ export class AlbIngressControllerStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps = {}) {
     super(scope, id, props);
 
+    const stack = cdk.Stack.of(this)
+
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()
     });
 
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-    const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
+    // const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
 
     const vpc = new ec2.Vpc(this, 'Vpc', {
       maxAzs: 3, 
@@ -230,7 +232,6 @@ export class AlbIngressControllerStack extends cdk.Stack {
       mastersRole,
       version: eks.KubernetesVersion.of(clusterVersion),
       defaultCapacity: 0,
-      clusterName,
     });
 
     cluster.addCapacity('Spot', {
@@ -240,100 +241,77 @@ export class AlbIngressControllerStack extends cdk.Stack {
       spotPrice: '0.05',
     })
 
-    cluster.addChart('alb-ingress-controller', {
-      chart: 'aws-alb-ingress-controller',
-      repository: 'https://kubernetes-charts-incubator.storage.googleapis.com',
-      version: '1.0.1',
-      values: {
-        clusterName: cluster.clusterName,
-        awsRegion: cdk.Stack.of(this).region,
-        awsVpcID: vpc.vpcId,
-        rbac: {
-          create: true,
-          serviceAccount: {
-            create: false,
-            name: 'alb-ingress',
-          }
-        },
-      }
-    })
+    /**
+     * dynamic add required policies for the service account
+     * 
+     * credit to t.me/zxkane
+     */
+    const albIngressControllerVersion = 'v1.1.8';
+    const albNamespace = 'kube-system';
+    const albBaseResourceBaseUrl = `https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${albIngressControllerVersion}/docs/examples/`;
+    const albIngressControllerPolicyUrl = `${albBaseResourceBaseUrl}iam-policy.json`;
 
     const sa = cluster.addServiceAccount('sa-alb-ingress', {
       name: 'alb-ingress',
+      namespace: albNamespace,
     })
 
-    // https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
-    sa.role.addToPolicy(new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: [
-        "acm:DescribeCertificate",
-        "acm:ListCertificates",
-        "acm:GetCertificate",
-        "ec2:AuthorizeSecurityGroupIngress",
-        "ec2:CreateSecurityGroup",
-        "ec2:CreateTags",
-        "ec2:DeleteTags",
-        "ec2:DeleteSecurityGroup",
-        "ec2:DescribeAccountAttributes",
-        "ec2:DescribeAddresses",
-        "ec2:DescribeInstances",
-        "ec2:DescribeInstanceStatus",
-        "ec2:DescribeInternetGateways",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeTags",
-        "ec2:DescribeVpcs",
-        "ec2:ModifyInstanceAttribute",
-        "ec2:ModifyNetworkInterfaceAttribute",
-        "ec2:RevokeSecurityGroupIngress",
-        "elasticloadbalancing:AddListenerCertificates",
-        "elasticloadbalancing:AddTags",
-        "elasticloadbalancing:CreateListener",
-        "elasticloadbalancing:CreateLoadBalancer",
-        "elasticloadbalancing:CreateRule",
-        "elasticloadbalancing:CreateTargetGroup",
-        "elasticloadbalancing:DeleteListener",
-        "elasticloadbalancing:DeleteLoadBalancer",
-        "elasticloadbalancing:DeleteRule",
-        "elasticloadbalancing:DeleteTargetGroup",
-        "elasticloadbalancing:DeregisterTargets",
-        "elasticloadbalancing:DescribeListenerCertificates",
-        "elasticloadbalancing:DescribeListeners",
-        "elasticloadbalancing:DescribeLoadBalancers",
-        "elasticloadbalancing:DescribeLoadBalancerAttributes",
-        "elasticloadbalancing:DescribeRules",
-        "elasticloadbalancing:DescribeSSLPolicies",
-        "elasticloadbalancing:DescribeTags",
-        "elasticloadbalancing:DescribeTargetGroups",
-        "elasticloadbalancing:DescribeTargetGroupAttributes",
-        "elasticloadbalancing:DescribeTargetHealth",
-        "elasticloadbalancing:ModifyListener",
-        "elasticloadbalancing:ModifyLoadBalancerAttributes",
-        "elasticloadbalancing:ModifyRule",
-        "elasticloadbalancing:ModifyTargetGroup",
-        "elasticloadbalancing:ModifyTargetGroupAttributes",
-        "elasticloadbalancing:RegisterTargets",
-        "elasticloadbalancing:RemoveListenerCertificates",
-        "elasticloadbalancing:RemoveTags",
-        "elasticloadbalancing:SetIpAddressType",
-        "elasticloadbalancing:SetSecurityGroups",
-        "elasticloadbalancing:SetSubnets",
-        "elasticloadbalancing:SetWebACL",
-        "iam:CreateServiceLinkedRole",
-        "iam:GetServerCertificate",
-        "iam:ListServerCertificates",
-        "cognito-idp:DescribeUserPoolClient",
-        "waf-regional:GetWebACLForResource",
-        "waf-regional:GetWebACL",
-        "waf-regional:AssociateWebACL",
-        "waf-regional:DisassociateWebACL",
-        "tag:GetResources",
-        "tag:TagResources",
-        "waf:GetWebACL",
-      ],
-      resources: [ '*' ],
-    }))
+    const request = require('sync-request');
+    const policyJson = request('GET', albIngressControllerPolicyUrl).getBody();
+    ((JSON.parse(policyJson))['Statement'] as []).forEach((statement, idx, array) => {
+      sa.addToPolicy(iam.PolicyStatement.fromJson(statement));
+    });
+
+    const yaml = require('js-yaml');
+    const rbacRoles = yaml.safeLoadAll(request('GET', `${albBaseResourceBaseUrl}rbac-role.yaml`).getBody())
+      .filter((rbac: any) => { return rbac['kind'] != 'ServiceAccount' });
+    const albDeployment = yaml.safeLoad(request('GET', `${albBaseResourceBaseUrl}alb-ingress-controller.yaml`).getBody());
+
+    const albResources = cluster.addResource('aws-alb-ingress-controller', ...rbacRoles, albDeployment);
+    const albResourcePatch = new eks.KubernetesPatch(this, `alb-ingress-controller-patch-${albIngressControllerVersion}`, {
+      cluster,
+      resourceName: "deployment/alb-ingress-controller",
+      resourceNamespace: albNamespace,
+      applyPatch: {
+        spec: {
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: 'alb-ingress-controller',
+                  args: [
+                    '--ingress-class=alb',
+                    '--feature-gates=wafv2=false',
+                    `--cluster-name=${cluster.clusterName}`,
+                    `--aws-vpc-id=${vpc.vpcId}`,
+                    `--aws-region=${stack.region}`,
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      restorePatch: {
+        spec: {
+          template: {
+            spec: {
+              containers: [
+                {
+                  name: 'alb-ingress-controller',
+                  args: [
+                    '--ingress-class=alb',
+                    '--feature-gates=wafv2=false',
+                    `--cluster-name=${cluster.clusterName}`,
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+    });
+    albResourcePatch.node.addDependency(albResources);
     new cdk.CfnOutput(this, 'PodRole', { value: sa.role.roleName })
   }
 }
