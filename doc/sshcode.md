@@ -53,5 +53,6 @@ cd aws-cdk
 docker run -ti -e HOME=/tmp -u $(id -u) -w /app \
 -v $PWD:/app \
 -v /etc/passwd:/etc/passwd \
+-v /var/run/docker.sock:/var/run/docker.sock \
 --entrypoint='' jsii/superchain ./build.sh --skip-test
 ```
