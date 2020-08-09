@@ -54,5 +54,6 @@ docker run -ti -e HOME=/tmp -u $(id -u) -w /app \
 -v $PWD:/app \
 -v /etc/passwd:/etc/passwd \
 -v /var/run/docker.sock:/var/run/docker.sock \
+-v $PWD/.yarn-cache:/tmp/.yarn-cache \
 --entrypoint='' jsii/superchain ./build.sh --skip-test
 ```
