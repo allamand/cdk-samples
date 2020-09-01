@@ -108,12 +108,12 @@ export class EksNginxStack extends cdk.Stack {
       caddySvc
     ]
 
-    new eks.KubernetesResource(this, 'MyCustomResource', {
+    new eks.KubernetesManifest(this, 'MyCustomResource', {
       cluster,
       manifest
     })
 
-    cluster.addResource('MyResources', ngxDeployment, ngxSvc);
+    cluster.addManifest('MyResources', ngxDeployment, ngxSvc);
     // cluster.addResource('MyResources', ngxDeployment, ngxSvc);
 
   }
