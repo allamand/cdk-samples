@@ -2,11 +2,24 @@ import cdk = require('@aws-cdk/core');
 import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
-import { Stack } from '@aws-cdk/core';
-import { VpcProvider } from './vpc';
+import {Stack} from '@aws-cdk/core';
+import {VpcProvider} from './vpc';
+import {ExternalDns} from "./k8sResources/ExternalDns";
+import {AlbIngressController} from "./k8sResources/AlbIngressController";
+import {MetricsServer} from "./k8sResources/MetricsServer";
+import {
+  DEFAULT_CLUSTER_NAME,
+  DEFAULT_CLUSTER_VERSION,
+  DEFAULT_DOMAIN_ZONE,
+  DEFAULT_EXTERNAL_DNS_POLICY,
+  DEFAULT_KEY_NAME,
+  DEFAULT_SSH_SOURCE_IP_RANGE,
+  DEFAULT_VPC_IP_RANGE
+} from "./defaults";
+import {ClusterAutoscaler} from "./k8sResources/ClusterAutoscaler";
+import {EbsCsiDriver} from "./k8sResources/EbsCsiDriver";
+import {EksUtilsAdmin} from "./k8sResources/EksUtilsPod";
 
-const DEFAULT_CLUSTER_VERSION = '1.16'
-const DEFAULT_CLUSTER_NAME = 'default-cluster-name'
 
 export class EksStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -83,7 +96,7 @@ export class EksIrsa extends cdk.Stack {
 
     const sa = cluster.addServiceAccount('MyServiceAccount', {});
 
-    const pod = cluster.addResource('mypod2', {
+    const pod = cluster.addManifest('mypod2', {
       apiVersion: 'v1',
       kind: 'Pod',
       metadata: { name: 'mypod2' },
@@ -220,98 +233,94 @@ export class AlbIngressControllerStack extends cdk.Stack {
     });
 
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-    // const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
+    const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
+    const keyName = this.node.tryGetContext('key_name') ?? DEFAULT_KEY_NAME
+    const sshAccessIpCIDR = this.node.tryGetContext('ssh_access_cidr') ?? DEFAULT_SSH_SOURCE_IP_RANGE
 
-    const vpc = new ec2.Vpc(this, 'Vpc', {
-      maxAzs: 3, 
-      natGateways: 1,
-    })
 
-    const cluster = new eks.Cluster(this, 'EKSMiniCluster', {
-      vpc,
-      mastersRole,
+    const vpc = VpcProvider.getOrCreate(this)
+
+    const cluster = new eks.Cluster(this, 'AlbIngressControllerStack', {
+      vpc: vpc,
+      mastersRole: mastersRole,
+      clusterName: clusterName,
       version: eks.KubernetesVersion.of(clusterVersion),
+
       defaultCapacity: 0,
+      //defaultCapacityInstance: new ec2.InstanceType('t3.medium'),
+      //defaultCapacityType: DefaultCapacityType.NODEGROUP
     });
 
-    cluster.addCapacity('Spot', {
+    //We can also add other nodesgroups manually
+    /*
+    cluster.addNodegroup('nodegroup', {
+      instanceType: new ec2.InstanceType('m5.large'),
+      minSize: 1,
+    });
+*/
+
+    //Add SPot Instances
+
+    const spotAsg = cluster.addCapacity('Spot', {
       instanceType: new ec2.InstanceType('t3.medium'),
       maxInstanceLifetime: cdk.Duration.days(7),
       minCapacity: 1,
       spotPrice: '0.05',
-    })
+      keyName: keyName,
+    });
+    spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.udp(53), "allow udp 53 from cluster security group");
 
-    /**
-     * dynamic add required policies for the service account
-     * 
-     * credit to t.me/zxkane
-     */
-    const albIngressControllerVersion = 'v1.1.8';
-    const albNamespace = 'kube-system';
-    const albBaseResourceBaseUrl = `https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${albIngressControllerVersion}/docs/examples/`;
-    const albIngressControllerPolicyUrl = `${albBaseResourceBaseUrl}iam-policy.json`;
+    //Add BottleRocket Instances
+    /*
+    const bottleRocket = cluster.addCapacity('BottlerocketNodes', {
+      instanceType: new ec2.InstanceType('t3.small'),
+      minCapacity:  2,
+      machineImageType: eks.MachineImageType.BOTTLEROCKET
+    });
+    bottleRocket.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.udp(53), "allow udp 53 from cluster security group");
+    */
 
-    const sa = cluster.addServiceAccount('sa-alb-ingress', {
-      name: 'alb-ingress',
-      namespace: albNamespace,
-    })
+    //Add Fargate profile
+    cluster.addFargateProfile('FargateProfile', {
+      selectors: [
+        { namespace: 'fargate' },
+        { namespace: 'fargate2' },
+      ]
 
-    const request = require('sync-request');
-    const policyJson = request('GET', albIngressControllerPolicyUrl).getBody();
-    ((JSON.parse(policyJson))['Statement'] as []).forEach((statement, idx, array) => {
-      sa.addToPolicy(iam.PolicyStatement.fromJson(statement));
     });
 
-    const yaml = require('js-yaml');
-    const rbacRoles = yaml.safeLoadAll(request('GET', `${albBaseResourceBaseUrl}rbac-role.yaml`).getBody())
-      .filter((rbac: any) => { return rbac['kind'] != 'ServiceAccount' });
-    const albDeployment = yaml.safeLoad(request('GET', `${albBaseResourceBaseUrl}alb-ingress-controller.yaml`).getBody());
 
-    const albResources = cluster.addResource('aws-alb-ingress-controller', ...rbacRoles, albDeployment);
-    const albResourcePatch = new eks.KubernetesPatch(this, `alb-ingress-controller-patch-${albIngressControllerVersion}`, {
-      cluster,
-      resourceName: "deployment/alb-ingress-controller",
-      resourceNamespace: albNamespace,
-      applyPatch: {
-        spec: {
-          template: {
-            spec: {
-              containers: [
-                {
-                  name: 'alb-ingress-controller',
-                  args: [
-                    '--ingress-class=alb',
-                    '--feature-gates=wafv2=false',
-                    `--cluster-name=${cluster.clusterName}`,
-                    `--aws-vpc-id=${vpc.vpcId}`,
-                    `--aws-region=${stack.region}`,
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      },
-      restorePatch: {
-        spec: {
-          template: {
-            spec: {
-              containers: [
-                {
-                  name: 'alb-ingress-controller',
-                  args: [
-                    '--ingress-class=alb',
-                    '--feature-gates=wafv2=false',
-                    `--cluster-name=${cluster.clusterName}`,
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      },
+    // Deploy ALB Ingress Controller
+    new AlbIngressController(this, 'alb-ingress-controller', cluster);
+
+    // Deploy External-DNS Controller
+    const externalDNSPolicy = this.node.tryGetContext('EXTERNAL_DNS_POLICY') ?? DEFAULT_EXTERNAL_DNS_POLICY
+    const appDomain = this.node.tryGetContext('app_domain') ?? DEFAULT_DOMAIN_ZONE
+    new ExternalDns(this, 'extrernal-dns', cluster, {
+      domain: appDomain,
+      policy: externalDNSPolicy,
+      owner: clusterName,
     });
-    albResourcePatch.node.addDependency(albResources);
-    new cdk.CfnOutput(this, 'PodRole', { value: sa.role.roleName })
+
+    //Deploy Metrics Server
+    new MetricsServer(this, 'metrics-server', cluster);
+
+    //Deploy Cluster Autoscaler
+    new ClusterAutoscaler(this, 'cluster-autoscaler', cluster, {});
+
+    //Deploy EbsCsiDriver
+    new EbsCsiDriver(this, 'ebs-csi-driver', cluster);
+
+    //Deploy EksUtils admin pod in ektusils namespace
+    new EksUtilsAdmin(this, 'eksutils-admin', cluster, {
+      namespace: 'eksutils'
+    });
+
+    //Deploy EksUtils admin pod in default namespace (backed by fargate)
+    new EksUtilsAdmin(this, 'eksutils-admin-fargate', cluster, {
+      namespace: 'fargate'
+    });
+
+
   }
 }
