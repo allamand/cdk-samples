@@ -15,6 +15,7 @@ export class BastionHost extends cdk.Stack {
 
     const homeIp = this.node.tryGetContext('HOME_IP') || undefined
     if(homeIp) {
+      console.debug("using homeIp "+ homeIp);
       bas.allowSshAccessFrom(ec2.Peer.ipv4(`${homeIp}/32`))
     }
 

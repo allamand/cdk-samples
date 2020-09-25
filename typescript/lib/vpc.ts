@@ -18,7 +18,7 @@ export class VpcProvider extends cdk.Stack {
             stack.node.tryGetContext('use_vpc_id') ?
             ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
                 new ec2.Vpc(stack, 'Vpc', {
-                    maxAzs: 3,
+                    maxAzs: 4,
                     natGateways: 1,
                     cidr: vpcIpRange,
                     subnetConfiguration: [

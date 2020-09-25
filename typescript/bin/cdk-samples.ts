@@ -3,8 +3,7 @@ import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
 import {
     ApiGatewayCustomDomainStack, ApiSixStack, AutoscalingGroupStack, BastionHost, EcsEc2Stack,
-    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, AccessPointProvider,
-    LambdaEfsStack, VpcStack
+    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, VpcStack, CassKopCluster
 } from '../lib';
 // Amaozn EKS
 import { AlbIngressControllerStack, EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
@@ -21,7 +20,7 @@ const env = {
 const enabledStacks = app.node.tryGetContext('enable_stack') ? app.node.tryGetContext('enable_stack').split(',') : ''
 
 var factory = {
-    'AccessPointProvider': AccessPointProvider,
+    //'AccessPointProvider': AccessPointProvider,
     'AlbIngressControllerStack': AlbIngressControllerStack,
     'AutoscalingGroupStack': AutoscalingGroupStack,
     'BastionHost': BastionHost,
@@ -43,8 +42,9 @@ var factory = {
     'EksIrsa': EksIrsa,
     'EksMini': EksMini,
     'EksSpot': EksSpot,
-    'LambdaEfsStack': LambdaEfsStack,
+    //'LambdaEfsStack': LambdaEfsStack,
     'cdkVpc': VpcStack,
+    'CassKop': CassKopCluster,
 }
 
 function activateIfEnabled(stackName: string) {

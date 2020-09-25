@@ -75,3 +75,36 @@ export abstract class K8sResourceIRSA extends Construct {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
   protected abstract manifests(props?: { [key: string]: any }): any[];
 }
+
+export class ServiceAccountIRSA extends Construct {
+  protected readonly  cluster: Cluster;
+  protected sa: ServiceAccount;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(scope: Construct, id: string, cluster: Cluster, props: { [key: string]: any } = {}) {
+    super(scope, id);
+
+    this.cluster = cluster;
+console.debug("props.namespace = " + props.namespace)
+    //Compute ServiceAccount with IAM role
+    const ns = cluster.addManifest('namespace'+id, {
+      apiVersion: 'v1',
+      kind: 'Namespace',
+      metadata: {
+        name: props.namespace
+      }
+    });
+    const policyStatements = json2statements(props.iamPolicyFile)
+    this.sa = cluster.addServiceAccount("service-account"+id, {
+      name: props.name,
+      namespace: props.namespace
+    })
+    const sa = this.sa
+    policyStatements.forEach(function (statement) {
+      sa.addToPolicy(statement)
+    });
+    this.sa.node.addDependency(ns)
+
+  }
+
+}

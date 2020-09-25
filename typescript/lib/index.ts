@@ -5,7 +5,7 @@ export * from './eks-nginx-svc';
 export * from './fargate-alb-svc';
 export * from './fargate-cicd';
 export * from './fargate-event-targets';
-export * from './lambda-filesystem';
+//export * from './lambda-filesystem';
 export * from './autoscaling-group';
 export * from './vpc';
 export * from './vpc-client-vpn';
