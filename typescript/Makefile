@@ -18,7 +18,7 @@ ifdef DOMAIN
 endif
 
 ifdef NAME
- PARAM_NAME := -c cluster_name=$(DOMAIN)
+ PARAM_NAME := -c cluster_name=$(NAME)
 endif
 
 ifdef HOME_IP

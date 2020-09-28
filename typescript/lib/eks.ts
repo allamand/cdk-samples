@@ -370,7 +370,7 @@ export class CassKopCluster extends cdk.Stack {
 
     const vpc = VpcProvider.getOrCreate(this)
 
-    const cluster = new eks.Cluster(this, 'AlbIngressControllerStack', {
+    const cluster = new eks.Cluster(this, 'CassKopCluster', {
       vpc: vpc,
       mastersRole: mastersRole,
       clusterName: clusterName,
@@ -380,7 +380,7 @@ export class CassKopCluster extends cdk.Stack {
 
     cluster.addNodegroup('nodegroup-AZa', {
       instanceType: new ec2.InstanceType('m5.large'),
-      minSize: 0,
+      minSize: 1,
       desiredSize: 1,
       maxSize: 10,
       nodegroupName: clusterName+"-AZa",
@@ -404,7 +404,7 @@ export class CassKopCluster extends cdk.Stack {
 
     cluster.addNodegroup('nodegroup-AZb', {
       instanceType: new ec2.InstanceType('m5.large'),
-      minSize: 0,
+      minSize: 1,
       desiredSize: 1,
       maxSize: 10,
       nodegroupName: clusterName+"-AZb",
@@ -427,7 +427,7 @@ export class CassKopCluster extends cdk.Stack {
 
     cluster.addNodegroup('nodegroup-AZc', {
       instanceType: new ec2.InstanceType('m5.large'),
-      minSize: 0,
+      minSize: 1,
       desiredSize: 1,
       maxSize: 10,
       nodegroupName: clusterName+"-AZc",

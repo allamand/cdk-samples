@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test CassKop 1`] = `
+exports[`Test Multi-AZ CassKop 1`] = `
 Object {
   "Outputs": Object {
     "AZOutput": Object {
       "Value": "dummy1a,dummy1b,dummy1c",
     },
-    "AlbIngressControllerStackConfigCommandD62A3969": Object {
+    "CassKopClusterConfigCommandA090E985": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
           Array [
             "aws eks update-kubeconfig --name ",
             Object {
-              "Ref": "AlbIngressControllerStackD72562D9",
+              "Ref": "CassKopCluster5683FE9F",
             },
             " --region eu-west-1 --role-arn ",
             Object {
@@ -26,14 +26,14 @@ Object {
         ],
       },
     },
-    "AlbIngressControllerStackGetTokenCommand8713CCA3": Object {
+    "CassKopClusterGetTokenCommand2CFE4645": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
           Array [
             "aws eks get-token --cluster-name ",
             Object {
-              "Ref": "AlbIngressControllerStackD72562D9",
+              "Ref": "CassKopCluster5683FE9F",
             },
             " --region eu-west-1 --role-arn ",
             Object {
@@ -48,18 +48,6 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9ArtifactHashC120AD53": Object {
-      "Description": "Artifact hash for asset \\"0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9\\"",
-      "Type": "String",
-    },
-    "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9S3Bucket17344EB5": Object {
-      "Description": "S3 bucket for asset \\"0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9\\"",
-      "Type": "String",
-    },
-    "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9S3VersionKeyDF5A54C0": Object {
-      "Description": "S3 key for asset version \\"0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9\\"",
-      "Type": "String",
-    },
     "AssetParameters10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608ArtifactHashECA71323": Object {
       "Description": "Artifact hash for asset \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
       "Type": "String",
@@ -96,16 +84,16 @@ Object {
       "Description": "S3 key for asset version \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
       "Type": "String",
     },
-    "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6ArtifactHash8DCB3EB6": Object {
-      "Description": "Artifact hash for asset \\"b28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6\\"",
+    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afArtifactHash71C8E2E4": Object {
+      "Description": "Artifact hash for asset \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
       "Type": "String",
     },
-    "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6S3Bucket98376792": Object {
-      "Description": "S3 bucket for asset \\"b28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6\\"",
+    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3Bucket151B99CC": Object {
+      "Description": "S3 bucket for asset \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
       "Type": "String",
     },
-    "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6S3VersionKeyEC769E1D": Object {
-      "Description": "S3 key for asset version \\"b28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6\\"",
+    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E": Object {
+      "Description": "S3 key for asset version \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
       "Type": "String",
     },
     "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
@@ -130,6 +118,18 @@ Object {
     },
     "AssetParametersbac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37S3VersionKeyC0E7DA00": Object {
       "Description": "S3 key for asset version \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
+      "Type": "String",
+    },
+    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868ArtifactHash5B510BBF": Object {
+      "Description": "Artifact hash for asset \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
+      "Type": "String",
+    },
+    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3BucketCC5107F4": Object {
+      "Description": "S3 bucket for asset \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
+      "Type": "String",
+    },
+    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026": Object {
+      "Description": "S3 key for asset version \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
       "Type": "String",
     },
     "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
@@ -232,7 +232,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::xxxxxxxxxxxx:root",
+                      ":iam::382076407153:root",
                     ],
                   ],
                 },
@@ -244,14 +244,110 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackAwsAuthmanifest49810F87": Object {
+    "CassKopCluster5683FE9F": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "VpcIGWD7BA715C",
+        "VpcPrivateSubnet1DefaultRouteBE02A9ED",
+        "VpcPrivateSubnet1RouteTableB2C5B500",
+        "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
+        "VpcPrivateSubnet1Subnet536B997A",
+        "VpcPrivateSubnet2DefaultRoute060D2087",
+        "VpcPrivateSubnet2RouteTableA678073B",
+        "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
+        "VpcPrivateSubnet2Subnet3788AAA1",
+        "VpcPrivateSubnet3DefaultRoute94B74F0D",
+        "VpcPrivateSubnet3RouteTableD98824C7",
+        "VpcPrivateSubnet3RouteTableAssociation16BDDC43",
+        "VpcPrivateSubnet3SubnetF258B56E",
+        "VpcPublicSubnet1DefaultRoute3DA9E72A",
+        "VpcPublicSubnet1EIPD7E02669",
+        "VpcPublicSubnet1NATGateway4D7517AA",
+        "VpcPublicSubnet1RouteTable6C95E38E",
+        "VpcPublicSubnet1RouteTableAssociation97140677",
+        "VpcPublicSubnet1Subnet5C2D37C4",
+        "VpcPublicSubnet2DefaultRoute97F91067",
+        "VpcPublicSubnet2RouteTable94F7E489",
+        "VpcPublicSubnet2RouteTableAssociationDD5762D8",
+        "VpcPublicSubnet2Subnet691E08A3",
+        "VpcPublicSubnet3DefaultRoute4697774F",
+        "VpcPublicSubnet3RouteTable93458DBB",
+        "VpcPublicSubnet3RouteTableAssociation1F1EDF02",
+        "VpcPublicSubnet3SubnetBE12F0B6",
+        "Vpc8378EB38",
+        "VpcVPCGWBF912B6E",
+      ],
+      "Properties": Object {
+        "AssumeRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "AttributesRevision": 2,
+        "Config": Object {
+          "name": "CdkEksCluster",
+          "resourcesVpcConfig": Object {
+            "endpointPrivateAccess": true,
+            "endpointPublicAccess": true,
+            "securityGroupIds": Array [
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+                  "GroupId",
+                ],
+              },
+            ],
+            "subnetIds": Array [
+              Object {
+                "Ref": "VpcPublicSubnet1Subnet5C2D37C4",
+              },
+              Object {
+                "Ref": "VpcPublicSubnet2Subnet691E08A3",
+              },
+              Object {
+                "Ref": "VpcPublicSubnet3SubnetBE12F0B6",
+              },
+              Object {
+                "Ref": "VpcPrivateSubnet1Subnet536B997A",
+              },
+              Object {
+                "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
+              },
+              Object {
+                "Ref": "VpcPrivateSubnet3SubnetF258B56E",
+              },
+            ],
+          },
+          "roleArn": Object {
+            "Fn::GetAtt": Array [
+              "CassKopClusterRole88533F86",
+              "Arn",
+            ],
+          },
+          "version": "1.17",
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.CasskopawscdkawseksClusterResourceProviderframeworkonEventDEC5D217Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-Cluster",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterAwsAuthmanifest4018B69E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -274,35 +370,35 @@ Object {
               "\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:masters\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
+                  "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
                   "Arn",
                 ],
               },
               "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
+                  "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
                   "Arn",
                 ],
               },
               "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
+                  "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
                   "Arn",
                 ],
               },
               "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+                  "CassKopClusterSpotInstanceRole3796F757",
                   "Arn",
                 ],
               },
               "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
+                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
                   "Arn",
                 ],
               },
@@ -312,7 +408,7 @@ Object {
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -326,7 +422,7 @@ Object {
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackControlPlaneSecurityGroupAB680602": Object {
+    "CassKopClusterControlPlaneSecurityGroup99EA84BD": Object {
       "Properties": Object {
         "GroupDescription": "EKS Control Plane Security Group",
         "SecurityGroupEgress": Array [
@@ -342,20 +438,20 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF443A660517D": Object {
+    "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417": Object {
       "Properties": Object {
-        "Description": "from CasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF:443",
+        "Description": "from CasskopCassKopClusterKubectlProviderSecurityGroup5151E995:443",
         "FromPort": 443,
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
+            "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
             "GroupId",
           ],
         },
@@ -363,20 +459,20 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD443E66E3581": Object {
+    "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD": Object {
       "Properties": Object {
-        "Description": "from CasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD:443",
+        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:443",
         "FromPort": 443,
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
@@ -384,9 +480,9 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackCreationRoleB9419435": Object {
+    "CassKopClusterCreationRoleDDB5156B": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -432,7 +528,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::xxxxxxxxxxxx:root",
+                      ":iam::382076407153:root",
                     ],
                   ],
                 },
@@ -444,9 +540,9 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D": Object {
+    "CassKopClusterCreationRoleDefaultPolicy0C3AACE5": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -485,7 +581,7 @@ Object {
               "Effect": "Allow",
               "Resource": Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackRoleC72527C3",
+                  "CassKopClusterRole88533F86",
                   "Arn",
                 ],
               },
@@ -520,7 +616,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-west-1:xxxxxxxxxxxx:cluster/CdkEksCluster",
+                      ":eks:eu-west-1:382076407153:cluster/CdkEksCluster",
                     ],
                   ],
                 },
@@ -532,7 +628,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-west-1:xxxxxxxxxxxx:cluster/CdkEksCluster/*",
+                      ":eks:eu-west-1:382076407153:cluster/CdkEksCluster/*",
                     ],
                   ],
                 },
@@ -552,7 +648,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":eks:eu-west-1:xxxxxxxxxxxx:fargateprofile/CdkEksCluster/*",
+                    ":eks:eu-west-1:382076407153:fargateprofile/CdkEksCluster/*",
                   ],
                 ],
               },
@@ -581,7 +677,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":ec2:eu-west-1:xxxxxxxxxxxx:vpc/",
+                    ":ec2:eu-west-1:382076407153:vpc/",
                     Object {
                       "Ref": "Vpc8378EB38",
                     },
@@ -594,7 +690,7 @@ Object {
               "Effect": "Allow",
               "Resource": Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
+                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
                   "Arn",
                 ],
               },
@@ -602,112 +698,16 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
+        "PolicyName": "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStackCreationRoleB9419435",
+            "Ref": "CassKopClusterCreationRoleDDB5156B",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStackD72562D9": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "VpcIGWD7BA715C",
-        "VpcPrivateSubnet1DefaultRouteBE02A9ED",
-        "VpcPrivateSubnet1RouteTableB2C5B500",
-        "VpcPrivateSubnet1RouteTableAssociation70C59FA6",
-        "VpcPrivateSubnet1Subnet536B997A",
-        "VpcPrivateSubnet2DefaultRoute060D2087",
-        "VpcPrivateSubnet2RouteTableA678073B",
-        "VpcPrivateSubnet2RouteTableAssociationA89CAD56",
-        "VpcPrivateSubnet2Subnet3788AAA1",
-        "VpcPrivateSubnet3DefaultRoute94B74F0D",
-        "VpcPrivateSubnet3RouteTableD98824C7",
-        "VpcPrivateSubnet3RouteTableAssociation16BDDC43",
-        "VpcPrivateSubnet3SubnetF258B56E",
-        "VpcPublicSubnet1DefaultRoute3DA9E72A",
-        "VpcPublicSubnet1EIPD7E02669",
-        "VpcPublicSubnet1NATGateway4D7517AA",
-        "VpcPublicSubnet1RouteTable6C95E38E",
-        "VpcPublicSubnet1RouteTableAssociation97140677",
-        "VpcPublicSubnet1Subnet5C2D37C4",
-        "VpcPublicSubnet2DefaultRoute97F91067",
-        "VpcPublicSubnet2RouteTable94F7E489",
-        "VpcPublicSubnet2RouteTableAssociationDD5762D8",
-        "VpcPublicSubnet2Subnet691E08A3",
-        "VpcPublicSubnet3DefaultRoute4697774F",
-        "VpcPublicSubnet3RouteTable93458DBB",
-        "VpcPublicSubnet3RouteTableAssociation1F1EDF02",
-        "VpcPublicSubnet3SubnetBE12F0B6",
-        "Vpc8378EB38",
-        "VpcVPCGWBF912B6E",
-      ],
-      "Properties": Object {
-        "AssumeRoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "AttributesRevision": 2,
-        "Config": Object {
-          "name": "CdkEksCluster",
-          "resourcesVpcConfig": Object {
-            "endpointPrivateAccess": true,
-            "endpointPublicAccess": true,
-            "securityGroupIds": Array [
-              Object {
-                "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-                  "GroupId",
-                ],
-              },
-            ],
-            "subnetIds": Array [
-              Object {
-                "Ref": "VpcPublicSubnet1Subnet5C2D37C4",
-              },
-              Object {
-                "Ref": "VpcPublicSubnet2Subnet691E08A3",
-              },
-              Object {
-                "Ref": "VpcPublicSubnet3SubnetBE12F0B6",
-              },
-              Object {
-                "Ref": "VpcPrivateSubnet1Subnet536B997A",
-              },
-              Object {
-                "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
-              },
-              Object {
-                "Ref": "VpcPrivateSubnet3SubnetF258B56E",
-              },
-            ],
-          },
-          "roleArn": Object {
-            "Fn::GetAtt": Array [
-              "AlbIngressControllerStackRoleC72527C3",
-              "Arn",
-            ],
-          },
-          "version": "1.17",
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
-            "Outputs.CasskopawscdkawseksClusterResourceProviderframeworkonEventDEC5D217Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-Cluster",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763": Object {
+    "CassKopClusterKubectlProviderSecurityGroupA7A18E9D": Object {
       "Properties": Object {
         "GroupDescription": "Comminication between KubectlProvider and EKS Control Plane",
         "SecurityGroupEgress": Array [
@@ -723,13 +723,13 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "AlbIngressControllerStackKubectlReadyBarrier32C3D398": Object {
+    "CassKopClusterKubectlReadyBarrier346C8999": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "CassKopCluster5683FE9F",
       ],
       "Properties": Object {
         "Type": "String",
@@ -737,10 +737,10 @@ Object {
       },
       "Type": "AWS::SSM::Parameter",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZaADE45433": Object {
+    "CassKopClusterNodegroupnodegroupAZa4BA33BD2": Object {
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
@@ -751,7 +751,7 @@ Object {
         },
         "NodeRole": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
+            "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
             "Arn",
           ],
         },
@@ -762,7 +762,7 @@ Object {
         "ScalingConfig": Object {
           "DesiredSize": 1,
           "MaxSize": 10,
-          "MinSize": 0,
+          "MinSize": 1,
         },
         "Subnets": Array [
           Object {
@@ -775,7 +775,7 @@ Object {
       },
       "Type": "AWS::EKS::Nodegroup",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E": Object {
+    "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -830,10 +830,10 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZb8B48E75C": Object {
+    "CassKopClusterNodegroupnodegroupAZb6B169D3A": Object {
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
@@ -844,7 +844,7 @@ Object {
         },
         "NodeRole": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
+            "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
             "Arn",
           ],
         },
@@ -855,7 +855,7 @@ Object {
         "ScalingConfig": Object {
           "DesiredSize": 1,
           "MaxSize": 10,
-          "MinSize": 0,
+          "MinSize": 1,
         },
         "Subnets": Array [
           Object {
@@ -868,7 +868,7 @@ Object {
       },
       "Type": "AWS::EKS::Nodegroup",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62": Object {
+    "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -923,10 +923,10 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZc4F1E727C": Object {
+    "CassKopClusterNodegroupnodegroupAZc77B0FA59": Object {
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
@@ -937,7 +937,7 @@ Object {
         },
         "NodeRole": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
+            "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
             "Arn",
           ],
         },
@@ -948,7 +948,7 @@ Object {
         "ScalingConfig": Object {
           "DesiredSize": 1,
           "MaxSize": 10,
-          "MinSize": 0,
+          "MinSize": 1,
         },
         "Subnets": Array [
           Object {
@@ -961,7 +961,7 @@ Object {
       },
       "Type": "AWS::EKS::Nodegroup",
     },
-    "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7": Object {
+    "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1016,7 +1016,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackOpenIdConnectProvider142642B9": Object {
+    "CassKopClusterOpenIdConnectProvider1554EB4B": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ClientIDList": Array [
@@ -1033,7 +1033,7 @@ Object {
         ],
         "Url": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackD72562D9",
+            "CassKopCluster5683FE9F",
             "OpenIdConnectIssuerUrl",
           ],
         },
@@ -1041,7 +1041,7 @@ Object {
       "Type": "Custom::AWSCDKOpenIdConnectProvider",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackRoleC72527C3": Object {
+    "CassKopClusterRole88533F86": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1072,10 +1072,10 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackSpotASG1C672A84": Object {
+    "CassKopClusterSpotASG93EF1913": Object {
       "Properties": Object {
         "LaunchConfigurationName": Object {
-          "Ref": "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
+          "Ref": "CassKopClusterSpotLaunchConfigFA810380",
         },
         "MaxInstanceLifetime": 604800,
         "MaxSize": "20",
@@ -1088,7 +1088,7 @@ Object {
                 Array [
                   "kubernetes.io/cluster/",
                   Object {
-                    "Ref": "AlbIngressControllerStackD72562D9",
+                    "Ref": "CassKopCluster5683FE9F",
                   },
                 ],
               ],
@@ -1099,7 +1099,7 @@ Object {
           Object {
             "Key": "Name",
             "PropagateAtLaunch": true,
-            "Value": "Casskop/AlbIngressControllerStack/Spot",
+            "Value": "Casskop/CassKopCluster/Spot",
           },
         ],
         "VPCZoneIdentifier": Array [
@@ -1121,17 +1121,17 @@ Object {
         },
       },
     },
-    "AlbIngressControllerStackSpotInstanceProfile34178E58": Object {
+    "CassKopClusterSpotInstanceProfileF7B9468A": Object {
       "Properties": Object {
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+            "Ref": "CassKopClusterSpotInstanceRole3796F757",
           },
         ],
       },
       "Type": "AWS::IAM::InstanceProfile",
     },
-    "AlbIngressControllerStackSpotInstanceRoleE63A024A": Object {
+    "CassKopClusterSpotInstanceRole3796F757": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1191,7 +1191,7 @@ Object {
                 Array [
                   "kubernetes.io/cluster/",
                   Object {
-                    "Ref": "AlbIngressControllerStackD72562D9",
+                    "Ref": "CassKopCluster5683FE9F",
                   },
                 ],
               ],
@@ -1200,15 +1200,15 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "Casskop/AlbIngressControllerStack/Spot",
+            "Value": "Casskop/CassKopCluster/Spot",
           },
         ],
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725": Object {
+    "CassKopClusterSpotInstanceSecurityGroup21F521B6": Object {
       "Properties": Object {
-        "GroupDescription": "Casskop/AlbIngressControllerStack/Spot/InstanceSecurityGroup",
+        "GroupDescription": "Casskop/CassKopCluster/Spot/InstanceSecurityGroup",
         "SecurityGroupEgress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
@@ -1224,7 +1224,7 @@ Object {
                 Array [
                   "kubernetes.io/cluster/",
                   Object {
-                    "Ref": "AlbIngressControllerStackD72562D9",
+                    "Ref": "CassKopCluster5683FE9F",
                   },
                 ],
               ],
@@ -1233,7 +1233,7 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "Casskop/AlbIngressControllerStack/Spot",
+            "Value": "Casskop/CassKopCluster/Spot",
           },
         ],
         "VpcId": Object {
@@ -1242,20 +1242,20 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A10256553562687E77": Object {
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517": Object {
       "Properties": Object {
-        "Description": "from CasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A:1025-65535",
+        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:1025-65535",
         "FromPort": 1025,
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
             "GroupId",
           ],
         },
@@ -1263,20 +1263,20 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A44304EAE249": Object {
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E": Object {
       "Properties": Object {
-        "Description": "from CasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A:443",
+        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:443",
         "FromPort": 443,
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
             "GroupId",
           ],
         },
@@ -1284,51 +1284,51 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41ADALLTRAFFICBB137F4F": Object {
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9": Object {
       "Properties": Object {
-        "Description": "from CasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD:ALL TRAFFIC",
+        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:ALL TRAFFIC",
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
         "IpProtocol": "-1",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICB32742F1": Object {
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54": Object {
       "Properties": Object {
         "Description": "allow all traffic from cluster security group",
         "GroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
         "IpProtocol": "-1",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackD72562D9",
+            "CassKopCluster5683FE9F",
             "ClusterSecurityGroupId",
           ],
         },
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "AlbIngressControllerStackSpotLaunchConfig1FB3F831": Object {
+    "CassKopClusterSpotLaunchConfigFA810380": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+        "CassKopClusterSpotInstanceRole3796F757",
       ],
       "Properties": Object {
         "IamInstanceProfile": Object {
-          "Ref": "AlbIngressControllerStackSpotInstanceProfile34178E58",
+          "Ref": "CassKopClusterSpotInstanceProfileF7B9468A",
         },
         "ImageId": Object {
           "Ref": "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter",
@@ -1338,7 +1338,7 @@ Object {
         "SecurityGroups": Array [
           Object {
             "Fn::GetAtt": Array [
-              "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+              "CassKopClusterSpotInstanceSecurityGroup21F521B6",
               "GroupId",
             ],
           },
@@ -1353,10 +1353,10 @@ Object {
 set -o xtrace
 /etc/eks/bootstrap.sh ",
                 Object {
-                  "Ref": "AlbIngressControllerStackD72562D9",
+                  "Ref": "CassKopCluster5683FE9F",
                 },
                 " --kubelet-extra-args \\"--node-labels lifecycle=Ec2Spot --register-with-taints=spotInstance=true:PreferNoSchedule\\" --use-max-pods true
-/opt/aws/bin/cfn-signal --exit-code $? --stack Casskop --resource AlbIngressControllerStackSpotASG1C672A84 --region eu-west-1",
+/opt/aws/bin/cfn-signal --exit-code $? --stack Casskop --resource CassKopClusterSpotASG93EF1913 --region eu-west-1",
               ],
             ],
           },
@@ -1364,23 +1364,23 @@ set -o xtrace
       },
       "Type": "AWS::AutoScaling::LaunchConfiguration",
     },
-    "AlbIngressControllerStackchartspotinterrupthandler255CE428": Object {
+    "CassKopClusterchartspotinterrupthandler80D296D7": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "Chart": "aws-node-termination-handler",
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "CreateNamespace": true,
         "Namespace": "kube-system",
-        "Release": "gresscontrollerstackchartspotinterrupthandler140900d7",
+        "Release": "asskopcasskopclusterchartspotinterrupthandlerb581dd3b",
         "Repository": "https://aws.github.io/eks-charts",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1396,22 +1396,22 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-HelmChart",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackfargateprofileFargateProfile0604A12E": Object {
+    "CassKopClusterfargateprofileFargateProfileE22A2CC1": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "AssumeRoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
         "Config": Object {
           "clusterName": Object {
-            "Ref": "AlbIngressControllerStackD72562D9",
+            "Ref": "CassKopCluster5683FE9F",
           },
           "podExecutionRoleArn": Object {
             "Fn::GetAtt": Array [
-              "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
+              "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
               "Arn",
             ],
           },
@@ -1434,7 +1434,7 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-FargateProfile",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D": Object {
+    "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1465,19 +1465,19 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4": Object {
+    "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"kube-system\\"}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1491,19 +1491,19 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27": Object {
+    "CassKopClustermanifestnamespaceeksutilsadminDDA150EC": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"eksutils\\"}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1517,19 +1517,19 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51": Object {
+    "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"fargate\\"}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1543,7 +1543,7 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaalbingressConditionJson6E876BB7": Object {
+    "CassKopClustersaalbingressConditionJson0299F979": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ServiceToken": Object {
@@ -1559,14 +1559,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -1578,7 +1578,7 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaalbingressRoleABD6CA8A": Object {
+    "CassKopClustersaalbingressRole92AC458C": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1587,7 +1587,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStacksaalbingressConditionJson6E876BB7",
+                    "CassKopClustersaalbingressConditionJson0299F979",
                     "Value",
                   ],
                 },
@@ -1595,7 +1595,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -1605,7 +1605,7 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851": Object {
+    "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -1743,23 +1743,23 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851",
+        "PolicyName": "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
+            "Ref": "CassKopClustersaalbingressRole92AC458C",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStacksaalbingressmanifestsaalbingressServiceAccountResource5B1C51D3": Object {
+    "CassKopClustersaalbingressmanifestsaalbingressServiceAccountResourceC95A1446": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -1768,7 +1768,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"alb-ingress-controller\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
+                  "CassKopClustersaalbingressRole92AC458C",
                   "Arn",
                 ],
               },
@@ -1778,7 +1778,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1792,7 +1792,7 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8": Object {
+    "CassKopClustersaebscsicontrollersaConditionJson818A84ED": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ServiceToken": Object {
@@ -1808,14 +1808,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -1827,7 +1827,7 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A": Object {
+    "CassKopClustersaebscsicontrollersaRole50FB61C3": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1836,7 +1836,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8",
+                    "CassKopClustersaebscsicontrollersaConditionJson818A84ED",
                     "Value",
                   ],
                 },
@@ -1844,7 +1844,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -1854,7 +1854,7 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE": Object {
+    "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -1879,23 +1879,23 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE",
+        "PolicyName": "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
+            "Ref": "CassKopClustersaebscsicontrollersaRole50FB61C3",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStacksaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResourceE4CF41C6": Object {
+    "CassKopClustersaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResource4BF87613": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -1904,7 +1904,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"ebs-csi-controller-sa\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
+                  "CassKopClustersaebscsicontrollersaRole50FB61C3",
                   "Arn",
                 ],
               },
@@ -1914,7 +1914,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -1928,7 +1928,7 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147": Object {
+    "CassKopClustersaexternaldnsConditionJsonF3353872": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
         "ServiceToken": Object {
@@ -1944,14 +1944,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -1963,7 +1963,7 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStacksaexternaldnsRole7B2F1597": Object {
+    "CassKopClustersaexternaldnsRole9F1D457B": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -1972,7 +1972,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147",
+                    "CassKopClustersaexternaldnsConditionJsonF3353872",
                     "Value",
                   ],
                 },
@@ -1980,7 +1980,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -1990,7 +1990,7 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E": Object {
+    "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -2010,23 +2010,23 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E",
+        "PolicyName": "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
+            "Ref": "CassKopClustersaexternaldnsRole9F1D457B",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStacksaexternaldnsmanifestsaexternaldnsServiceAccountResource00C1D72C": Object {
+    "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "CassKopClusterKubectlReadyBarrier346C8999",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -2035,7 +2035,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"external-dns\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
+                  "CassKopClustersaexternaldnsRole9F1D457B",
                   "Arn",
                 ],
               },
@@ -2045,7 +2045,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -2059,10 +2059,10 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC": Object {
+    "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
       ],
       "Properties": Object {
         "ServiceToken": Object {
@@ -2078,14 +2078,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -2097,9 +2097,9 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F": Object {
+    "CassKopClusterserviceaccountclusterautoscalerRole34C21866": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
       ],
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
@@ -2109,7 +2109,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
+                    "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
                     "Value",
                   ],
                 },
@@ -2117,7 +2117,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -2127,9 +2127,9 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E": Object {
+    "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
       ],
       "Properties": Object {
         "PolicyDocument": Object {
@@ -2150,24 +2150,24 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
+        "PolicyName": "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
+            "Ref": "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1": Object {
+    "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -2176,7 +2176,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
+                  "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
                   "Arn",
                 ],
               },
@@ -2186,7 +2186,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -2200,10 +2200,10 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3": Object {
+    "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
       ],
       "Properties": Object {
         "ServiceToken": Object {
@@ -2219,14 +2219,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -2238,9 +2238,9 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF": Object {
+    "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
       ],
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
@@ -2250,7 +2250,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
+                    "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
                     "Value",
                   ],
                 },
@@ -2258,7 +2258,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -2268,9 +2268,9 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97": Object {
+    "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
       ],
       "Properties": Object {
         "PolicyDocument": Object {
@@ -2387,19 +2387,19 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
+        "PolicyName": "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
+            "Ref": "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E": Object {
+    "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
       ],
       "Properties": Object {
         "ServiceToken": Object {
@@ -2415,14 +2415,14 @@ set -o xtrace
               "{\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
               ":aud\\":\\"sts.amazonaws.com\\",\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackD72562D9",
+                  "CassKopCluster5683FE9F",
                   "OpenIdConnectIssuer",
                 ],
               },
@@ -2434,9 +2434,9 @@ set -o xtrace
       "Type": "Custom::AWSCDKCfnJson",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3": Object {
+    "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
       ],
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
@@ -2446,7 +2446,7 @@ set -o xtrace
               "Condition": Object {
                 "StringEquals": Object {
                   "Fn::GetAtt": Array [
-                    "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
+                    "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
                     "Value",
                   ],
                 },
@@ -2454,7 +2454,7 @@ set -o xtrace
               "Effect": "Allow",
               "Principal": Object {
                 "Federated": Object {
-                  "Ref": "AlbIngressControllerStackOpenIdConnectProvider142642B9",
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
                 },
               },
             },
@@ -2464,9 +2464,9 @@ set -o xtrace
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8": Object {
+    "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
       ],
       "Properties": Object {
         "PolicyDocument": Object {
@@ -2583,24 +2583,24 @@ set -o xtrace
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
+        "PolicyName": "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
         "Roles": Array [
           Object {
-            "Ref": "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
+            "Ref": "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB": Object {
+    "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -2609,7 +2609,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"eksutils-admin\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
+                  "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
                   "Arn",
                 ],
               },
@@ -2619,7 +2619,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -2633,15 +2633,15 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757": Object {
+    "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -2650,7 +2650,7 @@ set -o xtrace
               "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"eksutils-admin\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
               Object {
                 "Fn::GetAtt": Array [
-                  "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
+                  "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
                   "Arn",
                 ],
               },
@@ -2660,7 +2660,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3282,66 +3282,66 @@ set -o xtrace
     "albingresscontrollerK8sResource87829C97": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF443A660517D",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD443E66E3581",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
-        "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
-        "AlbIngressControllerStackNodegroupnodegroupAZaADE45433",
-        "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
-        "AlbIngressControllerStackNodegroupnodegroupAZb8B48E75C",
-        "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
-        "AlbIngressControllerStackNodegroupnodegroupAZc4F1E727C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbingressConditionJson6E876BB7",
-        "AlbIngressControllerStacksaalbingressmanifestsaalbingressServiceAccountResource5B1C51D3",
-        "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851",
-        "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
-        "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8",
-        "AlbIngressControllerStacksaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResourceE4CF41C6",
-        "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE",
-        "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
-        "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147",
-        "AlbIngressControllerStacksaexternaldnsmanifestsaexternaldnsServiceAccountResource00C1D72C",
-        "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E",
-        "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
-        "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A10256553562687E77",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A44304EAE249",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41ADALLTRAFFICBB137F4F",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICB32742F1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
+        "CassKopClusterAwsAuthmanifest4018B69E",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
+        "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
+        "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
+        "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
+        "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
+        "CassKopClusterNodegroupnodegroupAZb6B169D3A",
+        "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
+        "CassKopClusterNodegroupnodegroupAZc77B0FA59",
+        "CassKopClusterOpenIdConnectProvider1554EB4B",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "CassKopCluster5683FE9F",
+        "CassKopClusterRole88533F86",
+        "CassKopClustersaalbingressConditionJson0299F979",
+        "CassKopClustersaalbingressmanifestsaalbingressServiceAccountResourceC95A1446",
+        "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE",
+        "CassKopClustersaalbingressRole92AC458C",
+        "CassKopClustersaebscsicontrollersaConditionJson818A84ED",
+        "CassKopClustersaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResource4BF87613",
+        "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7",
+        "CassKopClustersaebscsicontrollersaRole50FB61C3",
+        "CassKopClustersaexternaldnsConditionJsonF3353872",
+        "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
+        "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
+        "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
+        "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
+        "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
+        "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
+        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
+        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
+        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
+        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
+        "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
+        "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
+        "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
+        "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -3349,7 +3349,7 @@ set -o xtrace
             Array [
               "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"},\\"name\\":\\"alb-ingress-controller\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\",\\"extensions\\"],\\"resources\\":[\\"configmaps\\",\\"endpoints\\",\\"events\\",\\"ingresses\\",\\"ingresses/status\\",\\"services\\",\\"pods/status\\"],\\"verbs\\":[\\"create\\",\\"get\\",\\"list\\",\\"update\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\",\\"extensions\\"],\\"resources\\":[\\"nodes\\",\\"pods\\",\\"secrets\\",\\"services\\",\\"namespaces\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"},\\"name\\":\\"alb-ingress-controller\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"alb-ingress-controller\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"alb-ingress-controller\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"},\\"name\\":\\"alb-ingress-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"alb-ingress-controller\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"alb-ingress-controller\\",\\"args\\":[\\"--ingress-class=alb\\",\\"--cluster-name=",
               Object {
-                "Ref": "AlbIngressControllerStackD72562D9",
+                "Ref": "CassKopCluster5683FE9F",
               },
               "\\",\\"--feature-gates=wafv2=false\\",\\"--aws-vpc-id=",
               Object {
@@ -3361,7 +3361,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3378,12 +3378,6 @@ set -o xtrace
     "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": Object {
       "Properties": Object {
         "Parameters": Object {
-          "referencetoCasskopAlbIngressControllerStackCreationRoleEDCF3E2BArn": Object {
-            "Fn::GetAtt": Array [
-              "AlbIngressControllerStackCreationRoleB9419435",
-              "Arn",
-            ],
-          },
           "referencetoCasskopAssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket474C7F07Ref": Object {
             "Ref": "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket9EBF7C44",
           },
@@ -3396,6 +3390,12 @@ set -o xtrace
           "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey261108F0Ref": Object {
             "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8",
           },
+          "referencetoCasskopCassKopClusterCreationRole75E615BCArn": Object {
+            "Fn::GetAtt": Array [
+              "CassKopClusterCreationRoleDDB5156B",
+              "Arn",
+            ],
+          },
         },
         "TemplateURL": Object {
           "Fn::Join": Array [
@@ -3407,7 +3407,7 @@ set -o xtrace
               },
               "/",
               Object {
-                "Ref": "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6S3Bucket98376792",
+                "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3BucketCC5107F4",
               },
               "/",
               Object {
@@ -3417,7 +3417,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6S3VersionKeyEC769E1D",
+                        "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026",
                       },
                     ],
                   },
@@ -3430,7 +3430,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersb28e27b2f159ba7edb9fd0b53ad3de4af07243d389c167155587e39a9615eec6S3VersionKeyEC769E1D",
+                        "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026",
                       },
                     ],
                   },
@@ -3445,18 +3445,6 @@ set -o xtrace
     "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": Object {
       "Properties": Object {
         "Parameters": Object {
-          "referencetoCasskopAlbIngressControllerStack423DB242Arn": Object {
-            "Fn::GetAtt": Array [
-              "AlbIngressControllerStackD72562D9",
-              "Arn",
-            ],
-          },
-          "referencetoCasskopAlbIngressControllerStackCreationRoleEDCF3E2BArn": Object {
-            "Fn::GetAtt": Array [
-              "AlbIngressControllerStackCreationRoleB9419435",
-              "Arn",
-            ],
-          },
           "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3BucketAE188F98Ref": Object {
             "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33",
           },
@@ -3469,6 +3457,18 @@ set -o xtrace
           "referencetoCasskopAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey52DFCC0DRef": Object {
             "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A",
           },
+          "referencetoCasskopCassKopCluster29B90A16Arn": Object {
+            "Fn::GetAtt": Array [
+              "CassKopCluster5683FE9F",
+              "Arn",
+            ],
+          },
+          "referencetoCasskopCassKopClusterCreationRole75E615BCArn": Object {
+            "Fn::GetAtt": Array [
+              "CassKopClusterCreationRoleDDB5156B",
+              "Arn",
+            ],
+          },
         },
         "TemplateURL": Object {
           "Fn::Join": Array [
@@ -3480,7 +3480,7 @@ set -o xtrace
               },
               "/",
               Object {
-                "Ref": "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9S3Bucket17344EB5",
+                "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3Bucket151B99CC",
               },
               "/",
               Object {
@@ -3490,7 +3490,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9S3VersionKeyDF5A54C0",
+                        "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E",
                       },
                     ],
                   },
@@ -3503,7 +3503,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters0c079b792238a0e4edfa53f095b249c1fa5cc382168193f6cc5f90d7c62c6bb9S3VersionKeyDF5A54C0",
+                        "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E",
                       },
                     ],
                   },
@@ -3518,15 +3518,15 @@ set -o xtrace
     "clusterautoscalerK8sResourceIRSAECFBF5A7": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
-        "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
+        "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
+        "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
+        "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": Object {
           "Fn::Join": Array [
@@ -3534,7 +3534,7 @@ set -o xtrace
             Array [
               "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\",\\"endpoints\\"],\\"verbs\\":[\\"create\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/eviction\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/status\\"],\\"verbs\\":[\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"endpoints\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"verbs\\":[\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"services\\",\\"replicationcontrollers\\",\\"persistentvolumeclaims\\",\\"persistentvolumes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"policy\\"],\\"resources\\":[\\"poddisruptionbudgets\\"],\\"verbs\\":[\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"statefulsets\\",\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\",\\"csinodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"batch\\",\\"extensions\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"Role\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"verbs\\":[\\"create\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cluster-autoscaler-status\\",\\"cluster-autoscaler-priority-expander\\"],\\"verbs\\":[\\"delete\\",\\"get\\",\\"update\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"cluster-autoscaler.kubernetes.io/safe-to-evict\\":\\"false\\"}},\\"spec\\":{\\"replicas\\":1,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"cluster-autoscaler\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"prometheus.io/scrape\\":\\"true\\",\\"prometheus.io/port\\":\\"8085\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"cluster-autoscaler\\",\\"containers\\":[{\\"image\\":\\"eu.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.18.2\\",\\"name\\":\\"cluster-autoscaler\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"},\\"requests\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"}},\\"command\\":[\\"./cluster-autoscaler\\",\\"--v=4\\",\\"--stderrthreshold=info\\",\\"--cloud-provider=aws\\",\\"--skip-nodes-with-local-storage=false\\",\\"--expander=least-waste\\",\\"--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/",
               Object {
-                "Ref": "AlbIngressControllerStackD72562D9",
+                "Ref": "CassKopCluster5683FE9F",
               },
               "\\",\\"--balance-similar-node-groups\\",\\"--skip-nodes-with-system-pods=false\\"],\\"volumeMounts\\":[{\\"name\\":\\"ssl-certs\\",\\"mountPath\\":\\"/etc/ssl/certs/ca-certificates.crt\\",\\"readOnly\\":true}],\\"imagePullPolicy\\":\\"Always\\"}],\\"volumes\\":[{\\"name\\":\\"ssl-certs\\",\\"hostPath\\":{\\"path\\":\\"/etc/ssl/certs/ca-bundle.crt\\"}}]}}}}]",
             ],
@@ -3542,7 +3542,7 @@ set -o xtrace
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3559,71 +3559,71 @@ set -o xtrace
     "ebscsidriverK8sResource2B9EF818": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF443A660517D",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD443E66E3581",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
-        "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
-        "AlbIngressControllerStackNodegroupnodegroupAZaADE45433",
-        "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
-        "AlbIngressControllerStackNodegroupnodegroupAZb8B48E75C",
-        "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
-        "AlbIngressControllerStackNodegroupnodegroupAZc4F1E727C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbingressConditionJson6E876BB7",
-        "AlbIngressControllerStacksaalbingressmanifestsaalbingressServiceAccountResource5B1C51D3",
-        "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851",
-        "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
-        "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8",
-        "AlbIngressControllerStacksaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResourceE4CF41C6",
-        "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE",
-        "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
-        "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147",
-        "AlbIngressControllerStacksaexternaldnsmanifestsaexternaldnsServiceAccountResource00C1D72C",
-        "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E",
-        "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
-        "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A10256553562687E77",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A44304EAE249",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41ADALLTRAFFICBB137F4F",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICB32742F1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
+        "CassKopClusterAwsAuthmanifest4018B69E",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
+        "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
+        "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
+        "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
+        "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
+        "CassKopClusterNodegroupnodegroupAZb6B169D3A",
+        "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
+        "CassKopClusterNodegroupnodegroupAZc77B0FA59",
+        "CassKopClusterOpenIdConnectProvider1554EB4B",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "CassKopCluster5683FE9F",
+        "CassKopClusterRole88533F86",
+        "CassKopClustersaalbingressConditionJson0299F979",
+        "CassKopClustersaalbingressmanifestsaalbingressServiceAccountResourceC95A1446",
+        "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE",
+        "CassKopClustersaalbingressRole92AC458C",
+        "CassKopClustersaebscsicontrollersaConditionJson818A84ED",
+        "CassKopClustersaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResource4BF87613",
+        "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7",
+        "CassKopClustersaebscsicontrollersaRole50FB61C3",
+        "CassKopClustersaexternaldnsConditionJsonF3353872",
+        "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
+        "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
+        "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
+        "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
+        "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
+        "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
+        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
+        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
+        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
+        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
+        "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
+        "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
+        "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
+        "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-attacher-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"csi.storage.k8s.io\\"],\\"resources\\":[\\"csinodeinfos\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"volumeattachments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-provisioner-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumeclaims\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\"],\\"verbs\\":[\\"list\\",\\"watch\\",\\"create\\",\\"update\\",\\"patch\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshots\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshotcontents\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"csinodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\",\\"delete\\",\\"update\\",\\"create\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-attacher-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-attacher-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-provisioner-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-provisioner-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"replicas\\":2,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"containers\\":[{\\"args\\":[\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:///var/lib/csi/sockets/pluginproxy/csi.sock\\"},{\\"name\\":\\"AWS_ACCESS_KEY_ID\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"key_id\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}},{\\"name\\":\\"AWS_SECRET_ACCESS_KEY\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"access_key\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"imagePullPolicy\\":\\"IfNotPresent\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--feature-gates=Topology=true\\",\\"--enable-leader-election\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-provisioner:v1.3.0\\",\\"name\\":\\"csi-provisioner\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--leader-election=true\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-attacher:v1.2.0\\",\\"name\\":\\"csi-attacher\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"socket-dir\\"}]}],\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-cluster-critical\\",\\"serviceAccountName\\":\\"ebs-csi-controller-sa\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"emptyDir\\":{},\\"name\\":\\"socket-dir\\"}]}}}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-node\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"affinity\\":{\\"nodeAffinity\\":{\\"requiredDuringSchedulingIgnoredDuringExecution\\":{\\"nodeSelectorTerms\\":[{\\"matchExpressions\\":[{\\"key\\":\\"eks.amazonaws.com/compute-type\\",\\"operator\\":\\"NotIn\\",\\"values\\":[\\"fargate\\"]}]}]}}},\\"containers\\":[{\\"args\\":[\\"node\\",\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:/csi/csi.sock\\"}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"securityContext\\":{\\"privileged\\":true},\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/kubelet\\",\\"mountPropagation\\":\\"Bidirectional\\",\\"name\\":\\"kubelet-dir\\"},{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/dev\\",\\"name\\":\\"device-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/csi/csi.sock\\"},{\\"name\\":\\"DRIVER_REG_SOCK_PATH\\",\\"value\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-node-driver-registrar:v1.1.0\\",\\"lifecycle\\":{\\"preStop\\":{\\"exec\\":{\\"command\\":[\\"/bin/sh\\",\\"-c\\",\\"rm -rf /registration/ebs.csi.aws.com-reg.sock /csi/csi.sock\\"]}}},\\"name\\":\\"node-driver-registrar\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/registration\\",\\"name\\":\\"registration-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"}]}],\\"hostNetwork\\":true,\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-node-critical\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"kubelet-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/\\",\\"type\\":\\"DirectoryOrCreate\\"},\\"name\\":\\"plugin-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins_registry/\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"registration-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/dev\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"device-dir\\"}]}}}},{\\"apiVersion\\":\\"storage.k8s.io/v1beta1\\",\\"kind\\":\\"CSIDriver\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs.csi.aws.com\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"attachRequired\\":true,\\"podInfoOnMount\\":false}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3640,20 +3640,20 @@ set -o xtrace
     "eksutilsadminK8sResourceIRSA0A8791C8": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
+        "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
+        "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
+        "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"eksutils\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-eksutils\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\"}]}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3670,20 +3670,20 @@ set -o xtrace
     "eksutilsadminfargateK8sResourceIRSA651BECE8": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
+        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
+        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
+        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"fargate\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-fargate\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\"}]}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3700,71 +3700,71 @@ set -o xtrace
     "extrernaldnsK8sResource0278304D": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF443A660517D",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD443E66E3581",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
-        "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
-        "AlbIngressControllerStackNodegroupnodegroupAZaADE45433",
-        "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
-        "AlbIngressControllerStackNodegroupnodegroupAZb8B48E75C",
-        "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
-        "AlbIngressControllerStackNodegroupnodegroupAZc4F1E727C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbingressConditionJson6E876BB7",
-        "AlbIngressControllerStacksaalbingressmanifestsaalbingressServiceAccountResource5B1C51D3",
-        "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851",
-        "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
-        "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8",
-        "AlbIngressControllerStacksaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResourceE4CF41C6",
-        "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE",
-        "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
-        "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147",
-        "AlbIngressControllerStacksaexternaldnsmanifestsaexternaldnsServiceAccountResource00C1D72C",
-        "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E",
-        "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
-        "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A10256553562687E77",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A44304EAE249",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41ADALLTRAFFICBB137F4F",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICB32742F1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
+        "CassKopClusterAwsAuthmanifest4018B69E",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
+        "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
+        "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
+        "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
+        "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
+        "CassKopClusterNodegroupnodegroupAZb6B169D3A",
+        "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
+        "CassKopClusterNodegroupnodegroupAZc77B0FA59",
+        "CassKopClusterOpenIdConnectProvider1554EB4B",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "CassKopCluster5683FE9F",
+        "CassKopClusterRole88533F86",
+        "CassKopClustersaalbingressConditionJson0299F979",
+        "CassKopClustersaalbingressmanifestsaalbingressServiceAccountResourceC95A1446",
+        "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE",
+        "CassKopClustersaalbingressRole92AC458C",
+        "CassKopClustersaebscsicontrollersaConditionJson818A84ED",
+        "CassKopClustersaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResource4BF87613",
+        "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7",
+        "CassKopClustersaebscsicontrollersaRole50FB61C3",
+        "CassKopClustersaexternaldnsConditionJsonF3353872",
+        "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
+        "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
+        "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
+        "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
+        "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
+        "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
+        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
+        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
+        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
+        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
+        "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
+        "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
+        "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
+        "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo3.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CdkEksCluster\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },
@@ -3781,71 +3781,71 @@ set -o xtrace
     "metricsserverK8sResourceBB4DF557": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackKubectlProviderSecurityGroupB75198DF443A660517D",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41AD443E66E3581",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminA4E6FD27",
-        "AlbIngressControllerStackNodegroupnodegroupAZaNodeGroupRole8780EA4E",
-        "AlbIngressControllerStackNodegroupnodegroupAZaADE45433",
-        "AlbIngressControllerStackNodegroupnodegroupAZbNodeGroupRole3A966D62",
-        "AlbIngressControllerStackNodegroupnodegroupAZb8B48E75C",
-        "AlbIngressControllerStackNodegroupnodegroupAZcNodeGroupRole54DE16C7",
-        "AlbIngressControllerStackNodegroupnodegroupAZc4F1E727C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbingressConditionJson6E876BB7",
-        "AlbIngressControllerStacksaalbingressmanifestsaalbingressServiceAccountResource5B1C51D3",
-        "AlbIngressControllerStacksaalbingressRoleDefaultPolicyFDB47851",
-        "AlbIngressControllerStacksaalbingressRoleABD6CA8A",
-        "AlbIngressControllerStacksaebscsicontrollersaConditionJson8519F7D8",
-        "AlbIngressControllerStacksaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResourceE4CF41C6",
-        "AlbIngressControllerStacksaebscsicontrollersaRoleDefaultPolicyE51DB8CE",
-        "AlbIngressControllerStacksaebscsicontrollersaRole06391A6A",
-        "AlbIngressControllerStacksaexternaldnsConditionJsonAF29C147",
-        "AlbIngressControllerStacksaexternaldnsmanifestsaexternaldnsServiceAccountResource00C1D72C",
-        "AlbIngressControllerStacksaexternaldnsRoleDefaultPolicy4BE8A23E",
-        "AlbIngressControllerStacksaexternaldnsRole7B2F1597",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerConditionJsonDDD2BFDC",
-        "AlbIngressControllerStackserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource3764D2B1",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleDefaultPolicy1F75EA2E",
-        "AlbIngressControllerStackserviceaccountclusterautoscalerRoleB4581C4F",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateConditionJsonC7A2592E",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource959304EB",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRoleDefaultPolicyD3C91FE8",
-        "AlbIngressControllerStackserviceaccounteksutilsadminfargateRole9FECD4A3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminConditionJson0C3777E3",
-        "AlbIngressControllerStackserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource365CB757",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleDefaultPolicyEA3A0C97",
-        "AlbIngressControllerStackserviceaccounteksutilsadminRoleC73F84AF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A10256553562687E77",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackControlPlaneSecurityGroup2997AF0A44304EAE249",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopAlbIngressControllerStackSpotInstanceSecurityGroup95BD41ADALLTRAFFICBB137F4F",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICB32742F1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
+        "CassKopClusterAwsAuthmanifest4018B69E",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
+        "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
+        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
+        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
+        "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
+        "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
+        "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
+        "CassKopClusterNodegroupnodegroupAZbNodeGroupRoleA4480EB9",
+        "CassKopClusterNodegroupnodegroupAZb6B169D3A",
+        "CassKopClusterNodegroupnodegroupAZcNodeGroupRoleD8232C63",
+        "CassKopClusterNodegroupnodegroupAZc77B0FA59",
+        "CassKopClusterOpenIdConnectProvider1554EB4B",
+        "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
+        "CassKopClusterCreationRoleDDB5156B",
+        "CassKopCluster5683FE9F",
+        "CassKopClusterRole88533F86",
+        "CassKopClustersaalbingressConditionJson0299F979",
+        "CassKopClustersaalbingressmanifestsaalbingressServiceAccountResourceC95A1446",
+        "CassKopClustersaalbingressRoleDefaultPolicyFC5473BE",
+        "CassKopClustersaalbingressRole92AC458C",
+        "CassKopClustersaebscsicontrollersaConditionJson818A84ED",
+        "CassKopClustersaebscsicontrollersamanifestsaebscsicontrollersaServiceAccountResource4BF87613",
+        "CassKopClustersaebscsicontrollersaRoleDefaultPolicyE73F45E7",
+        "CassKopClustersaebscsicontrollersaRole50FB61C3",
+        "CassKopClustersaexternaldnsConditionJsonF3353872",
+        "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
+        "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
+        "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
+        "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
+        "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
+        "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
+        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
+        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
+        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
+        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
+        "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
+        "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
+        "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
+        "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
+          "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"kind\\":\\"ClusterRole\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"system:aggregated-metrics-reader\\",\\"labels\\":{\\"rbac.authorization.k8s.io/aggregate-to-view\\":\\"true\\",\\"rbac.authorization.k8s.io/aggregate-to-edit\\":\\"true\\",\\"rbac.authorization.k8s.io/aggregate-to-admin\\":\\"true\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"metrics.k8s.io\\"],\\"resources\\":[\\"pods\\",\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"metrics-server:system:auth-delegator\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"system:auth-delegator\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"metrics-server-auth-reader\\",\\"namespace\\":\\"kube-system\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"extension-apiserver-authentication-reader\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apiregistration.k8s.io/v1beta1\\",\\"kind\\":\\"APIService\\",\\"metadata\\":{\\"name\\":\\"v1beta1.metrics.k8s.io\\"},\\"spec\\":{\\"service\\":{\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\"},\\"group\\":\\"metrics.k8s.io\\",\\"version\\":\\"v1beta1\\",\\"insecureSkipTLSVerify\\":true,\\"groupPriorityMinimum\\":100,\\"versionPriority\\":100}},{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\"}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-app\\":\\"metrics-server\\"}},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"k8s-app\\":\\"metrics-server\\"}},\\"template\\":{\\"metadata\\":{\\"name\\":\\"metrics-server\\",\\"labels\\":{\\"k8s-app\\":\\"metrics-server\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"metrics-server\\",\\"volumes\\":[{\\"name\\":\\"tmp-dir\\",\\"emptyDir\\":{}}],\\"containers\\":[{\\"name\\":\\"metrics-server\\",\\"image\\":\\"k8s.gcr.io/metrics-server-amd64:v0.3.6\\",\\"imagePullPolicy\\":\\"Always\\",\\"volumeMounts\\":[{\\"name\\":\\"tmp-dir\\",\\"mountPath\\":\\"/tmp\\"}]}]}}}},{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Service\\",\\"metadata\\":{\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"kubernetes.io/name\\":\\"Metrics-server\\",\\"kubernetes.io/cluster-service\\":\\"true\\"}},\\"spec\\":{\\"selector\\":{\\"k8s-app\\":\\"metrics-server\\"},\\"ports\\":[{\\"port\\":443,\\"protocol\\":\\"TCP\\",\\"targetPort\\":443}]}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"system:metrics-server\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"nodes\\",\\"nodes/stats\\",\\"namespaces\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"system:metrics-server\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"system:metrics-server\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"metrics-server\\",\\"namespace\\":\\"kube-system\\"}]}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
+            "CassKopClusterCreationRoleDDB5156B",
             "Arn",
           ],
         },

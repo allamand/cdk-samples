@@ -28,7 +28,7 @@ test('Test eks creation CloudFormation Snapshot', () => {
 */
 
 
-test('Test CassKop', () => {
+test('Test Multi-AZ CassKop', () => {
     //const stack = new cdk.Stack();
     // GIVEN
     const app = new App();
@@ -36,7 +36,7 @@ test('Test CassKop', () => {
         region: app.node.tryGetContext('region') || process.env.CDK_DEFAULT_REGION || "eu-west-1",
         account: app.node.tryGetContext('account') || process.env.CDK_DEFAULT_ACCOUNT || "xxxxxxxxxxxx"
     };
-
+    
 
     // WHEN
     const stack = new eks.CassKopCluster(app, 'Casskop', {env});
@@ -68,7 +68,7 @@ test('Test CassKop', () => {
         ScalingConfig: {
             "DesiredSize": 1,
             "MaxSize": 10,
-            "MinSize": 0,
+            "MinSize": 1,
         },
         Tags:  {
             "cdk-nodegroup": "AZa",
@@ -93,7 +93,7 @@ test('Test CassKop', () => {
         ScalingConfig: {
             "DesiredSize": 1,
             "MaxSize": 10,
-            "MinSize": 0,
+            "MinSize": 1,
         },
         Tags:  {
             "cdk-nodegroup": "AZb",
@@ -118,7 +118,7 @@ test('Test CassKop', () => {
         ScalingConfig: {
             "DesiredSize": 1,
             "MaxSize": 10,
-            "MinSize": 0,
+            "MinSize": 1,
         },
         Tags:  {
             "cdk-nodegroup": "AZc",
