@@ -461,16 +461,6 @@ export class CassKopCluster extends cdk.Stack {
     });
     spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.allTraffic(), "allow all traffic from cluster security group");
 
-    //Add BottleRocket Instances
-    /*
-    const bottleRocket = cluster.addCapacity('BottlerocketNodes', {
-      instanceType: new ec2.InstanceType('t3.small'),
-      minCapacity:  2,
-      machineImageType: eks.MachineImageType.BOTTLEROCKET
-    });
-    bottleRocket.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.udp(53), "allow udp 53 from cluster security group");
-    */
-
     //Add Fargate profile
     cluster.addFargateProfile('FargateProfile', {
       selectors: [
@@ -511,18 +501,6 @@ export class CassKopCluster extends cdk.Stack {
     new EksUtilsAdmin(this, 'eksutils-admin-fargate', cluster, {
       namespace: 'fargate'
     });
-
-    //Example: create an IRSA service account
-    //only add a IRSA serviceAccount ex to use for xray-daemon
-    //this is the equivalent of eksctl create iamserviceaccount --name xray-daemon --namespace default --cluster EKS-Lab --attach-policy-arn arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess --approve --override-existing-serviceaccounts
-    //TODO i would like instead uses arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess as existing policy to attach to my role
-    /*
-    new ServiceAccountIRSA(this, 'xray-daemon', cluster, {
-      iamPolicyFile: 'xray-daemonset.json',
-      name: 'xray-daemon',
-      namespace: 'default',
-    });
-     */
 
     new cdk.CfnOutput(this, 'AZOutput', {value: vpc.availabilityZones.join(',')})
 
