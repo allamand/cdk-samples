@@ -3,9 +3,9 @@ import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
 import {
     ApiGatewayCustomDomainStack, ApiSixStack, AutoscalingGroupStack, BastionHost, EcsEc2Stack,
-    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, AccessPointProvider, 
-    LambdaEfsStack
-    } from '../lib';
+    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, AccessPointProvider,
+    LambdaEfsStack, VpcStack
+} from '../lib';
 // Amaozn EKS
 import { AlbIngressControllerStack, EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
 // AWS Fargate
@@ -44,6 +44,7 @@ var factory = {
     'EksMini': EksMini,
     'EksSpot': EksSpot,
     'LambdaEfsStack': LambdaEfsStack,
+    'cdkVpc': VpcStack,
 }
 
 function activateIfEnabled(stackName: string) {
