@@ -1,0 +1,38 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "firehose:PutRecordBatch"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "logs:PutLogEvents",
+            "Resource": "arn:aws:logs:*:*:log-group:*:*:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "es:ESHttp*"
+            ],
+            "Resource": "arn:aws:es:eu-west-1:382076407153:domain/eks-casskop",
+            "Effect": "Allow"
+        }
+    ]
+}

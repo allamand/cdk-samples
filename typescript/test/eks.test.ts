@@ -54,14 +54,13 @@ test('Test Multi-AZ CassKop', () => {
     });
 
     expect(stack).toHaveResource('AWS::EKS::Nodegroup', {
-        //AmiType: "AL2_x86_64",
         InstanceTypes: [
-            "m5.large",
-        ],
+            "c5d.2xlarge"
+          ],
         Labels:  {
             "cdk-nodegroup": "AZa",
         },
-        NodegroupName: "CdkEksCluster-AZa",
+        //NodegroupName: "CdkEksCluster-AZa",
         RemoteAccess:  {
             "Ec2SshKey":  DEFAULT_KEY_NAME,
         },
@@ -81,12 +80,12 @@ test('Test Multi-AZ CassKop', () => {
     expect(stack).toHaveResource('AWS::EKS::Nodegroup', {
         //AmiType: "AL2_x86_64",
         InstanceTypes: [
-            "m5.large",
+            "c5d.2xlarge"
         ],
         Labels:  {
             "cdk-nodegroup": "AZb",
         },
-        NodegroupName: "CdkEksCluster-AZb",
+        //NodegroupName: "CdkEksCluster-AZb",
         RemoteAccess:  {
             "Ec2SshKey":  DEFAULT_KEY_NAME,
         },
@@ -106,12 +105,12 @@ test('Test Multi-AZ CassKop', () => {
     expect(stack).toHaveResource('AWS::EKS::Nodegroup', {
         //AmiType: "AL2_x86_64",
         InstanceTypes: [
-            "m5.large",
+            "c5d.2xlarge"
         ],
         Labels:  {
             "cdk-nodegroup": "AZc",
         },
-        NodegroupName: "CdkEksCluster-AZc",
+        //NodegroupName: "CdkEksCluster-AZc",
         RemoteAccess:  {
             "Ec2SshKey":  DEFAULT_KEY_NAME,
         },
@@ -126,6 +125,12 @@ test('Test Multi-AZ CassKop', () => {
         Subnets: [{
             "Ref": "VpcPrivateSubnet3SubnetF258B56E",
         },],
+    });
+
+    expect(stack).toHaveResource('Custom::AWSCDK-EKS-HelmChart', {
+        "Release": "aws-for-fluent-bit",
+        "Repository": "https://aws.github.io/eks-charts",  
+        "Values": "{\"serviceAccount\":{\"create\":false,\"name\":\"aws-for-fluent-bit\"},\"cloudWatch\":{\"enabled\":true,\"region\":\"eu-west-1\",\"logStreamName\":\"CassKop\"},\"firehose\":{\"enabled\":false},\"kinesis\":{\"enabled\":false}}",
     });
 
 });

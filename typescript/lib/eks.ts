@@ -2,11 +2,11 @@ import cdk = require('@aws-cdk/core');
 import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
-import {Stack} from '@aws-cdk/core';
-import {VpcProvider} from './vpc';
-import {ExternalDns} from "./k8sResources/ExternalDns";
-import {AlbIngressController} from "./k8sResources/AlbIngressController";
-import {MetricsServer} from "./k8sResources/MetricsServer";
+import { Stack } from '@aws-cdk/core';
+import { VpcProvider } from './vpc';
+import { ExternalDns } from "./k8sResources/ExternalDns";
+import { AlbIngressController } from "./k8sResources/AlbIngressController";
+import { MetricsServer } from "./k8sResources/MetricsServer";
 import {
   DEFAULT_CLUSTER_NAME,
   DEFAULT_CLUSTER_VERSION,
@@ -15,11 +15,14 @@ import {
   DEFAULT_KEY_NAME,
   DEFAULT_SSH_SOURCE_IP_RANGE
 } from "./defaults";
-import {ClusterAutoscaler} from "./k8sResources/ClusterAutoscaler";
-import {EbsCsiDriver} from "./k8sResources/EbsCsiDriver";
-import {EksUtilsAdmin} from "./k8sResources/EksUtilsPod";
-import {DefaultCapacityType} from "@aws-cdk/aws-eks";
-import {SubnetType} from "@aws-cdk/aws-ec2";
+import { ClusterAutoscaler } from "./k8sResources/ClusterAutoscaler";
+import { EbsCsiDriver } from "./k8sResources/EbsCsiDriver";
+import { EksUtilsAdmin } from "./k8sResources/EksUtilsPod";
+import { DefaultCapacityType } from "@aws-cdk/aws-eks";
+import { SubnetType } from "@aws-cdk/aws-ec2";
+import { K8sHelmChartIRSA } from './k8sResources/K8sResource';
+import { AwsForFluentBit } from './k8sResources/AwsForFluentBit';
+import { CloudWatchAgent } from './k8sResources/CloudWatchAgent';
 
 
 export class EksStack extends cdk.Stack {
@@ -219,7 +222,7 @@ export class EksMini extends cdk.Stack {
     })
 
     new cdk.CfnOutput(this, 'Region', { value: Stack.of(this).region })
-    new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })    
+    new cdk.CfnOutput(this, 'ClusterVersion', { value: clusterVersion })
   }
 }
 
@@ -255,7 +258,7 @@ export class AlbIngressControllerStack extends cdk.Stack {
     //We can also add other nodesgroups manually
 
     cluster.addNodegroup('nodegroup', {
-      nodegroupName: clusterName+"-addNodeGroup1",
+      nodegroupName: clusterName + "-addNodeGroup1",
       instanceType: new ec2.InstanceType('m5.large'),
       minSize: 1,
       maxSize: 50,
@@ -282,7 +285,7 @@ export class AlbIngressControllerStack extends cdk.Stack {
       keyName: keyName,
 
     });
-    spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.allTraffic(), "allow all traffic from cluster security group");
+    spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId), ec2.Port.allTraffic(), "allow all traffic from cluster security group");
 
     //Add BottleRocket Instances
     /*
@@ -366,7 +369,10 @@ export class CassKopCluster extends cdk.Stack {
     const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
     const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
     const keyName = this.node.tryGetContext('key_name') ?? DEFAULT_KEY_NAME
-
+    const instanceType = this.node.tryGetContext('instance_type') ?? 'c5d.2xlarge'
+    const desiredSize = this.node.tryGetContext('desired_size') ?? 4
+    const uid: string = this.node.uniqueId;
+    const nid: string = this.node.id;
 
     const vpc = VpcProvider.getOrCreate(this)
 
@@ -378,12 +384,14 @@ export class CassKopCluster extends cdk.Stack {
       defaultCapacity: 0,
     });
 
+    //TODO : refactor with a loob for each AZ
     cluster.addNodegroup('nodegroup-AZa', {
-      instanceType: new ec2.InstanceType('m5.large'),
+      instanceType: new ec2.InstanceType(instanceType),
       minSize: 1,
-      desiredSize: 1,
+      desiredSize: desiredSize,
       maxSize: 10,
-      nodegroupName: clusterName+"-AZa",
+      forceUpdate: false,
+      //nodegroupName: clusterName+nid+uid+"-AZa",
       subnets: vpc.selectSubnets({
         subnetType: SubnetType.PRIVATE,
         availabilityZones: [
@@ -403,11 +411,12 @@ export class CassKopCluster extends cdk.Stack {
 
 
     cluster.addNodegroup('nodegroup-AZb', {
-      instanceType: new ec2.InstanceType('m5.large'),
+      instanceType: new ec2.InstanceType(instanceType),
       minSize: 1,
-      desiredSize: 1,
+      desiredSize: desiredSize,
       maxSize: 10,
-      nodegroupName: clusterName+"-AZb",
+      forceUpdate: false,
+      //nodegroupName: clusterName+nid+uid+"-AZb",
       subnets: vpc.selectSubnets({
         subnetType: SubnetType.PRIVATE,
         availabilityZones: [
@@ -426,11 +435,12 @@ export class CassKopCluster extends cdk.Stack {
     });
 
     cluster.addNodegroup('nodegroup-AZc', {
-      instanceType: new ec2.InstanceType('m5.large'),
+      instanceType: new ec2.InstanceType(instanceType),
       minSize: 1,
-      desiredSize: 1,
+      desiredSize: desiredSize,
       maxSize: 10,
-      nodegroupName: clusterName+"-AZc",
+      forceUpdate: false,
+      //nodegroupName: clusterName+nid+uid+"-AZc",
       subnets: vpc.selectSubnets({
         subnetType: SubnetType.PRIVATE,
         availabilityZones: [
@@ -447,29 +457,6 @@ export class CassKopCluster extends cdk.Stack {
         sshKeyName: keyName,
       },
     });
-
-    //Add SPot Instances
-
-    const spotAsg = cluster.addCapacity('Spot', {
-      instanceType: new ec2.InstanceType('t3.medium'),
-      maxInstanceLifetime: cdk.Duration.days(7),
-      minCapacity: 1,
-      maxCapacity: 20,
-      spotPrice: '0.05',
-      keyName: keyName,
-
-    });
-    spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId) , ec2.Port.allTraffic(), "allow all traffic from cluster security group");
-
-    //Add Fargate profile
-    cluster.addFargateProfile('FargateProfile', {
-      selectors: [
-        { namespace: 'fargate' },
-        { namespace: 'fargate2' },
-      ]
-
-    });
-
 
     // Deploy ALB Ingress Controller
     new AlbIngressController(this, 'alb-ingress-controller', cluster);
@@ -497,12 +484,18 @@ export class CassKopCluster extends cdk.Stack {
       namespace: 'eksutils'
     });
 
-    //Deploy EksUtils admin pod in default namespace (backed by fargate)
-    new EksUtilsAdmin(this, 'eksutils-admin-fargate', cluster, {
-      namespace: 'fargate'
+    //Deploy CloudWatch Agent for CloudWatch Container Insight
+    new CloudWatchAgent(this, 'cloudWatch-agent', cluster, {});
+
+    //Configure FluentBit to forward logs to CloudWatch & ElasticSearch
+    new AwsForFluentBit(this, "aws-for-fluent-bit", cluster, {
+      name: "aws-for-fluent-bit",
+      namespace: "kube-system",
+      iamPolicyFile: "aws-for-fluent-bit.json"
     });
 
-    new cdk.CfnOutput(this, 'AZOutput', {value: vpc.availabilityZones.join(',')})
+
+    new cdk.CfnOutput(this, 'AZOutput', { value: vpc.availabilityZones.join(',') })
 
   }
 }

@@ -132,10 +132,6 @@ Object {
       "Description": "S3 key for asset version \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
       "Type": "String",
     },
-    "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "/aws/service/eks/optimized-ami/1.17/amazon-linux-2/recommended/image_id",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
   },
   "Resources": Object {
     "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57": Object {
@@ -388,21 +384,7 @@ Object {
                   "Arn",
                 ],
               },
-              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "CassKopClusterSpotInstanceRole3796F757",
-                  "Arn",
-                ],
-              },
-              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-                  "Arn",
-                ],
-              },
-              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{SessionName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\",\\\\\\"system:node-proxier\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
             ],
           ],
         },
@@ -452,27 +434,6 @@ Object {
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
             "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
-            "GroupId",
-          ],
-        },
-        "ToPort": 443,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD": Object {
-      "Properties": Object {
-        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:443",
-        "FromPort": 443,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
@@ -685,16 +646,6 @@ Object {
                 ],
               },
             },
-            Object {
-              "Action": "iam:PassRole",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-                  "Arn",
-                ],
-              },
-            },
           ],
           "Version": "2012-10-17",
         },
@@ -725,8 +676,6 @@ Object {
     },
     "CassKopClusterKubectlReadyBarrier346C8999": Object {
       "DependsOn": Array [
-        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
         "CassKopClusterCreationRoleDDB5156B",
         "CassKopCluster5683FE9F",
@@ -744,7 +693,7 @@ Object {
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
-          "m5.large",
+          "c5d.2xlarge",
         ],
         "Labels": Object {
           "cdk-nodegroup": "AZa",
@@ -755,7 +704,6 @@ Object {
             "Arn",
           ],
         },
-        "NodegroupName": "CdkEksCluster-AZa",
         "RemoteAccess": Object {
           "Ec2SshKey": "sallaman",
         },
@@ -837,7 +785,7 @@ Object {
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
-          "m5.large",
+          "c5d.2xlarge",
         ],
         "Labels": Object {
           "cdk-nodegroup": "AZb",
@@ -848,7 +796,6 @@ Object {
             "Arn",
           ],
         },
-        "NodegroupName": "CdkEksCluster-AZb",
         "RemoteAccess": Object {
           "Ec2SshKey": "sallaman",
         },
@@ -930,7 +877,7 @@ Object {
         },
         "ForceUpdateEnabled": true,
         "InstanceTypes": Array [
-          "m5.large",
+          "c5d.2xlarge",
         ],
         "Labels": Object {
           "cdk-nodegroup": "AZc",
@@ -941,7 +888,6 @@ Object {
             "Arn",
           ],
         },
-        "NodegroupName": "CdkEksCluster-AZc",
         "RemoteAccess": Object {
           "Ec2SshKey": "sallaman",
         },
@@ -1072,399 +1018,6 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "CassKopClusterSpotASG93EF1913": Object {
-      "Properties": Object {
-        "LaunchConfigurationName": Object {
-          "Ref": "CassKopClusterSpotLaunchConfigFA810380",
-        },
-        "MaxInstanceLifetime": 604800,
-        "MaxSize": "20",
-        "MinSize": "1",
-        "Tags": Array [
-          Object {
-            "Key": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  "kubernetes.io/cluster/",
-                  Object {
-                    "Ref": "CassKopCluster5683FE9F",
-                  },
-                ],
-              ],
-            },
-            "PropagateAtLaunch": true,
-            "Value": "owned",
-          },
-          Object {
-            "Key": "Name",
-            "PropagateAtLaunch": true,
-            "Value": "Casskop/CassKopCluster/Spot",
-          },
-        ],
-        "VPCZoneIdentifier": Array [
-          Object {
-            "Ref": "VpcPrivateSubnet1Subnet536B997A",
-          },
-          Object {
-            "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
-          },
-          Object {
-            "Ref": "VpcPrivateSubnet3SubnetF258B56E",
-          },
-        ],
-      },
-      "Type": "AWS::AutoScaling::AutoScalingGroup",
-      "UpdatePolicy": Object {
-        "AutoScalingScheduledAction": Object {
-          "IgnoreUnmodifiedGroupSizeProperties": true,
-        },
-      },
-    },
-    "CassKopClusterSpotInstanceProfileF7B9468A": Object {
-      "Properties": Object {
-        "Roles": Array [
-          Object {
-            "Ref": "CassKopClusterSpotInstanceRole3796F757",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
-    },
-    "CassKopClusterSpotInstanceRole3796F757": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "ec2.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEKSWorkerNodePolicy",
-              ],
-            ],
-          },
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEKS_CNI_Policy",
-              ],
-            ],
-          },
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
-              ],
-            ],
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  "kubernetes.io/cluster/",
-                  Object {
-                    "Ref": "CassKopCluster5683FE9F",
-                  },
-                ],
-              ],
-            },
-            "Value": "owned",
-          },
-          Object {
-            "Key": "Name",
-            "Value": "Casskop/CassKopCluster/Spot",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "CassKopClusterSpotInstanceSecurityGroup21F521B6": Object {
-      "Properties": Object {
-        "GroupDescription": "Casskop/CassKopCluster/Spot/InstanceSecurityGroup",
-        "SecurityGroupEgress": Array [
-          Object {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1",
-          },
-        ],
-        "Tags": Array [
-          Object {
-            "Key": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  "kubernetes.io/cluster/",
-                  Object {
-                    "Ref": "CassKopCluster5683FE9F",
-                  },
-                ],
-              ],
-            },
-            "Value": "owned",
-          },
-          Object {
-            "Key": "Name",
-            "Value": "Casskop/CassKopCluster/Spot",
-          },
-        ],
-        "VpcId": Object {
-          "Ref": "Vpc8378EB38",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
-    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517": Object {
-      "Properties": Object {
-        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:1025-65535",
-        "FromPort": 1025,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-            "GroupId",
-          ],
-        },
-        "ToPort": 65535,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E": Object {
-      "Properties": Object {
-        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:443",
-        "FromPort": 443,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-            "GroupId",
-          ],
-        },
-        "ToPort": 443,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9": Object {
-      "Properties": Object {
-        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:ALL TRAFFIC",
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "-1",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-            "GroupId",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54": Object {
-      "Properties": Object {
-        "Description": "allow all traffic from cluster security group",
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "-1",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "CassKopCluster5683FE9F",
-            "ClusterSecurityGroupId",
-          ],
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "CassKopClusterSpotLaunchConfigFA810380": Object {
-      "DependsOn": Array [
-        "CassKopClusterSpotInstanceRole3796F757",
-      ],
-      "Properties": Object {
-        "IamInstanceProfile": Object {
-          "Ref": "CassKopClusterSpotInstanceProfileF7B9468A",
-        },
-        "ImageId": Object {
-          "Ref": "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter",
-        },
-        "InstanceType": "t3.medium",
-        "KeyName": "sallaman",
-        "SecurityGroups": Array [
-          Object {
-            "Fn::GetAtt": Array [
-              "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-              "GroupId",
-            ],
-          },
-        ],
-        "SpotPrice": "0.05",
-        "UserData": Object {
-          "Fn::Base64": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "#!/bin/bash
-set -o xtrace
-/etc/eks/bootstrap.sh ",
-                Object {
-                  "Ref": "CassKopCluster5683FE9F",
-                },
-                " --kubelet-extra-args \\"--node-labels lifecycle=Ec2Spot --register-with-taints=spotInstance=true:PreferNoSchedule\\" --use-max-pods true
-/opt/aws/bin/cfn-signal --exit-code $? --stack Casskop --resource CassKopClusterSpotASG93EF1913 --region eu-west-1",
-              ],
-            ],
-          },
-        },
-      },
-      "Type": "AWS::AutoScaling::LaunchConfiguration",
-    },
-    "CassKopClusterchartspotinterrupthandler80D296D7": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "CassKopClusterKubectlReadyBarrier346C8999",
-      ],
-      "Properties": Object {
-        "Chart": "aws-node-termination-handler",
-        "ClusterName": Object {
-          "Ref": "CassKopCluster5683FE9F",
-        },
-        "CreateNamespace": true,
-        "Namespace": "kube-system",
-        "Release": "asskopcasskopclusterchartspotinterrupthandlerb581dd3b",
-        "Repository": "https://aws.github.io/eks-charts",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterCreationRoleDDB5156B",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-        "Values": "{\\"nodeSelector.lifecycle\\":\\"Ec2Spot\\"}",
-        "Version": "0.7.3",
-      },
-      "Type": "Custom::AWSCDK-EKS-HelmChart",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "CassKopClusterfargateprofileFargateProfileE22A2CC1": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "AssumeRoleArn": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterCreationRoleDDB5156B",
-            "Arn",
-          ],
-        },
-        "Config": Object {
-          "clusterName": Object {
-            "Ref": "CassKopCluster5683FE9F",
-          },
-          "podExecutionRoleArn": Object {
-            "Fn::GetAtt": Array [
-              "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-              "Arn",
-            ],
-          },
-          "selectors": Array [
-            Object {
-              "namespace": "fargate",
-            },
-            Object {
-              "namespace": "fargate2",
-            },
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
-            "Outputs.CasskopawscdkawseksClusterResourceProviderframeworkonEventDEC5D217Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-FargateProfile",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": Object {
-                "Service": "eks-fargate-pods.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "arn:",
-                Object {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
-              ],
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
     "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -1501,32 +1054,6 @@ set -o xtrace
           "Ref": "CassKopCluster5683FE9F",
         },
         "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"eksutils\\"}}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterCreationRoleDDB5156B",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "CassKopClusterKubectlReadyBarrier346C8999",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "CassKopCluster5683FE9F",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"fargate\\"}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "CassKopClusterCreationRoleDDB5156B",
@@ -2059,6 +1586,148 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+            "Arn",
+          ],
+        },
+        "Value": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":aud\\":\\"sts.amazonaws.com\\",\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":sub\\":\\"system:serviceaccount:kube-system:aws-for-fluent-bit\\"}",
+            ],
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDKCfnJson",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": Object {
+                "StringEquals": Object {
+                  "Fn::GetAtt": Array [
+                    "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+                    "Value",
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": Object {
+                "Federated": Object {
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "firehose:PutRecordBatch",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "logs:PutLogEvents",
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:log-group:*:*:*",
+            },
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "arn:aws:logs:*:*:log-group:*",
+            },
+            Object {
+              "Action": "logs:CreateLogGroup",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "Roles": Array [
+          Object {
+            "Ref": "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"aws-for-fluent-bit\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-for-fluent-bit\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+                  "Arn",
+                ],
+              },
+              "\\"}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
     "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -2395,243 +2064,6 @@ set -o xtrace
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
-      ],
-      "Properties": Object {
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
-            "Arn",
-          ],
-        },
-        "Value": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "{\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "CassKopCluster5683FE9F",
-                  "OpenIdConnectIssuer",
-                ],
-              },
-              ":aud\\":\\"sts.amazonaws.com\\",\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "CassKopCluster5683FE9F",
-                  "OpenIdConnectIssuer",
-                ],
-              },
-              ":sub\\":\\"system:serviceaccount:fargate:eksutils-admin\\"}",
-            ],
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDKCfnJson",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720": Object {
-      "DependsOn": Array [
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
-      ],
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "sts:AssumeRoleWithWebIdentity",
-              "Condition": Object {
-                "StringEquals": Object {
-                  "Fn::GetAtt": Array [
-                    "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-                    "Value",
-                  ],
-                },
-              },
-              "Effect": "Allow",
-              "Principal": Object {
-                "Federated": Object {
-                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
-                },
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B": Object {
-      "DependsOn": Array [
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
-      ],
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
-                "acm:DescribeCertificate",
-                "acm:ListCertificates",
-                "acm:GetCertificate",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:CreateSecurityGroup",
-                "ec2:CreateTags",
-                "ec2:DeleteTags",
-                "ec2:DeleteSecurityGroup",
-                "ec2:DescribeAccountAttributes",
-                "ec2:DescribeAddresses",
-                "ec2:DescribeInstances",
-                "ec2:DescribeInstanceStatus",
-                "ec2:DescribeInternetGateways",
-                "ec2:DescribeNetworkInterfaces",
-                "ec2:DescribeSecurityGroups",
-                "ec2:DescribeSubnets",
-                "ec2:DescribeTags",
-                "ec2:DescribeVpcs",
-                "ec2:ModifyInstanceAttribute",
-                "ec2:ModifyNetworkInterfaceAttribute",
-                "ec2:RevokeSecurityGroupIngress",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "elasticloadbalancing:AddListenerCertificates",
-                "elasticloadbalancing:AddTags",
-                "elasticloadbalancing:CreateListener",
-                "elasticloadbalancing:CreateLoadBalancer",
-                "elasticloadbalancing:CreateRule",
-                "elasticloadbalancing:CreateTargetGroup",
-                "elasticloadbalancing:DeleteListener",
-                "elasticloadbalancing:DeleteLoadBalancer",
-                "elasticloadbalancing:DeleteRule",
-                "elasticloadbalancing:DeleteTargetGroup",
-                "elasticloadbalancing:DeregisterTargets",
-                "elasticloadbalancing:DescribeListenerCertificates",
-                "elasticloadbalancing:DescribeListeners",
-                "elasticloadbalancing:DescribeLoadBalancers",
-                "elasticloadbalancing:DescribeLoadBalancerAttributes",
-                "elasticloadbalancing:DescribeRules",
-                "elasticloadbalancing:DescribeSSLPolicies",
-                "elasticloadbalancing:DescribeTags",
-                "elasticloadbalancing:DescribeTargetGroups",
-                "elasticloadbalancing:DescribeTargetGroupAttributes",
-                "elasticloadbalancing:DescribeTargetHealth",
-                "elasticloadbalancing:ModifyListener",
-                "elasticloadbalancing:ModifyLoadBalancerAttributes",
-                "elasticloadbalancing:ModifyRule",
-                "elasticloadbalancing:ModifyTargetGroup",
-                "elasticloadbalancing:ModifyTargetGroupAttributes",
-                "elasticloadbalancing:RegisterTargets",
-                "elasticloadbalancing:RemoveListenerCertificates",
-                "elasticloadbalancing:RemoveTags",
-                "elasticloadbalancing:SetIpAddressType",
-                "elasticloadbalancing:SetSecurityGroups",
-                "elasticloadbalancing:SetSubnets",
-                "elasticloadbalancing:SetWebACL",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "iam:CreateServiceLinkedRole",
-                "iam:GetServerCertificate",
-                "iam:ListServerCertificates",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": "cognito-idp:DescribeUserPoolClient",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "waf-regional:GetWebACLForResource",
-                "waf-regional:GetWebACL",
-                "waf-regional:AssociateWebACL",
-                "waf-regional:DisassociateWebACL",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": Array [
-                "tag:GetResources",
-                "tag:TagResources",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            Object {
-              "Action": "waf:GetWebACL",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "Roles": Array [
-          Object {
-            "Ref": "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "CassKopClusterKubectlReadyBarrier346C8999",
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "CassKopCluster5683FE9F",
-        },
-        "Manifest": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"eksutils-admin\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
-              Object {
-                "Fn::GetAtt": Array [
-                  "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
-                  "Arn",
-                ],
-              },
-              "\\"}}}]",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterCreationRoleDDB5156B",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
     },
     "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA": Object {
       "DeletionPolicy": "Delete",
@@ -3283,16 +2715,11 @@ set -o xtrace
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterchartspotinterrupthandler80D296D7",
         "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
         "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
@@ -3317,27 +2744,18 @@ set -o xtrace
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
         "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
-        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
-        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
         "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
-        "CassKopClusterSpotASG93EF1913",
-        "CassKopClusterSpotInstanceProfileF7B9468A",
-        "CassKopClusterSpotInstanceRole3796F757",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
-        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3515,6 +2933,41 @@ set -o xtrace
       },
       "Type": "AWS::CloudFormation::Stack",
     },
+    "awsforfluentbitHelmChartIRSAawsforfluentbitHelmChartIRSAHelmChart0020AB4E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+      ],
+      "Properties": Object {
+        "Chart": "aws-for-fluent-bit",
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "CreateNamespace": true,
+        "Namespace": "kube-system",
+        "Release": "aws-for-fluent-bit",
+        "Repository": "https://aws.github.io/eks-charts",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+        "Values": "{\\"serviceAccount\\":{\\"create\\":false,\\"name\\":\\"aws-for-fluent-bit\\"},\\"cloudWatch\\":{\\"enabled\\":true,\\"region\\":\\"eu-west-1\\",\\"logStreamName\\":\\"CassKop\\"},\\"firehose\\":{\\"enabled\\":false},\\"kinesis\\":{\\"enabled\\":false}}",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
     "clusterautoscalerK8sResourceIRSAECFBF5A7": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -3560,16 +3013,11 @@ set -o xtrace
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterchartspotinterrupthandler80D296D7",
         "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
         "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
@@ -3594,27 +3042,18 @@ set -o xtrace
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
         "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
-        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
-        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
         "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
-        "CassKopClusterSpotASG93EF1913",
-        "CassKopClusterSpotInstanceProfileF7B9468A",
-        "CassKopClusterSpotInstanceRole3796F757",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
-        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3667,50 +3106,15 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "eksutilsadminfargateK8sResourceIRSA651BECE8": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "CassKopClusterKubectlReadyBarrier346C8999",
-        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
-        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "CassKopCluster5683FE9F",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"fargate\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-fargate\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\"}]}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "CassKopClusterCreationRoleDDB5156B",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
     "extrernaldnsK8sResource0278304D": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterchartspotinterrupthandler80D296D7",
         "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
         "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
@@ -3735,27 +3139,18 @@ set -o xtrace
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
         "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
-        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
-        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
         "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
-        "CassKopClusterSpotASG93EF1913",
-        "CassKopClusterSpotInstanceProfileF7B9468A",
-        "CassKopClusterSpotInstanceRole3796F757",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
-        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3782,16 +3177,11 @@ set -o xtrace
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterchartspotinterrupthandler80D296D7",
         "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
-        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
-        "CassKopClustermanifestnamespaceeksutilsadminfargate5B429A3A",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
         "CassKopClusterNodegroupnodegroupAZa4BA33BD2",
@@ -3816,27 +3206,18 @@ set -o xtrace
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
+        "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
         "CassKopClusterserviceaccountclusterautoscalerRole34C21866",
-        "CassKopClusterserviceaccounteksutilsadminfargateConditionJson686E471D",
-        "CassKopClusterserviceaccounteksutilsadminfargatemanifestserviceaccounteksutilsadminfargateServiceAccountResource0D2087B6",
-        "CassKopClusterserviceaccounteksutilsadminfargateRoleDefaultPolicy36573F5B",
-        "CassKopClusterserviceaccounteksutilsadminfargateRole6D70F720",
         "CassKopClusterserviceaccounteksutilsadminConditionJsonEFCA82A5",
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
-        "CassKopClusterSpotASG93EF1913",
-        "CassKopClusterSpotInstanceProfileF7B9468A",
-        "CassKopClusterSpotInstanceRole3796F757",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
-        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
-        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
-        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {

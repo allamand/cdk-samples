@@ -1,5 +1,5 @@
 import { Construct } from '@aws-cdk/core';
-import {Cluster, KubernetesManifest} from '@aws-cdk/aws-eks';
+import {Cluster, HelmChart, HelmChartOptions, HelmChartProps, KubernetesManifest} from '@aws-cdk/aws-eks';
 import {ServiceAccount} from "@aws-cdk/aws-eks/lib/service-account";
 import {json2statements} from "../policies/PolicyUtils";
 
@@ -104,6 +104,37 @@ console.debug("props.namespace = " + props.namespace)
       sa.addToPolicy(statement)
     });
     this.sa.node.addDependency(ns)
+
+  }
+
+}
+
+
+export class K8sHelmChartIRSA extends Construct {
+  protected readonly  cluster: Cluster;
+  protected sa: ServiceAccount;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(scope: Construct, id: string, cluster: Cluster, irsa: { [key: string]: any }, props: HelmChartProps) {
+    super(scope, id);
+
+    this.cluster = cluster;
+
+    const policyStatements = json2statements(irsa.iamPolicyFile)
+    this.sa = cluster.addServiceAccount("service-account"+id, {
+      name: irsa.name,
+      namespace: props.namespace
+    })
+    const sa = this.sa
+    policyStatements.forEach(function (statement) {
+      sa.addToPolicy(statement)
+    });
+
+    const resource = new HelmChart(this, id+'HelmChart', props);
+
+    if (this.sa) {
+      resource.node.addDependency(this.sa)
+    }
 
   }
 

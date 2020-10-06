@@ -12,6 +12,10 @@ export function loadManifestYaml(filePath: string): any[] {
   return yamlData;
 }
 
+/**
+ * loadManifestYaml return yamlData from a filePath except ServiceAccount objects
+ * @param filePath is the path to the yaml file
+ */
 export function loadManifestYamlWithoutServiceAcount(filePath: string): any[] {
   const yamlFile = fs.readFileSync(filePath, 'utf8');
   const yamlData = YAML.safeLoadAll(yamlFile).filter((manifest: any) => {
@@ -29,5 +33,17 @@ export function loadManifestYamlAll(dirPath: string): any[] {
   const files = fs.readdirSync(dirPath).filter((fileName: string) => fileName.endsWith('.yaml'));
   const manifests: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   files.forEach((file) => manifests.push(...loadManifestYaml(`${dirPath}/${file}`)));
+  return manifests;
+}
+
+/**
+ * loadManifestYamlAllWithoutServiceAcount will return a manifests tab with yaml content of all file of a directory, except Service Account
+ * @param dirPath is the directory from witch we will read yaml files
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function loadManifestYamlAllWithoutServiceAcount(dirPath: string): any[] {
+  const files = fs.readdirSync(dirPath).filter((fileName: string) => fileName.endsWith('.yaml'));
+  const manifests: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
+  files.forEach((file) => manifests.push(...loadManifestYamlWithoutServiceAcount(`${dirPath}/${file}`)));
   return manifests;
 }
