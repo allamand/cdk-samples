@@ -19,3 +19,4 @@ $ wget https://raw.githubusercontent.com/kubernetes-sigs/metrics-server/v0.3.6/d
 
 ## Reference
 https://docs.aws.amazon.com/eks/latest/userguide/horizontal-pod-autoscaler.html
+wget 
