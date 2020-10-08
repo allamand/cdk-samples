@@ -1,22 +1,20 @@
 import cdk = require('@aws-cdk/core');
 import ec2 = require('@aws-cdk/aws-ec2');
-import {DEFAULT_CLUSTER_VERSION, DEFAULT_VPC_IP_RANGE} from "./defaults";
-import {Stack} from "@aws-cdk/core";
+import { DEFAULT_CLUSTER_VERSION, DEFAULT_VPC_IP_RANGE } from "./defaults";
+import { Stack } from "@aws-cdk/core";
 
 export class VpcProvider extends cdk.Stack {
 
     public static getOrCreate(scope: cdk.Construct) {
-
-
-
         const stack = cdk.Stack.of(scope)
-        const value = stack.node.tryGetContext('use_vpc_id')
 
-        const vpcIpRange = stack.node.tryGetContext('vpc_ip_cidr') ?? DEFAULT_VPC_IP_RANGE
-        const vpc = stack.node.tryGetContext('use_default_vpc') === '1' ?
-        ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
-            stack.node.tryGetContext('use_vpc_id') ?
-            ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: stack.node.tryGetContext('use_vpc_id') }) :
+        const vpcIpRange = stack.node.tryGetContext('vpc_ip_cidr') || process.env.vpc_ip_cidr || DEFAULT_VPC_IP_RANGE
+        const use_default_vpc = stack.node.tryGetContext('use_default_vpc') || process.env.use_default_vpc || 0
+        const use_vpc_id = stack.node.tryGetContext('use_vpc_id') || process.env.use_vpc_id
+        const vpc = use_default_vpc === '1' ?
+            ec2.Vpc.fromLookup(stack, 'Vpc', { isDefault: true }) :
+            use_vpc_id ?
+                ec2.Vpc.fromLookup(stack, 'Vpc', { vpcId: use_vpc_id }) :
                 new ec2.Vpc(stack, 'Vpc', {
                     maxAzs: 4,
                     natGateways: 1,
@@ -35,7 +33,7 @@ export class VpcProvider extends cdk.Stack {
                     ],
                 });
 
-    return vpc
+        return vpc
     }
 }
 
@@ -46,7 +44,7 @@ export class VpcStack extends cdk.Stack {
         const vpc = VpcProvider.getOrCreate(this)
 
         new cdk.CfnOutput(this, 'VpcId', { value: vpc.vpcId })
-            }
+    }
 }
 
 // const vpc = VpcProvider.getOrCreate(this)

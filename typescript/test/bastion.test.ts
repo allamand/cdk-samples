@@ -1,8 +1,8 @@
-import {App} from "@aws-cdk/core";
+import { App } from "@aws-cdk/core";
 import * as bastion from "../lib/bastion-linux";
-import {SynthUtils} from "@aws-cdk/assert";
+import { SynthUtils } from "@aws-cdk/assert";
 import * as vpc from "../lib/vpc";
-import {createContext} from "vm";
+import { createContext } from "vm";
 
 
 test('Test Bastion host creation', () => {
@@ -15,11 +15,11 @@ test('Test Bastion host creation', () => {
 
 test('Test Bastion host creation with HOME_IP', () => {
 
-    const app = new App( {
+    const app = new App({
         context: {
-            "HOME_IP": "45.43.42.41",
+            "home_ip": "45.43.42.41",
         }
-    } );
+    });
     const stack = new bastion.BastionHost(app, 'BASTION');
 
     /*

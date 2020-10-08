@@ -1,10 +1,11 @@
 import { Construct } from '@aws-cdk/core';
-import {Cluster, HelmChart, HelmChartOptions, HelmChartProps, KubernetesManifest} from '@aws-cdk/aws-eks';
-import {ServiceAccount} from "@aws-cdk/aws-eks/lib/service-account";
-import {json2statements} from "../policies/PolicyUtils";
+import { Cluster, HelmChart, HelmChartOptions, HelmChartProps, KubernetesManifest } from '@aws-cdk/aws-eks';
+import { ServiceAccount } from "@aws-cdk/aws-eks/lib/service-account";
+import { json2statements } from "../policies/PolicyUtils";
+import { PolicyStatement } from '@aws-cdk/aws-iam';
 
 export abstract class K8sResource extends Construct {
-  protected readonly  cluster: Cluster;
+  protected readonly cluster: Cluster;
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,7 +29,7 @@ export abstract class K8sResource extends Construct {
 }
 
 export abstract class K8sResourceIRSA extends Construct {
-  protected readonly  cluster: Cluster;
+  protected readonly cluster: Cluster;
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,13 +39,13 @@ export abstract class K8sResourceIRSA extends Construct {
     this.cluster = cluster;
 
     //Compute ServiceAccount with IAM role
-    const ns = cluster.addManifest('namespace'+id, {
+    const ns = cluster.addManifest('namespace' + id, {
       apiVersion: 'v1',
       kind: 'Namespace',
       metadata: { name: props.namespace }
     });
     const policyStatements = json2statements(props.iamPolicyFile)
-    this.sa = cluster.addServiceAccount("service-account"+id, {
+    this.sa = cluster.addServiceAccount("service-account" + id, {
       name: props.name,
       namespace: props.namespace
     })
@@ -77,7 +78,7 @@ export abstract class K8sResourceIRSA extends Construct {
 }
 
 export class ServiceAccountIRSA extends Construct {
-  protected readonly  cluster: Cluster;
+  protected readonly cluster: Cluster;
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,24 +86,35 @@ export class ServiceAccountIRSA extends Construct {
     super(scope, id);
 
     this.cluster = cluster;
-console.debug("props.namespace = " + props.namespace)
+
     //Compute ServiceAccount with IAM role
-    const ns = cluster.addManifest('namespace'+id, {
+    const ns = cluster.addManifest('namespace' + id, {
       apiVersion: 'v1',
       kind: 'Namespace',
       metadata: {
         name: props.namespace
       }
     });
-    const policyStatements = json2statements(props.iamPolicyFile)
-    this.sa = cluster.addServiceAccount("service-account"+id, {
+    let policyStatements: PolicyStatement[];
+    if (props.iamPolicyFile != "") {
+      policyStatements = json2statements(props.iamPolicyFile)
+    } else if (props.iamPolicy != "") {
+      const jsonObject = JSON.parse(props.iamPolicy);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      policyStatements = jsonObject.Statement.map((statement: any) => PolicyStatement.fromJson(statement));
+    }
+    this.sa = cluster.addServiceAccount("service-account" + id, {
       name: props.name,
       namespace: props.namespace
     })
     const sa = this.sa
-    policyStatements.forEach(function (statement) {
-      sa.addToPolicy(statement)
-    });
+
+
+    if (policyStatements!.length > 0) {
+      policyStatements!.forEach(function (statement) {
+        sa.addToPolicy(statement)
+      });
+    }
     this.sa.node.addDependency(ns)
 
   }
@@ -111,7 +123,7 @@ console.debug("props.namespace = " + props.namespace)
 
 
 export class K8sHelmChartIRSA extends Construct {
-  protected readonly  cluster: Cluster;
+  protected readonly cluster: Cluster;
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -121,7 +133,7 @@ export class K8sHelmChartIRSA extends Construct {
     this.cluster = cluster;
 
     const policyStatements = json2statements(irsa.iamPolicyFile)
-    this.sa = cluster.addServiceAccount("service-account"+id, {
+    this.sa = cluster.addServiceAccount("service-account" + id, {
       name: irsa.name,
       namespace: props.namespace
     })
@@ -130,7 +142,7 @@ export class K8sHelmChartIRSA extends Construct {
       sa.addToPolicy(statement)
     });
 
-    const resource = new HelmChart(this, id+'HelmChart', props);
+    const resource = new HelmChart(this, id + 'HelmChart', props);
 
     if (this.sa) {
       resource.node.addDependency(this.sa)

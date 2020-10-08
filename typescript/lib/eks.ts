@@ -20,7 +20,7 @@ import { EbsCsiDriver } from "./k8sResources/EbsCsiDriver";
 import { EksUtilsAdmin } from "./k8sResources/EksUtilsPod";
 import { DefaultCapacityType } from "@aws-cdk/aws-eks";
 import { SubnetType } from "@aws-cdk/aws-ec2";
-import { K8sHelmChartIRSA } from './k8sResources/K8sResource';
+import { K8sHelmChartIRSA, ServiceAccountIRSA } from './k8sResources/K8sResource';
 import { AwsForFluentBit } from './k8sResources/AwsForFluentBit';
 import { CloudWatchAgent } from './k8sResources/CloudWatchAgent';
 
@@ -29,7 +29,7 @@ export class EksStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
     const vpc = VpcProvider.getOrCreate(this)
     const mastersRole = new iam.Role(this, 'AdminRole', {
       assumedBy: new iam.AccountRootPrincipal()
@@ -52,7 +52,7 @@ export class EksSpot extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
     const vpc = VpcProvider.getOrCreate(this)
@@ -83,7 +83,7 @@ export class EksIrsa extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
     const vpc = VpcProvider.getOrCreate(this)
@@ -128,7 +128,7 @@ export class EksFargate extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
     const vpc = VpcProvider.getOrCreate(this)
@@ -159,7 +159,7 @@ export class Bottlerocket extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
 
     // use an existing vpc or create a new one
     const vpc = VpcProvider.getOrCreate(this)
@@ -198,7 +198,7 @@ export class EksMini extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
 
     const vpc = VpcProvider.getOrCreate(this)
 
@@ -236,10 +236,13 @@ export class AlbIngressControllerStack extends cdk.Stack {
       assumedBy: new iam.AccountRootPrincipal()
     });
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-    const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
-    const keyName = this.node.tryGetContext('key_name') ?? DEFAULT_KEY_NAME
-    const sshAccessIpCIDR = this.node.tryGetContext('ssh_access_cidr') ?? DEFAULT_SSH_SOURCE_IP_RANGE
+
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
+    const clusterName = this.node.tryGetContext('cluster_name') || process.env.cluster_name || DEFAULT_CLUSTER_NAME
+    const keyName = this.node.tryGetContext('key_name') || process.env.key_name || DEFAULT_KEY_NAME
+    const instanceType = this.node.tryGetContext('instance_type') || process.env.instance_type || 'c5d.4xlarge'
+    const desiredSize = this.node.tryGetContext('desired_size') || Number(process.env.desired_size) || 4
+    const sshAccessIpCIDR = this.node.tryGetContext('ssh_access_cidr') || process.env.ssh_access_cidr || DEFAULT_SSH_SOURCE_IP_RANGE
 
 
     const vpc = VpcProvider.getOrCreate(this)
@@ -311,8 +314,8 @@ export class AlbIngressControllerStack extends cdk.Stack {
     new AlbIngressController(this, 'alb-ingress-controller', cluster);
 
     // Deploy External-DNS Controller
-    const externalDNSPolicy = this.node.tryGetContext('EXTERNAL_DNS_POLICY') ?? DEFAULT_EXTERNAL_DNS_POLICY
-    const appDomain = this.node.tryGetContext('app_domain') ?? DEFAULT_DOMAIN_ZONE
+    const externalDNSPolicy = this.node.tryGetContext('EXTERNAL_DNS_POLICY') || process.env.external_dns_policy || DEFAULT_EXTERNAL_DNS_POLICY
+    const appDomain = this.node.tryGetContext('app_domain') || process.env.app_domain || DEFAULT_DOMAIN_ZONE
     new ExternalDns(this, 'extrernal-dns', cluster, {
       domain: appDomain,
       policy: externalDNSPolicy,
@@ -366,11 +369,11 @@ export class CassKopCluster extends cdk.Stack {
       assumedBy: new iam.AccountRootPrincipal()
     });
 
-    const clusterVersion = this.node.tryGetContext('cluster_version') ?? DEFAULT_CLUSTER_VERSION
-    const clusterName = this.node.tryGetContext('cluster_name') ?? DEFAULT_CLUSTER_NAME
-    const keyName = this.node.tryGetContext('key_name') ?? DEFAULT_KEY_NAME
-    const instanceType = this.node.tryGetContext('instance_type') ?? 'c5d.2xlarge'
-    const desiredSize = this.node.tryGetContext('desired_size') ?? 4
+    const clusterVersion = this.node.tryGetContext('cluster_version') || process.env.cluster_version || DEFAULT_CLUSTER_VERSION
+    const clusterName = this.node.tryGetContext('cluster_name') || process.env.cluster_name || DEFAULT_CLUSTER_NAME
+    const keyName = this.node.tryGetContext('key_name') || process.env.key_name || DEFAULT_KEY_NAME
+    const instanceType = this.node.tryGetContext('instance_type') || process.env.instance_type || 'c5d.4xlarge'
+    const desiredSize = this.node.tryGetContext('desired_size') || Number(process.env.desired_size) || 4
     const uid: string = this.node.uniqueId;
     const nid: string = this.node.id;
 
@@ -387,10 +390,12 @@ export class CassKopCluster extends cdk.Stack {
     //TODO : refactor with a loob for each AZ
     cluster.addNodegroup('nodegroup-AZa', {
       instanceType: new ec2.InstanceType(instanceType),
+      //instanceType: new ec2.InstanceType('c5d.4xlarge'),
       minSize: 1,
       desiredSize: desiredSize,
       maxSize: 10,
       forceUpdate: false,
+      //releaseVersion: "1.16-202007101208",
       //nodegroupName: clusterName+nid+uid+"-AZa",
       subnets: vpc.selectSubnets({
         subnetType: SubnetType.PRIVATE,
@@ -402,7 +407,7 @@ export class CassKopCluster extends cdk.Stack {
         "cdk-nodegroup": "AZa",
       },
       tags: {
-        "cdk-nodegroup": "AZa",
+        "cdk-nodegroup": "AZaXXX",
       },
       remoteAccess: {
         sshKeyName: keyName,
@@ -462,8 +467,8 @@ export class CassKopCluster extends cdk.Stack {
     new AlbIngressController(this, 'alb-ingress-controller', cluster);
 
     // Deploy External-DNS Controller
-    const externalDNSPolicy = this.node.tryGetContext('EXTERNAL_DNS_POLICY') ?? DEFAULT_EXTERNAL_DNS_POLICY
-    const appDomain = this.node.tryGetContext('app_domain') ?? DEFAULT_DOMAIN_ZONE
+    const externalDNSPolicy = this.node.tryGetContext('EXTERNAL_DNS_POLICY') || process.env.external_dns_policy || DEFAULT_EXTERNAL_DNS_POLICY
+    const appDomain = this.node.tryGetContext('app_domain') || process.env.app_domain || DEFAULT_DOMAIN_ZONE
     new ExternalDns(this, 'extrernal-dns', cluster, {
       domain: appDomain,
       policy: externalDNSPolicy,
@@ -494,6 +499,27 @@ export class CassKopCluster extends cdk.Stack {
       iamPolicyFile: "aws-for-fluent-bit.json"
     });
 
+    new ServiceAccountIRSA(this, 'argo', cluster, {
+      iamPolicyFile: "",
+      iamPolicy: ' \
+        { \
+        "Version": "2012-10-17",\
+        "Statement": [\
+          {\
+            "Effect": "Allow",\
+            "Action": [\
+              "s3:*"\
+            ],\
+            "Resource": [\
+              "arn:aws:s3:::batch-artifact-repository-'+ props.env!.account + '",\
+              "arn:aws:s3:::batch-artifact-repository-'+ props.env!.account + '/*"\
+            ]\
+          }\
+        ]\
+      }',
+      name: 'argo',
+      namespace: 'argo',
+    });
 
     new cdk.CfnOutput(this, 'AZOutput', { value: vpc.availabilityZones.join(',') })
 

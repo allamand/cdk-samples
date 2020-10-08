@@ -228,7 +228,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::382076407153:root",
+                      ":iam::xxxxxxxxxxxx:root",
                     ],
                   ],
                 },
@@ -285,7 +285,7 @@ Object {
         },
         "AttributesRevision": 2,
         "Config": Object {
-          "name": "CdkEksCluster",
+          "name": "CassKop",
           "resourcesVpcConfig": Object {
             "endpointPrivateAccess": true,
             "endpointPublicAccess": true,
@@ -489,7 +489,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::382076407153:root",
+                      ":iam::xxxxxxxxxxxx:root",
                     ],
                   ],
                 },
@@ -577,7 +577,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-west-1:382076407153:cluster/CdkEksCluster",
+                      ":eks:eu-west-1:xxxxxxxxxxxx:cluster/CassKop",
                     ],
                   ],
                 },
@@ -589,7 +589,7 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":eks:eu-west-1:382076407153:cluster/CdkEksCluster/*",
+                      ":eks:eu-west-1:xxxxxxxxxxxx:cluster/CassKop/*",
                     ],
                   ],
                 },
@@ -609,7 +609,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":eks:eu-west-1:382076407153:fargateprofile/CdkEksCluster/*",
+                    ":eks:eu-west-1:xxxxxxxxxxxx:fargateprofile/CassKop/*",
                   ],
                 ],
               },
@@ -638,7 +638,7 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":ec2:eu-west-1:382076407153:vpc/",
+                    ":ec2:eu-west-1:xxxxxxxxxxxx:vpc/",
                     Object {
                       "Ref": "Vpc8378EB38",
                     },
@@ -691,7 +691,7 @@ Object {
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
-        "ForceUpdateEnabled": true,
+        "ForceUpdateEnabled": false,
         "InstanceTypes": Array [
           "c5d.2xlarge",
         ],
@@ -783,7 +783,7 @@ Object {
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
-        "ForceUpdateEnabled": true,
+        "ForceUpdateEnabled": false,
         "InstanceTypes": Array [
           "c5d.2xlarge",
         ],
@@ -875,7 +875,7 @@ Object {
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
-        "ForceUpdateEnabled": true,
+        "ForceUpdateEnabled": false,
         "InstanceTypes": Array [
           "c5d.2xlarge",
         ],
@@ -1017,6 +1017,58 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "CassKopClustermanifestnamespaceargo8CC7E968": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"argo\\"}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"Namespace\\",\\"metadata\\":{\\"name\\":\\"amazon-cloudwatch\\"}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
     },
     "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415": Object {
       "DeletionPolicy": "Delete",
@@ -1586,6 +1638,142 @@ Object {
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "CassKopClusterserviceaccountargoConditionJson6D4CC48C": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+      ],
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+            "Arn",
+          ],
+        },
+        "Value": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":aud\\":\\"sts.amazonaws.com\\",\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":sub\\":\\"system:serviceaccount:argo:argo\\"}",
+            ],
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDKCfnJson",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterserviceaccountargoRole4A723E2C": Object {
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": Object {
+                "StringEquals": Object {
+                  "Fn::GetAtt": Array [
+                    "CassKopClusterserviceaccountargoConditionJson6D4CC48C",
+                    "Value",
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": Object {
+                "Federated": Object {
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055": Object {
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+      ],
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "s3:*",
+              "Effect": "Allow",
+              "Resource": Array [
+                "arn:aws:s3:::batch-artifact-repository-xxxxxxxxxxxx",
+                "arn:aws:s3:::batch-artifact-repository-xxxxxxxxxxxx/*",
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055",
+        "Roles": Array [
+          Object {
+            "Ref": "CassKopClusterserviceaccountargoRole4A723E2C",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CassKopClusterserviceaccountargomanifestserviceaccountargoServiceAccountResource24FE9A43": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"argo\\",\\"namespace\\":\\"argo\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"argo\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterserviceaccountargoRole4A723E2C",
+                  "Arn",
+                ],
+              },
+              "\\"}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
     "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73": Object {
       "DeletionPolicy": "Delete",
       "Properties": Object {
@@ -1676,6 +1864,11 @@ Object {
               "Effect": "Allow",
               "Resource": "*",
             },
+            Object {
+              "Action": "es:ESHttp*",
+              "Effect": "Allow",
+              "Resource": "arn:aws:es:eu-west-1:382076407153:domain/eks-casskop",
+            },
           ],
           "Version": "2012-10-17",
         },
@@ -1705,6 +1898,153 @@ Object {
               Object {
                 "Fn::GetAtt": Array [
                   "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+                  "Arn",
+                ],
+              },
+              "\\"}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
+      ],
+      "Properties": Object {
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57",
+            "Arn",
+          ],
+        },
+        "Value": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":aud\\":\\"sts.amazonaws.com\\",\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopCluster5683FE9F",
+                  "OpenIdConnectIssuer",
+                ],
+              },
+              ":sub\\":\\"system:serviceaccount:amazon-cloudwatch:cloudwatch-agent\\"}",
+            ],
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDKCfnJson",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02": Object {
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
+      ],
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": Object {
+                "StringEquals": Object {
+                  "Fn::GetAtt": Array [
+                    "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+                    "Value",
+                  ],
+                },
+              },
+              "Effect": "Allow",
+              "Principal": Object {
+                "Federated": Object {
+                  "Ref": "CassKopClusterOpenIdConnectProvider1554EB4B",
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE": Object {
+      "DependsOn": Array [
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
+      ],
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "cloudwatch:PutMetricData",
+                "ec2:DescribeVolumes",
+                "ec2:DescribeTags",
+                "logs:PutLogEvents",
+                "logs:DescribeLogStreams",
+                "logs:DescribeLogGroups",
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "ssm:GetParameter",
+              "Effect": "Allow",
+              "Resource": "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "Roles": Array [
+          Object {
+            "Ref": "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ServiceAccount\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\",\\"labels\\":{\\"app.kubernetes.io/name\\":\\"cloudwatch-agent\\"},\\"annotations\\":{\\"eks.amazonaws.com/role-arn\\":\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
                   "Arn",
                 ],
               },
@@ -2719,6 +3059,8 @@ Object {
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
@@ -2744,10 +3086,18 @@ Object {
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountargoConditionJson6D4CC48C",
+        "CassKopClusterserviceaccountargomanifestserviceaccountargoServiceAccountResource24FE9A43",
+        "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055",
+        "CassKopClusterserviceaccountargoRole4A723E2C",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+        "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+        "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD",
+        "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
@@ -2963,9 +3313,61 @@ Object {
             "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
           ],
         },
-        "Values": "{\\"serviceAccount\\":{\\"create\\":false,\\"name\\":\\"aws-for-fluent-bit\\"},\\"cloudWatch\\":{\\"enabled\\":true,\\"region\\":\\"eu-west-1\\",\\"logStreamName\\":\\"CassKop\\"},\\"firehose\\":{\\"enabled\\":false},\\"kinesis\\":{\\"enabled\\":false}}",
+        "Values": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "{\\"serviceAccount\\":{\\"create\\":false,\\"name\\":\\"aws-for-fluent-bit\\"},\\"cloudWatch\\":{\\"enabled\\":true,\\"region\\":\\"eu-west-1\\",\\"logStreamName\\":\\"CassKop\\",\\"logGroupName\\":\\"/aws/eks/",
+              Object {
+                "Ref": "CassKopCluster5683FE9F",
+              },
+              "/logs\\"},\\"firehose\\":{\\"enabled\\":false},\\"kinesis\\":{\\"enabled\\":false}}",
+            ],
+          ],
+        },
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "cloudWatchagentK8sResourceIRSA7859E0C1": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+        "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD",
+        "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"data\\":{\\"cwagentconfig.json\\":\\"{\\\\n  \\\\\\"logs\\\\\\": {\\\\n    \\\\\\"metrics_collected\\\\\\": {\\\\n      \\\\\\"kubernetes\\\\\\": {\\\\n        \\\\\\"cluster_name\\\\\\": \\\\\\"",
+              Object {
+                "Ref": "CassKopCluster5683FE9F",
+              },
+              "\\\\\\",\\\\n        \\\\\\"metrics_collection_interval\\\\\\": 60\\\\n      }\\\\n    },\\\\n    \\\\\\"force_flush_interval\\\\\\": 5\\\\n  }\\\\n}\\\\n\\"},\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"cwagentconfig\\",\\"namespace\\":\\"amazon-cloudwatch\\"}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"cloudwatch-agent\\",\\"image\\":\\"amazon/cloudwatch-agent:1.247345.36b249270\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"},\\"requests\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"}},\\"env\\":[{\\"name\\":\\"HOST_IP\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"status.hostIP\\"}}},{\\"name\\":\\"HOST_NAME\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"spec.nodeName\\"}}},{\\"name\\":\\"K8S_NAMESPACE\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"metadata.namespace\\"}}},{\\"name\\":\\"CI_VERSION\\",\\"value\\":\\"k8s/1.2.2\\"}],\\"volumeMounts\\":[{\\"name\\":\\"cwagentconfig\\",\\"mountPath\\":\\"/etc/cwagentconfig\\"},{\\"name\\":\\"rootfs\\",\\"mountPath\\":\\"/rootfs\\",\\"readOnly\\":true},{\\"name\\":\\"dockersock\\",\\"mountPath\\":\\"/var/run/docker.sock\\",\\"readOnly\\":true},{\\"name\\":\\"varlibdocker\\",\\"mountPath\\":\\"/var/lib/docker\\",\\"readOnly\\":true},{\\"name\\":\\"sys\\",\\"mountPath\\":\\"/sys\\",\\"readOnly\\":true},{\\"name\\":\\"devdisk\\",\\"mountPath\\":\\"/dev/disk\\",\\"readOnly\\":true}]}],\\"volumes\\":[{\\"name\\":\\"cwagentconfig\\",\\"configMap\\":{\\"name\\":\\"cwagentconfig\\"}},{\\"name\\":\\"rootfs\\",\\"hostPath\\":{\\"path\\":\\"/\\"}},{\\"name\\":\\"dockersock\\",\\"hostPath\\":{\\"path\\":\\"/var/run/docker.sock\\"}},{\\"name\\":\\"varlibdocker\\",\\"hostPath\\":{\\"path\\":\\"/var/lib/docker\\"}},{\\"name\\":\\"sys\\",\\"hostPath\\":{\\"path\\":\\"/sys\\"}},{\\"name\\":\\"devdisk\\",\\"hostPath\\":{\\"path\\":\\"/dev/disk/\\"}}],\\"terminationGracePeriodSeconds\\":60,\\"serviceAccountName\\":\\"cloudwatch-agent\\"}}}},{\\"kind\\":\\"ClusterRole\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"nodes\\",\\"endpoints\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"replicasets\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"batch\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/proxy\\"],\\"verbs\\":[\\"get\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/stats\\",\\"configmaps\\",\\"events\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cwagent-clusterleader\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]},{\\"kind\\":\\"ClusterRoleBinding\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role-binding\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"}],\\"roleRef\\":{\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cloudwatch-agent-role\\",\\"apiGroup\\":\\"rbac.authorization.k8s.io\\"}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
     "clusterautoscalerK8sResourceIRSAECFBF5A7": Object {
@@ -3017,6 +3419,8 @@ Object {
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
@@ -3042,10 +3446,18 @@ Object {
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountargoConditionJson6D4CC48C",
+        "CassKopClusterserviceaccountargomanifestserviceaccountargoServiceAccountResource24FE9A43",
+        "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055",
+        "CassKopClusterserviceaccountargoRole4A723E2C",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+        "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+        "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD",
+        "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
@@ -3114,6 +3526,8 @@ Object {
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
@@ -3139,10 +3553,18 @@ Object {
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountargoConditionJson6D4CC48C",
+        "CassKopClusterserviceaccountargomanifestserviceaccountargoServiceAccountResource24FE9A43",
+        "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055",
+        "CassKopClusterserviceaccountargoRole4A723E2C",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+        "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+        "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD",
+        "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
@@ -3156,7 +3578,7 @@ Object {
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo3.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CdkEksCluster\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo3.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CassKop\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "CassKopClusterCreationRoleDDB5156B",
@@ -3181,6 +3603,8 @@ Object {
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
         "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterKubectlReadyBarrier346C8999",
+        "CassKopClustermanifestnamespaceargo8CC7E968",
+        "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
         "CassKopClustermanifestnamespaceclusterautoscaler3FD9E415",
         "CassKopClustermanifestnamespaceeksutilsadminDDA150EC",
         "CassKopClusterNodegroupnodegroupAZaNodeGroupRole03D9A5A3",
@@ -3206,10 +3630,18 @@ Object {
         "CassKopClustersaexternaldnsmanifestsaexternaldnsServiceAccountResource1C55A672",
         "CassKopClustersaexternaldnsRoleDefaultPolicy479E4104",
         "CassKopClustersaexternaldnsRole9F1D457B",
+        "CassKopClusterserviceaccountargoConditionJson6D4CC48C",
+        "CassKopClusterserviceaccountargomanifestserviceaccountargoServiceAccountResource24FE9A43",
+        "CassKopClusterserviceaccountargoRoleDefaultPolicy091BE055",
+        "CassKopClusterserviceaccountargoRole4A723E2C",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAConditionJson51FFAB73",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSAmanifestserviceaccountawsforfluentbitHelmChartIRSAServiceAccountResource11DF5A05",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARoleDefaultPolicyABABBC43",
         "CassKopClusterserviceaccountawsforfluentbitHelmChartIRSARole88FFADB0",
+        "CassKopClusterserviceaccountcloudWatchagentConditionJsonEB8B273E",
+        "CassKopClusterserviceaccountcloudWatchagentmanifestserviceaccountcloudWatchagentServiceAccountResourceA6A9C0FD",
+        "CassKopClusterserviceaccountcloudWatchagentRoleDefaultPolicy3D7349EE",
+        "CassKopClusterserviceaccountcloudWatchagentRoleAA9A8C02",
         "CassKopClusterserviceaccountclusterautoscalerConditionJsonFC6A5BF0",
         "CassKopClusterserviceaccountclusterautoscalermanifestserviceaccountclusterautoscalerServiceAccountResource8C064A71",
         "CassKopClusterserviceaccountclusterautoscalerRoleDefaultPolicyDBB088C5",
@@ -3762,7 +4194,7 @@ Object {
                       Object {
                         "Ref": "AWS::AccountId",
                       },
-                      ":cluster/CdkEksCluster",
+                      ":cluster/CassKop",
                     ],
                   ],
                 },
@@ -3782,7 +4214,7 @@ Object {
                       Object {
                         "Ref": "AWS::AccountId",
                       },
-                      ":cluster/CdkEksCluster/*",
+                      ":cluster/CassKop/*",
                     ],
                   ],
                 },
@@ -3810,7 +4242,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":fargateprofile/CdkEksCluster/*",
+                    ":fargateprofile/CassKop/*",
                   ],
                 ],
               },
@@ -3914,7 +4346,7 @@ Object {
         },
         "AttributesRevision": 2,
         "Config": Object {
-          "name": "CdkEksCluster",
+          "name": "CassKop",
           "resourcesVpcConfig": Object {
             "endpointPrivateAccess": true,
             "endpointPublicAccess": true,
@@ -4103,7 +4535,7 @@ Object {
             "Arn",
           ],
         },
-        "NodegroupName": "CdkEksCluster-addNodeGroup1",
+        "NodegroupName": "CassKop-addNodeGroup1",
         "RemoteAccess": Object {
           "Ec2SshKey": "sallaman",
         },
@@ -6837,7 +7269,7 @@ set -o xtrace
         "ClusterName": Object {
           "Ref": "AlbIngressControllerStackD72562D9",
         },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo3.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CdkEksCluster\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo3.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CassKop\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
         "RoleArn": Object {
           "Fn::GetAtt": Array [
             "AlbIngressControllerStackCreationRoleB9419435",
