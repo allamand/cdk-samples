@@ -23,6 +23,7 @@ import { SubnetType } from "@aws-cdk/aws-ec2";
 import { K8sHelmChartIRSA, ServiceAccountIRSA } from './k8sResources/K8sResource';
 import { AwsForFluentBit } from './k8sResources/AwsForFluentBit';
 import { CloudWatchAgent } from './k8sResources/CloudWatchAgent';
+import { UpdateType } from '@aws-cdk/aws-autoscaling';
 
 
 export class EksStack extends cdk.Stack {
@@ -68,7 +69,7 @@ export class EksSpot extends cdk.Stack {
       defaultCapacity: 0
     });
 
-    cluster.addCapacity('Spot', {
+    cluster.addAutoScalingGroupCapacity('Spot', {
       instanceType: new ec2.InstanceType('m5.large'),
       maxInstanceLifetime: cdk.Duration.days(7),
       spotPrice: '0.1',
@@ -176,7 +177,7 @@ export class Bottlerocket extends cdk.Stack {
     });
 
     // add bottlerocket nodes
-    const bottlerocketAsg = cluster.addCapacity('BottlerocketNodes', {
+    const bottlerocketAsg = cluster.addAutoScalingGroupCapacity('BottlerocketNodes', {
       instanceType: new ec2.InstanceType('t3.small'),
       minCapacity: 2,
       machineImageType: eks.MachineImageType.BOTTLEROCKET,
@@ -213,7 +214,7 @@ export class EksMini extends cdk.Stack {
       defaultCapacity: 0
     });
 
-    this.cluster.addCapacity('Spot', {
+    this.cluster.addAutoScalingGroupCapacity('Spot', {
       instanceType: new ec2.InstanceType('t3.medium'),
       maxInstanceLifetime: cdk.Duration.days(7),
       machineImageType: eks.MachineImageType.BOTTLEROCKET,
@@ -260,16 +261,16 @@ export class AlbIngressControllerStack extends cdk.Stack {
 
     //We can also add other nodesgroups manually
 
-    cluster.addNodegroup('nodegroup', {
-      nodegroupName: clusterName + "-addNodeGroup1",
+    cluster.addNodegroupCapacity('nodegroup', {
+      nodegroupName: clusterName + "-addNodegroupCapacity1",
       instanceType: new ec2.InstanceType('m5.large'),
       minSize: 1,
       maxSize: 50,
       labels: {
-        "cdk-nodegroup": "addNodegroup1",
+        "cdk-nodegroup": "addNodegroupCapacity1",
       },
       tags: {
-        "cdk-nodegroup": "addNodegroup1",
+        "cdk-nodegroup": "addNodegroupCapacity1",
       },
       remoteAccess: {
         sshKeyName: keyName,
@@ -279,7 +280,7 @@ export class AlbIngressControllerStack extends cdk.Stack {
 
     //Add SPot Instances
 
-    const spotAsg = cluster.addCapacity('Spot', {
+    const spotAsg = cluster.addAutoScalingGroupCapacity('Spot', {
       instanceType: new ec2.InstanceType('t3.medium'),
       maxInstanceLifetime: cdk.Duration.days(7),
       minCapacity: 1,
@@ -292,7 +293,7 @@ export class AlbIngressControllerStack extends cdk.Stack {
 
     //Add BottleRocket Instances
     /*
-    const bottleRocket = cluster.addCapacity('BottlerocketNodes', {
+    const bottleRocket = cluster.addAutoScalingGroupCapacity('BottlerocketNodes', {
       instanceType: new ec2.InstanceType('t3.small'),
       minCapacity:  2,
       machineImageType: eks.MachineImageType.BOTTLEROCKET
@@ -388,7 +389,7 @@ export class CassKopCluster extends cdk.Stack {
     });
 
     //TODO : refactor with a loob for each AZ
-    cluster.addNodegroup('nodegroup-AZa', {
+    cluster.addNodegroupCapacity('nodegroup-AZa', {
       instanceType: new ec2.InstanceType(instanceType),
       //instanceType: new ec2.InstanceType('c5d.4xlarge'),
       minSize: 1,
@@ -415,7 +416,7 @@ export class CassKopCluster extends cdk.Stack {
     });
 
 
-    cluster.addNodegroup('nodegroup-AZb', {
+    cluster.addNodegroupCapacity('nodegroup-AZb', {
       instanceType: new ec2.InstanceType(instanceType),
       minSize: 1,
       desiredSize: desiredSize,
@@ -439,7 +440,7 @@ export class CassKopCluster extends cdk.Stack {
       },
     });
 
-    cluster.addNodegroup('nodegroup-AZc', {
+    cluster.addNodegroupCapacity('nodegroup-AZc', {
       instanceType: new ec2.InstanceType(instanceType),
       minSize: 1,
       desiredSize: desiredSize,
@@ -462,6 +463,33 @@ export class CassKopCluster extends cdk.Stack {
         sshKeyName: keyName,
       },
     });
+
+
+    //Add Fargate profile
+    // For pod to monitor the rolling upgrad of the nodegroup pods
+    cluster.addFargateProfile('FargateProfile', {
+      selectors: [
+        { namespace: 'fargate' },
+      ]
+    });
+
+    //Add SPot nodegroup with big instances to launch or cassandra stress tool
+    const spotAsg = cluster.addAutoScalingGroupCapacity('Spot', {
+      instanceType: new ec2.InstanceType('c5.9xlarge'),
+      maxInstanceLifetime: cdk.Duration.days(7),
+      minCapacity: 1,
+      desiredCapacity: 1,
+      updateType: UpdateType.ROLLING_UPDATE,
+      rollingUpdateConfiguration: {
+        maxBatchSize: 0,
+      },
+      maxCapacity: 5,
+      spotPrice: '0.05',
+      keyName: keyName,
+
+    });
+    spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId), ec2.Port.allTraffic(), "allow all traffic from cluster security group");
+
 
     // Deploy ALB Ingress Controller
     new AlbIngressController(this, 'alb-ingress-controller', cluster);
