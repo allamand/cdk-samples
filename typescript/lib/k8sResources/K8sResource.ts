@@ -82,7 +82,7 @@ export class ServiceAccountIRSA extends Construct {
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(scope: Construct, id: string, cluster: Cluster, props: { [key: string]: any } = {}) {
+  constructor(scope: Construct, id: string, cluster: Cluster, props: IrsaProps = {}) {
     super(scope, id);
 
     this.cluster = cluster;
@@ -97,9 +97,9 @@ export class ServiceAccountIRSA extends Construct {
     });
     let policyStatements: PolicyStatement[];
     if (props.iamPolicyFile != "") {
-      policyStatements = json2statements(props.iamPolicyFile)
+      policyStatements = json2statements(props.iamPolicyFile!)
     } else if (props.iamPolicy != "") {
-      const jsonObject = JSON.parse(props.iamPolicy);
+      const jsonObject = JSON.parse(props.iamPolicy!);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       policyStatements = jsonObject.Statement.map((statement: any) => PolicyStatement.fromJson(statement));
     }
@@ -121,26 +121,62 @@ export class ServiceAccountIRSA extends Construct {
 
 }
 
+export interface IrsaProps {
+  /**
+   * (experimental) The name of the service acount to create.
+   *
+   * @experimental
+   */
+  readonly name?: string;
+  /**
+ * (experimental) The name of the namespace where to create the service account.
+ *
+ * @experimental
+ */
+  readonly namespace?: string;
+  /**
+ * (experimental) Optional: name of the policy file in the lib/policies/statements directory
+ *
+ * @experimental
+ */
+  readonly iamPolicyFile?: string;
+  /**
+* (experimental) Optional: Optional: inline policy to affect to the new service account
+* @experimental
+*/
+  readonly iamPolicy?: string;
+}
 
 export class K8sHelmChartIRSA extends Construct {
   protected readonly cluster: Cluster;
   protected sa: ServiceAccount;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(scope: Construct, id: string, cluster: Cluster, irsa: { [key: string]: any }, props: HelmChartProps) {
+  constructor(scope: Construct, id: string, cluster: Cluster, irsa: IrsaProps, props: HelmChartProps) {
     super(scope, id);
 
     this.cluster = cluster;
 
-    const policyStatements = json2statements(irsa.iamPolicyFile)
-    this.sa = cluster.addServiceAccount("service-account" + id, {
-      name: irsa.name,
-      namespace: props.namespace
-    })
-    const sa = this.sa
-    policyStatements.forEach(function (statement) {
-      sa.addToPolicy(statement)
-    });
+    let policyStatements: PolicyStatement[];
+    if (irsa.iamPolicyFile != undefined && irsa.iamPolicyFile != "") {
+      policyStatements = json2statements(irsa.iamPolicyFile!)
+    } else if (irsa.iamPolicy != undefined && irsa.iamPolicy != "") {
+      const jsonObject = JSON.parse(irsa.iamPolicy!);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      policyStatements = jsonObject.Statement.map((statement: any) => PolicyStatement.fromJson(statement));
+    }
+    if (irsa.name != undefined) {
+      this.sa = cluster.addServiceAccount("service-account" + id, {
+        name: irsa.name,
+        namespace: props.namespace
+      })
+      const sa = this.sa
+      if (policyStatements!.length > 0) {
+        policyStatements!.forEach(function (statement) {
+          sa.addToPolicy(statement)
+        });
+      }
+    }
 
     const resource = new HelmChart(this, id + 'HelmChart', props);
 

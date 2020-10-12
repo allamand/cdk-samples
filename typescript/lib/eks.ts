@@ -24,6 +24,7 @@ import { K8sHelmChartIRSA, ServiceAccountIRSA } from './k8sResources/K8sResource
 import { AwsForFluentBit } from './k8sResources/AwsForFluentBit';
 import { CloudWatchAgent } from './k8sResources/CloudWatchAgent';
 import { UpdateType } from '@aws-cdk/aws-autoscaling';
+import { KubeOpsView } from './k8sResources/KubeOpsView';
 
 
 export class EksStack extends cdk.Stack {
@@ -388,81 +389,42 @@ export class CassKopCluster extends cdk.Stack {
       defaultCapacity: 0,
     });
 
-    //TODO : refactor with a loob for each AZ
-    cluster.addNodegroupCapacity('nodegroup-AZa', {
-      instanceType: new ec2.InstanceType(instanceType),
-      //instanceType: new ec2.InstanceType('c5d.4xlarge'),
-      minSize: 1,
-      desiredSize: desiredSize,
-      maxSize: 10,
-      forceUpdate: false,
-      //releaseVersion: "1.16-202007101208",
-      //nodegroupName: clusterName+nid+uid+"-AZa",
-      subnets: vpc.selectSubnets({
-        subnetType: SubnetType.PRIVATE,
-        availabilityZones: [
-          vpc.availabilityZones[0],
-        ],
-      }),
-      labels: {
-        "cdk-nodegroup": "AZa",
-      },
-      tags: {
-        "cdk-nodegroup": "AZaXXX",
-      },
-      remoteAccess: {
-        sshKeyName: keyName,
-      },
-    });
+    let AZs = ["AZa", "AZb", "AZc"]
 
-
-    cluster.addNodegroupCapacity('nodegroup-AZb', {
-      instanceType: new ec2.InstanceType(instanceType),
-      minSize: 1,
-      desiredSize: desiredSize,
-      maxSize: 10,
-      forceUpdate: false,
-      //nodegroupName: clusterName+nid+uid+"-AZb",
-      subnets: vpc.selectSubnets({
-        subnetType: SubnetType.PRIVATE,
-        availabilityZones: [
-          vpc.availabilityZones[1],
-        ],
-      }),
-      labels: {
-        "cdk-nodegroup": "AZb",
-      },
-      tags: {
-        "cdk-nodegroup": "AZb",
-      },
-      remoteAccess: {
-        sshKeyName: keyName,
-      },
-    });
-
-    cluster.addNodegroupCapacity('nodegroup-AZc', {
-      instanceType: new ec2.InstanceType(instanceType),
-      minSize: 1,
-      desiredSize: desiredSize,
-      maxSize: 10,
-      forceUpdate: false,
-      //nodegroupName: clusterName+nid+uid+"-AZc",
-      subnets: vpc.selectSubnets({
-        subnetType: SubnetType.PRIVATE,
-        availabilityZones: [
-          vpc.availabilityZones[2],
-        ],
-      }),
-      labels: {
-        "cdk-nodegroup": "AZc",
-      },
-      tags: {
-        "cdk-nodegroup": "AZc",
-      },
-      remoteAccess: {
-        sshKeyName: keyName,
-      },
-    });
+    //az will have value 0, 1, 2
+    for (let az in AZs) {
+      cluster.addNodegroupCapacity('nodegroup-' + AZs[az], {
+        instanceType: new ec2.InstanceType(instanceType),
+        minSize: 1,
+        desiredSize: desiredSize,
+        maxSize: 10,
+        forceUpdate: false,
+        //releaseVersion: "1.16-202007101208",
+        //nodegroupName: clusterName+nid+uid+"-AZa",
+        subnets: vpc.selectSubnets({
+          subnetType: SubnetType.PRIVATE,
+          availabilityZones: [
+            vpc.availabilityZones[az],
+          ],
+        }),
+        labels: {
+          "cdk-nodegroup": AZs[az],
+        },
+        tags: {
+          "cdk-nodegroup": AZs[az],
+        },
+        remoteAccess: {
+          sshKeyName: keyName,
+        },
+        //specify Launch template
+        /*
+        launchTemplateSpec: {
+          id: "xxx",
+          version: "1",
+        }
+        */
+      });
+    }
 
 
     //Add Fargate profile
@@ -478,10 +440,10 @@ export class CassKopCluster extends cdk.Stack {
       instanceType: new ec2.InstanceType('c5.9xlarge'),
       maxInstanceLifetime: cdk.Duration.days(7),
       minCapacity: 1,
-      desiredCapacity: 1,
+      //desiredCapacity: 1,
       updateType: UpdateType.ROLLING_UPDATE,
       rollingUpdateConfiguration: {
-        maxBatchSize: 0,
+        maxBatchSize: 1,
       },
       maxCapacity: 5,
       spotPrice: '0.05',
@@ -526,6 +488,8 @@ export class CassKopCluster extends cdk.Stack {
       namespace: "kube-system",
       iamPolicyFile: "aws-for-fluent-bit.json"
     });
+
+    new KubeOpsView(this, 'kube-ops-view', cluster, {});
 
     new ServiceAccountIRSA(this, 'argo', cluster, {
       iamPolicyFile: "",

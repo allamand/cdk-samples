@@ -49,7 +49,6 @@ test('Test Multi-AZ CassKop', () => {
     const stack = new eks.CassKopCluster(app, 'Casskop', { env });
 
     // THEN
-    expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 
     expect(stack).toHaveResource('AWS::EC2::VPC', {
         EnableDnsSupport: true,
@@ -151,4 +150,14 @@ test('Test Multi-AZ CassKop', () => {
         }
     });
 
+    expect(stack).toHaveResource('Custom::AWSCDK-EKS-HelmChart', {
+        "Release": "kube-ops-view",
+        "Repository": "https://kubernetes-charts.storage.googleapis.com",
+        "CreateNamespace": true,
+        "Values": "{\"service\":{\"type\":\"ClusterIP\"},\"redis\":{\"enabled\":false},\"rbac\":{\"create\":true},\"ingress\":{\"enabled\":true,\"path\":\"/*\",\"hostname\":\"kube-ops-view.demo3.allamand.com\",\"annotations\":{\"kubernetes.io.ingress.class\":\"alb\",\"alb.ingress.kubernetes.io/scheme\":\"internet-facing\",\"alb.ingress.kubernetes.io/target-type\":\"ip\",\"alb.ingress.kubernetes.io/listen-ports\":\"[{\\\"HTTP\\\": 80}, {\\\"HTTPS\\\":443}]\",\"alb.ingress.kubernetes.io/certificate-arn\":\"arn:aws:acm:eu-west-1:382076407153:certificate/c48c5822-e2b0-4a21-a5bb-b66b51382586\"}}}",
+        "Wait": true,
+    });
+
+
+    expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 });

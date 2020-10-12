@@ -30,7 +30,7 @@ Object {
         ],
       },
     },
-    "runCommekstesand": Object {
+    "runCommand": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
@@ -579,7 +579,7 @@ Object {
         ],
       },
     },
-    "runCommekstesand": Object {
+    "runCommand": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",

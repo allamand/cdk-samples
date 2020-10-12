@@ -33,6 +33,14 @@ cdk deploy EksStack -c enable_stack=EksStack
 cdk diff 'Eks*' -c enable_stack=EksStack,EksFargate
 ```
 
+Some Stacks are also using an environnement configuration file, you can copy the sample `cp .env.template .env`and edit the values.
+
+There is a Makefile that can help launching cdk using the values from the `.env` file:
+
+```
+ make deploy STACK=EksStack  
+```
+
 # Deploy in the default VPC or any existing VPC
 
 You may deploy the stack in your existing VPC to save the deployment time

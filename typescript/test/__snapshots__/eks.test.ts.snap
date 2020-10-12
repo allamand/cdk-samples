@@ -60,40 +60,28 @@ Object {
       "Description": "S3 key for asset version \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42ArtifactHashDDB9E62D": Object {
-      "Description": "Artifact hash for asset \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1ArtifactHash32F5D823": Object {
+      "Description": "Artifact hash for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket9EBF7C44": Object {
-      "Description": "S3 bucket for asset \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0": Object {
+      "Description": "S3 bucket for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKey752BCCC4": Object {
-      "Description": "S3 key for asset version \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9": Object {
+      "Description": "S3 key for asset version \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aArtifactHash84962CBE": Object {
-      "Description": "Artifact hash for asset \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
+    "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0ArtifactHash51C622DE": Object {
+      "Description": "Artifact hash for asset \\"9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0\\"",
       "Type": "String",
     },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33": Object {
-      "Description": "S3 bucket for asset \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
+    "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0S3BucketCEF45554": Object {
+      "Description": "S3 bucket for asset \\"9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0\\"",
       "Type": "String",
     },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8": Object {
-      "Description": "S3 key for asset version \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
-      "Type": "String",
-    },
-    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afArtifactHash71C8E2E4": Object {
-      "Description": "Artifact hash for asset \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
-      "Type": "String",
-    },
-    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3Bucket151B99CC": Object {
-      "Description": "S3 bucket for asset \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
-      "Type": "String",
-    },
-    "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E": Object {
-      "Description": "S3 key for asset version \\"99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048af\\"",
+    "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0S3VersionKeyACF72A58": Object {
+      "Description": "S3 key for asset version \\"9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0\\"",
       "Type": "String",
     },
     "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
@@ -120,17 +108,33 @@ Object {
       "Description": "S3 key for asset version \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
       "Type": "String",
     },
-    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868ArtifactHash5B510BBF": Object {
-      "Description": "Artifact hash for asset \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cArtifactHash627DAAA7": Object {
+      "Description": "Artifact hash for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
       "Type": "String",
     },
-    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3BucketCC5107F4": Object {
-      "Description": "S3 bucket for asset \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43": Object {
+      "Description": "S3 bucket for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
       "Type": "String",
     },
-    "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026": Object {
-      "Description": "S3 key for asset version \\"e4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868\\"",
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7": Object {
+      "Description": "S3 key for asset version \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
       "Type": "String",
+    },
+    "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4ArtifactHash481E8039": Object {
+      "Description": "Artifact hash for asset \\"e262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4\\"",
+      "Type": "String",
+    },
+    "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4S3BucketD3C5EE3C": Object {
+      "Description": "S3 bucket for asset \\"e262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4\\"",
+      "Type": "String",
+    },
+    "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4S3VersionKey77F35CCE": Object {
+      "Description": "S3 key for asset version \\"e262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4\\"",
+      "Type": "String",
+    },
+    "SsmParameterValueawsserviceeksoptimizedami114amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/eks/optimized-ami/1.14/amazon-linux-2/recommended/image_id",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
   "Resources": Object {
@@ -243,7 +247,6 @@ Object {
     "CassKopCluster5683FE9F": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
         "CassKopClusterCreationRoleDDB5156B",
         "VpcIGWD7BA715C",
@@ -324,7 +327,7 @@ Object {
               "Arn",
             ],
           },
-          "version": "1.17",
+          "version": "1.14",
         },
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -384,6 +387,20 @@ Object {
                   "Arn",
                 ],
               },
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+                  "Arn",
+                ],
+              },
+              "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{SessionName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\",\\\\\\"system:node-proxier\\\\\\"]},{\\\\\\"rolearn\\\\\\":\\\\\\"",
+              Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterSpotInstanceRole3796F757",
+                  "Arn",
+                ],
+              },
               "\\\\\\",\\\\\\"username\\\\\\":\\\\\\"system:node:{{EC2PrivateDNSName}}\\\\\\",\\\\\\"groups\\\\\\":[\\\\\\"system:bootstrappers\\\\\\",\\\\\\"system:nodes\\\\\\"]}]\\",\\"mapUsers\\":\\"[]\\",\\"mapAccounts\\":\\"[]\\"}}]",
             ],
           ],
@@ -404,6 +421,27 @@ Object {
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "CassKopClusterClusterSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090443994408CD": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:443",
+        "FromPort": 443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopCluster5683FE9F",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "ToPort": 443,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
     "CassKopClusterControlPlaneSecurityGroup99EA84BD": Object {
       "Properties": Object {
         "GroupDescription": "EKS Control Plane Security Group",
@@ -420,9 +458,9 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417": Object {
+    "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD": Object {
       "Properties": Object {
-        "Description": "from CasskopCassKopClusterKubectlProviderSecurityGroup5151E995:443",
+        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:443",
         "FromPort": 443,
         "GroupId": Object {
           "Fn::GetAtt": Array [
@@ -433,7 +471,7 @@ Object {
         "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
-            "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
             "GroupId",
           ],
         },
@@ -443,7 +481,6 @@ Object {
     },
     "CassKopClusterCreationRoleDDB5156B": Object {
       "DependsOn": Array [
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -503,7 +540,6 @@ Object {
     },
     "CassKopClusterCreationRoleDefaultPolicy0C3AACE5": Object {
       "DependsOn": Array [
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -646,6 +682,16 @@ Object {
                 ],
               },
             },
+            Object {
+              "Action": "iam:PassRole",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+                  "Arn",
+                ],
+              },
+            },
           ],
           "Version": "2012-10-17",
         },
@@ -658,24 +704,10 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "CassKopClusterKubectlProviderSecurityGroupA7A18E9D": Object {
-      "Properties": Object {
-        "GroupDescription": "Comminication between KubectlProvider and EKS Control Plane",
-        "SecurityGroupEgress": Array [
-          Object {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1",
-          },
-        ],
-        "VpcId": Object {
-          "Ref": "Vpc8378EB38",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
     "CassKopClusterKubectlReadyBarrier346C8999": Object {
       "DependsOn": Array [
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterCreationRoleDefaultPolicy0C3AACE5",
         "CassKopClusterCreationRoleDDB5156B",
         "CassKopCluster5683FE9F",
@@ -688,6 +720,7 @@ Object {
     },
     "CassKopClusterNodegroupnodegroupAZa4BA33BD2": Object {
       "Properties": Object {
+        "AmiType": "AL2_x86_64",
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
@@ -780,6 +813,7 @@ Object {
     },
     "CassKopClusterNodegroupnodegroupAZb6B169D3A": Object {
       "Properties": Object {
+        "AmiType": "AL2_x86_64",
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
@@ -872,6 +906,7 @@ Object {
     },
     "CassKopClusterNodegroupnodegroupAZc77B0FA59": Object {
       "Properties": Object {
+        "AmiType": "AL2_x86_64",
         "ClusterName": Object {
           "Ref": "CassKopCluster5683FE9F",
         },
@@ -1011,6 +1046,450 @@ Object {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/AmazonEKSClusterPolicy",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CassKopClusterSpotASG93EF1913": Object {
+      "Properties": Object {
+        "LaunchConfigurationName": Object {
+          "Ref": "CassKopClusterSpotLaunchConfigFA810380",
+        },
+        "MaxInstanceLifetime": 604800,
+        "MaxSize": "5",
+        "MinSize": "1",
+        "Tags": Array [
+          Object {
+            "Key": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "kubernetes.io/cluster/",
+                  Object {
+                    "Ref": "CassKopCluster5683FE9F",
+                  },
+                ],
+              ],
+            },
+            "PropagateAtLaunch": true,
+            "Value": "owned",
+          },
+          Object {
+            "Key": "Name",
+            "PropagateAtLaunch": true,
+            "Value": "Casskop/CassKopCluster/Spot",
+          },
+        ],
+        "VPCZoneIdentifier": Array [
+          Object {
+            "Ref": "VpcPrivateSubnet1Subnet536B997A",
+          },
+          Object {
+            "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
+          },
+          Object {
+            "Ref": "VpcPrivateSubnet3SubnetF258B56E",
+          },
+        ],
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "UpdatePolicy": Object {
+        "AutoScalingRollingUpdate": Object {
+          "MaxBatchSize": 1,
+          "PauseTime": "PT0S",
+          "SuspendProcesses": Array [
+            "HealthCheck",
+            "ReplaceUnhealthy",
+            "AZRebalance",
+            "AlarmNotification",
+            "ScheduledActions",
+          ],
+          "WaitOnResourceSignals": false,
+        },
+        "AutoScalingScheduledAction": Object {
+          "IgnoreUnmodifiedGroupSizeProperties": true,
+        },
+      },
+    },
+    "CassKopClusterSpotInstanceProfileF7B9468A": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "CassKopClusterSpotInstanceRole3796F757",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "CassKopClusterSpotInstanceRole3796F757": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSWorkerNodePolicy",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKS_CNI_Policy",
+              ],
+            ],
+          },
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+              ],
+            ],
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "kubernetes.io/cluster/",
+                  Object {
+                    "Ref": "CassKopCluster5683FE9F",
+                  },
+                ],
+              ],
+            },
+            "Value": "owned",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "Casskop/CassKopCluster/Spot",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CassKopClusterSpotInstanceSecurityGroup21F521B6": Object {
+      "Properties": Object {
+        "GroupDescription": "Casskop/CassKopCluster/Spot/InstanceSecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "kubernetes.io/cluster/",
+                  Object {
+                    "Ref": "CassKopCluster5683FE9F",
+                  },
+                ],
+              ],
+            },
+            "Value": "owned",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "Casskop/CassKopCluster/Spot",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "Vpc8378EB38",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8102565535BCBB0FD7": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterClusterSecurityGroup9D6263A8:1025-65535",
+        "FromPort": 1025,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopCluster5683FE9F",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8443456E56E7": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterClusterSecurityGroup9D6263A8:443",
+        "FromPort": 443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopCluster5683FE9F",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "ToPort": 443,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:1025-65535",
+        "FromPort": 1025,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterControlPlaneSecurityGroup27A08AA4:443",
+        "FromPort": 443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterControlPlaneSecurityGroup99EA84BD",
+            "GroupId",
+          ],
+        },
+        "ToPort": 443,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9": Object {
+      "Properties": Object {
+        "Description": "from CasskopCassKopClusterSpotInstanceSecurityGroupC3C97090:ALL TRAFFIC",
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "-1",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54": Object {
+      "Properties": Object {
+        "Description": "allow all traffic from cluster security group",
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "-1",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "CassKopCluster5683FE9F",
+            "ClusterSecurityGroupId",
+          ],
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "CassKopClusterSpotLaunchConfigFA810380": Object {
+      "DependsOn": Array [
+        "CassKopClusterSpotInstanceRole3796F757",
+      ],
+      "Properties": Object {
+        "IamInstanceProfile": Object {
+          "Ref": "CassKopClusterSpotInstanceProfileF7B9468A",
+        },
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceeksoptimizedami114amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "c5.9xlarge",
+        "KeyName": "sallaman",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+              "GroupId",
+            ],
+          },
+        ],
+        "SpotPrice": "0.05",
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "#!/bin/bash
+set -o xtrace
+/etc/eks/bootstrap.sh ",
+                Object {
+                  "Ref": "CassKopCluster5683FE9F",
+                },
+                " --kubelet-extra-args \\"--node-labels lifecycle=Ec2Spot --register-with-taints=spotInstance=true:PreferNoSchedule\\" --use-max-pods true
+/opt/aws/bin/cfn-signal --exit-code $? --stack Casskop --resource CassKopClusterSpotASG93EF1913 --region eu-west-1",
+              ],
+            ],
+          },
+        },
+      },
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+    },
+    "CassKopClusterchartspotinterrupthandler80D296D7": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+      ],
+      "Properties": Object {
+        "Chart": "aws-node-termination-handler",
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "CreateNamespace": true,
+        "Namespace": "kube-system",
+        "Release": "asskopcasskopclusterchartspotinterrupthandlerb581dd3b",
+        "Repository": "https://aws.github.io/eks-charts",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+        "Values": "{\\"nodeSelector.lifecycle\\":\\"Ec2Spot\\"}",
+        "Version": "0.9.5",
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterfargateprofileFargateProfileE22A2CC1": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "AssumeRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "Config": Object {
+          "clusterName": Object {
+            "Ref": "CassKopCluster5683FE9F",
+          },
+          "podExecutionRoleArn": Object {
+            "Fn::GetAtt": Array [
+              "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+              "Arn",
+            ],
+          },
+          "selectors": Array [
+            Object {
+              "namespace": "fargate",
+            },
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+            "Outputs.CasskopawscdkawseksClusterResourceProviderframeworkonEventDEC5D217Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-FargateProfile",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "eks-fargate-pods.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy",
               ],
             ],
           },
@@ -3055,9 +3534,12 @@ Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterClusterSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090443994408CD",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceargo8CC7E968",
         "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
@@ -3106,6 +3588,17 @@ Object {
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8102565535BCBB0FD7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8443456E56E7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3146,17 +3639,17 @@ Object {
     "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": Object {
       "Properties": Object {
         "Parameters": Object {
-          "referencetoCasskopAssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket474C7F07Ref": Object {
-            "Ref": "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket9EBF7C44",
+          "referencetoCasskopAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3BucketF31D7F75Ref": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0",
           },
-          "referencetoCasskopAssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKeyD78A19DERef": Object {
-            "Ref": "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKey752BCCC4",
+          "referencetoCasskopAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey1443A76FRef": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9",
           },
-          "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3BucketAE188F98Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33",
+          "referencetoCasskopAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket4782F525Ref": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
           },
-          "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey261108F0Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8",
+          "referencetoCasskopAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyD705D0BERef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
           },
           "referencetoCasskopCassKopClusterCreationRole75E615BCArn": Object {
             "Fn::GetAtt": Array [
@@ -3175,7 +3668,7 @@ Object {
               },
               "/",
               Object {
-                "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3BucketCC5107F4",
+                "Ref": "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0S3BucketCEF45554",
               },
               "/",
               Object {
@@ -3185,7 +3678,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026",
+                        "Ref": "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0S3VersionKeyACF72A58",
                       },
                     ],
                   },
@@ -3198,7 +3691,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameterse4a77bba8cae1cf36e2ce293a7e55cc290855d439063fff3c16c66623693d868S3VersionKey6466C026",
+                        "Ref": "AssetParameters9534f7dc11f259aac439c51ef802eaadf520fb191413ae8c8a2c9f505714dac0S3VersionKeyACF72A58",
                       },
                     ],
                   },
@@ -3213,17 +3706,17 @@ Object {
     "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": Object {
       "Properties": Object {
         "Parameters": Object {
-          "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3BucketAE188F98Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33",
-          },
-          "referencetoCasskopAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey261108F0Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8",
-          },
           "referencetoCasskopAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3BucketD2D26FC7Ref": Object {
             "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2",
           },
           "referencetoCasskopAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey52DFCC0DRef": Object {
             "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A",
+          },
+          "referencetoCasskopAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket4782F525Ref": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "referencetoCasskopAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyD705D0BERef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
           },
           "referencetoCasskopCassKopCluster29B90A16Arn": Object {
             "Fn::GetAtt": Array [
@@ -3231,11 +3724,26 @@ Object {
               "Arn",
             ],
           },
+          "referencetoCasskopCassKopCluster29B90A16ClusterSecurityGroupId": Object {
+            "Fn::GetAtt": Array [
+              "CassKopCluster5683FE9F",
+              "ClusterSecurityGroupId",
+            ],
+          },
           "referencetoCasskopCassKopClusterCreationRole75E615BCArn": Object {
             "Fn::GetAtt": Array [
               "CassKopClusterCreationRoleDDB5156B",
               "Arn",
             ],
+          },
+          "referencetoCasskopVpcPrivateSubnet1SubnetED61AC39Ref": Object {
+            "Ref": "VpcPrivateSubnet1Subnet536B997A",
+          },
+          "referencetoCasskopVpcPrivateSubnet2Subnet95DF6909Ref": Object {
+            "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
+          },
+          "referencetoCasskopVpcPrivateSubnet3SubnetFF035E04Ref": Object {
+            "Ref": "VpcPrivateSubnet3SubnetF258B56E",
           },
         },
         "TemplateURL": Object {
@@ -3248,7 +3756,7 @@ Object {
               },
               "/",
               Object {
-                "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3Bucket151B99CC",
+                "Ref": "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4S3BucketD3C5EE3C",
               },
               "/",
               Object {
@@ -3258,7 +3766,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E",
+                        "Ref": "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4S3VersionKey77F35CCE",
                       },
                     ],
                   },
@@ -3271,7 +3779,7 @@ Object {
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters99a51fc744784f777dee4eaf548bf0981b9d3a6087329b9124ff70f546a048afS3VersionKey786A188E",
+                        "Ref": "AssetParameterse262985f31e182173c7541af67224169233f1516cafe96a00d1a244400ce8de4S3VersionKey77F35CCE",
                       },
                     ],
                   },
@@ -3415,9 +3923,12 @@ Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterClusterSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090443994408CD",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceargo8CC7E968",
         "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
@@ -3466,6 +3977,17 @@ Object {
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8102565535BCBB0FD7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8443456E56E7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3522,9 +4044,12 @@ Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterClusterSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090443994408CD",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceargo8CC7E968",
         "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
@@ -3573,6 +4098,17 @@ Object {
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8102565535BCBB0FD7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8443456E56E7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3595,13 +4131,48 @@ Object {
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "kubeopsviewkubeopsviewHelmChart58E7AD12": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CassKopClusterKubectlReadyBarrier346C8999",
+      ],
+      "Properties": Object {
+        "Chart": "stable/kube-ops-view",
+        "ClusterName": Object {
+          "Ref": "CassKopCluster5683FE9F",
+        },
+        "CreateNamespace": true,
+        "Namespace": "metrics",
+        "Release": "kube-ops-view",
+        "Repository": "https://kubernetes-charts.storage.googleapis.com",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CassKopClusterCreationRoleDDB5156B",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+        "Values": "{\\"service\\":{\\"type\\":\\"ClusterIP\\"},\\"redis\\":{\\"enabled\\":false},\\"rbac\\":{\\"create\\":true},\\"ingress\\":{\\"enabled\\":true,\\"path\\":\\"/*\\",\\"hostname\\":\\"kube-ops-view.demo3.allamand.com\\",\\"annotations\\":{\\"kubernetes.io.ingress.class\\":\\"alb\\",\\"alb.ingress.kubernetes.io/scheme\\":\\"internet-facing\\",\\"alb.ingress.kubernetes.io/target-type\\":\\"ip\\",\\"alb.ingress.kubernetes.io/listen-ports\\":\\"[{\\\\\\"HTTP\\\\\\": 80}, {\\\\\\"HTTPS\\\\\\":443}]\\",\\"alb.ingress.kubernetes.io/certificate-arn\\":\\"arn:aws:acm:eu-west-1:382076407153:certificate/c48c5822-e2b0-4a21-a5bb-b66b51382586\\"}}}",
+        "Wait": true,
+      },
+      "Type": "Custom::AWSCDK-EKS-HelmChart",
+      "UpdateReplacePolicy": "Delete",
+    },
     "metricsserverK8sResourceBB4DF557": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "CassKopClusterAwsAuthmanifest4018B69E",
-        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterKubectlProviderSecurityGroup5151E995443CA6B0417",
+        "CassKopClusterchartspotinterrupthandler80D296D7",
+        "CassKopClusterClusterSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090443994408CD",
+        "CassKopClusterControlPlaneSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C970904433646F5CD",
         "CassKopClusterControlPlaneSecurityGroup99EA84BD",
-        "CassKopClusterKubectlProviderSecurityGroupA7A18E9D",
+        "CassKopClusterfargateprofileFargateProfilePodExecutionRoleCD3A960C",
+        "CassKopClusterfargateprofileFargateProfileE22A2CC1",
         "CassKopClusterKubectlReadyBarrier346C8999",
         "CassKopClustermanifestnamespaceargo8CC7E968",
         "CassKopClustermanifestnamespacecloudWatchagent17CF4D0F",
@@ -3650,6 +4221,17 @@ Object {
         "CassKopClusterserviceaccounteksutilsadminmanifestserviceaccounteksutilsadminServiceAccountResource42E0B3DA",
         "CassKopClusterserviceaccounteksutilsadminRoleDefaultPolicyBB4445D6",
         "CassKopClusterserviceaccounteksutilsadminRoleA9ABA218",
+        "CassKopClusterSpotASG93EF1913",
+        "CassKopClusterSpotInstanceProfileF7B9468A",
+        "CassKopClusterSpotInstanceRole3796F757",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8102565535BCBB0FD7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterClusterSecurityGroup9D6263A8443456E56E7",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4102565535B1544517",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterControlPlaneSecurityGroup27A08AA4443D85E169E",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopCassKopClusterSpotInstanceSecurityGroupC3C97090ALLTRAFFIC29206DE9",
+        "CassKopClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFIC88C0EC54",
+        "CassKopClusterSpotInstanceSecurityGroup21F521B6",
+        "CassKopClusterSpotLaunchConfigFA810380",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -3741,52 +4323,16 @@ Object {
       "Description": "S3 key for asset version \\"10e0d4bba7ae4b96280b39e3351d41c9fd4487d0e005c1e18f2d50bf056b1608\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42ArtifactHashDDB9E62D": Object {
-      "Description": "Artifact hash for asset \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1ArtifactHash32F5D823": Object {
+      "Description": "Artifact hash for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket9EBF7C44": Object {
-      "Description": "S3 bucket for asset \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0": Object {
+      "Description": "S3 bucket for asset \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
-    "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKey752BCCC4": Object {
-      "Description": "S3 key for asset version \\"1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42\\"",
-      "Type": "String",
-    },
-    "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0ArtifactHash44B80DA5": Object {
-      "Description": "Artifact hash for asset \\"26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0\\"",
-      "Type": "String",
-    },
-    "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0S3BucketA38AE29D": Object {
-      "Description": "S3 bucket for asset \\"26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0\\"",
-      "Type": "String",
-    },
-    "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0S3VersionKeyDFE478B4": Object {
-      "Description": "S3 key for asset version \\"26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0\\"",
-      "Type": "String",
-    },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aArtifactHash84962CBE": Object {
-      "Description": "Artifact hash for asset \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
-      "Type": "String",
-    },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33": Object {
-      "Description": "S3 bucket for asset \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
-      "Type": "String",
-    },
-    "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8": Object {
-      "Description": "S3 key for asset version \\"7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690a\\"",
-      "Type": "String",
-    },
-    "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16ArtifactHashE2832B92": Object {
-      "Description": "Artifact hash for asset \\"a981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16\\"",
-      "Type": "String",
-    },
-    "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16S3BucketCD4B136F": Object {
-      "Description": "S3 bucket for asset \\"a981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16\\"",
-      "Type": "String",
-    },
-    "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16S3VersionKeyE91F6E85": Object {
-      "Description": "S3 key for asset version \\"a981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16\\"",
+    "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9": Object {
+      "Description": "S3 key for asset version \\"50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1\\"",
       "Type": "String",
     },
     "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2ArtifactHashE86B38C7": Object {
@@ -3813,8 +4359,44 @@ Object {
       "Description": "S3 key for asset version \\"bac0243f487acc20e4218710f00301de6ecd41f11245b7d1229d38bfec963e37\\"",
       "Type": "String",
     },
-    "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "/aws/service/eks/optimized-ami/1.17/amazon-linux-2/recommended/image_id",
+    "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422ArtifactHash2F759EE2": Object {
+      "Description": "Artifact hash for asset \\"be61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422\\"",
+      "Type": "String",
+    },
+    "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422S3Bucket97D4C77B": Object {
+      "Description": "S3 bucket for asset \\"be61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422\\"",
+      "Type": "String",
+    },
+    "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422S3VersionKeyA55AB329": Object {
+      "Description": "S3 key for asset version \\"be61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cArtifactHash627DAAA7": Object {
+      "Description": "Artifact hash for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43": Object {
+      "Description": "S3 bucket for asset \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+    "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7": Object {
+      "Description": "S3 key for asset version \\"c691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49c\\"",
+      "Type": "String",
+    },
+    "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25ArtifactHash39472811": Object {
+      "Description": "Artifact hash for asset \\"dc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25\\"",
+      "Type": "String",
+    },
+    "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25S3Bucket1BABB2FA": Object {
+      "Description": "S3 bucket for asset \\"dc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25\\"",
+      "Type": "String",
+    },
+    "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25S3VersionKeyB30F83AE": Object {
+      "Description": "S3 key for asset version \\"dc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25\\"",
+      "Type": "String",
+    },
+    "SsmParameterValueawsserviceeksoptimizedami114amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/eks/optimized-ami/1.14/amazon-linux-2/recommended/image_id",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
@@ -4004,6 +4586,27 @@ Object {
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA": Object {
+      "Properties": Object {
+        "Description": "from EKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496:443",
+        "FromPort": 443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackD72562D9",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "GroupId",
+          ],
+        },
+        "ToPort": 443,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
     "AlbIngressControllerStackControlPlaneSecurityGroupAB680602": Object {
       "Properties": Object {
         "GroupDescription": "EKS Control Plane Security Group",
@@ -4019,27 +4622,6 @@ Object {
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
-    },
-    "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B4433A66A9C9": Object {
-      "Properties": Object {
-        "Description": "from EKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B:443",
-        "FromPort": 443,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
-            "GroupId",
-          ],
-        },
-        "ToPort": 443,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
     },
     "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12": Object {
       "Properties": Object {
@@ -4064,7 +4646,6 @@ Object {
     },
     "AlbIngressControllerStackCreationRoleB9419435": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -4120,7 +4701,6 @@ Object {
     },
     "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D": Object {
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "VpcIGWD7BA715C",
         "VpcPrivateSubnet1DefaultRouteBE02A9ED",
         "VpcPrivateSubnet1RouteTableB2C5B500",
@@ -4312,7 +4892,6 @@ Object {
     "AlbIngressControllerStackD72562D9": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
         "AlbIngressControllerStackCreationRoleB9419435",
         "VpcIGWD7BA715C",
@@ -4379,7 +4958,7 @@ Object {
               "Arn",
             ],
           },
-          "version": "1.17",
+          "version": "1.14",
         },
         "ServiceToken": Object {
           "Fn::GetAtt": Array [
@@ -4390,22 +4969,6 @@ Object {
       },
       "Type": "Custom::AWSCDK-EKS-Cluster",
       "UpdateReplacePolicy": "Delete",
-    },
-    "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763": Object {
-      "Properties": Object {
-        "GroupDescription": "Comminication between KubectlProvider and EKS Control Plane",
-        "SecurityGroupEgress": Array [
-          Object {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1",
-          },
-        ],
-        "VpcId": Object {
-          "Ref": "Vpc8378EB38",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
     },
     "AlbIngressControllerStackKubectlReadyBarrier32C3D398": Object {
       "DependsOn": Array [
@@ -4423,6 +4986,7 @@ Object {
     },
     "AlbIngressControllerStackNodegroupDefaultCapacity292A30F4": Object {
       "Properties": Object {
+        "AmiType": "AL2_x86_64",
         "ClusterName": Object {
           "Ref": "AlbIngressControllerStackD72562D9",
         },
@@ -4519,6 +5083,7 @@ Object {
     },
     "AlbIngressControllerStackNodegroupnodegroup64293F7C": Object {
       "Properties": Object {
+        "AmiType": "AL2_x86_64",
         "ClusterName": Object {
           "Ref": "AlbIngressControllerStackD72562D9",
         },
@@ -4527,7 +5092,7 @@ Object {
           "m5.large",
         ],
         "Labels": Object {
-          "cdk-nodegroup": "addNodegroup1",
+          "cdk-nodegroup": "addNodegroupCapacity1",
         },
         "NodeRole": Object {
           "Fn::GetAtt": Array [
@@ -4535,7 +5100,7 @@ Object {
             "Arn",
           ],
         },
-        "NodegroupName": "CassKop-addNodeGroup1",
+        "NodegroupName": "CassKop-addNodegroupCapacity1",
         "RemoteAccess": Object {
           "Ec2SshKey": "sallaman",
         },
@@ -4553,7 +5118,7 @@ Object {
           },
         ],
         "Tags": Object {
-          "cdk-nodegroup": "addNodegroup1",
+          "cdk-nodegroup": "addNodegroupCapacity1",
         },
       },
       "Type": "AWS::EKS::Nodegroup",
@@ -4856,6 +5421,48 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
+    "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E": Object {
+      "Properties": Object {
+        "Description": "from EKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F5:1025-65535",
+        "FromPort": 1025,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackD72562D9",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9": Object {
+      "Properties": Object {
+        "Description": "from EKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F5:443",
+        "FromPort": 443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackD72562D9",
+            "ClusterSecurityGroupId",
+          ],
+        },
+        "ToPort": 443,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
     "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E": Object {
       "Properties": Object {
         "Description": "from EKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F:1025-65535",
@@ -4945,7 +5552,7 @@ Object {
           "Ref": "AlbIngressControllerStackSpotInstanceProfile34178E58",
         },
         "ImageId": Object {
-          "Ref": "SsmParameterValueawsserviceeksoptimizedami117amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter",
+          "Ref": "SsmParameterValueawsserviceeksoptimizedami114amazonlinux2recommendedimageidC96584B6F00A464EAD1953AFF4B05118Parameter",
         },
         "InstanceType": "t3.medium",
         "KeyName": "sallaman",
@@ -5008,7 +5615,7 @@ set -o xtrace
           ],
         },
         "Values": "{\\"nodeSelector.lifecycle\\":\\"Ec2Spot\\"}",
-        "Version": "0.7.3",
+        "Version": "0.9.5",
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
       "UpdateReplacePolicy": "Delete",
@@ -6786,12 +7393,11 @@ set -o xtrace
       "DependsOn": Array [
         "AlbIngressControllerStackAwsAuthmanifest49810F87",
         "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B4433A66A9C9",
+        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
         "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
         "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
         "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
         "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
         "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
         "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
@@ -6832,6 +7438,8 @@ set -o xtrace
         "AlbIngressControllerStackSpotASG1C672A84",
         "AlbIngressControllerStackSpotInstanceProfile34178E58",
         "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",
@@ -6888,17 +7496,17 @@ set -o xtrace
               "Arn",
             ],
           },
-          "referencetoEKSAssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3BucketFABAEBD5Ref": Object {
-            "Ref": "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3Bucket9EBF7C44",
+          "referencetoEKSAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket006B966CRef": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3Bucket36C546E0",
           },
-          "referencetoEKSAssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKey922C6918Ref": Object {
-            "Ref": "AssetParameters1d4bc9c94ad495269c8403552eb916f466fcc202a35957cfb7cf6a0fe0739d42S3VersionKey752BCCC4",
+          "referencetoEKSAssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey96A1D31FRef": Object {
+            "Ref": "AssetParameters50e10880d134a01b440991fc77d217f39f01c2d56945215ee9a3b81187c6f3b1S3VersionKey85C003F9",
           },
-          "referencetoEKSAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket45D90A62Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33",
+          "referencetoEKSAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket67AE6179Ref": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
           },
-          "referencetoEKSAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey35722EA6Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8",
+          "referencetoEKSAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKey88FDF63ARef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
           },
         },
         "TemplateURL": Object {
@@ -6915,7 +7523,7 @@ set -o xtrace
               },
               "/",
               Object {
-                "Ref": "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0S3BucketA38AE29D",
+                "Ref": "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25S3Bucket1BABB2FA",
               },
               "/",
               Object {
@@ -6925,7 +7533,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0S3VersionKeyDFE478B4",
+                        "Ref": "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25S3VersionKeyB30F83AE",
                       },
                     ],
                   },
@@ -6938,7 +7546,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParameters26e0cc71f49f62aa7808119feaef7eca4c204b830201487ee4226c4a00745ac0S3VersionKeyDFE478B4",
+                        "Ref": "AssetParametersdc0a5643042eba06158dcc25e6ec987458f1f396ecef92d587b8e256b571db25S3VersionKeyB30F83AE",
                       },
                     ],
                   },
@@ -6959,23 +7567,35 @@ set -o xtrace
               "Arn",
             ],
           },
+          "referencetoEKSAlbIngressControllerStack7DD60982ClusterSecurityGroupId": Object {
+            "Fn::GetAtt": Array [
+              "AlbIngressControllerStackD72562D9",
+              "ClusterSecurityGroupId",
+            ],
+          },
           "referencetoEKSAlbIngressControllerStackCreationRole417D13BAArn": Object {
             "Fn::GetAtt": Array [
               "AlbIngressControllerStackCreationRoleB9419435",
               "Arn",
             ],
           },
-          "referencetoEKSAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket45D90A62Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3Bucket24A39C33",
-          },
-          "referencetoEKSAssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey35722EA6Ref": Object {
-            "Ref": "AssetParameters7b8f901e53744758131669f2606b340cd2b32759fbbfc3dd93fb3fa4d08d690aS3VersionKey0E38F1A8",
-          },
           "referencetoEKSAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3BucketD5A9963ARef": Object {
             "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3Bucket9ABBD5A2",
           },
           "referencetoEKSAssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey2D6141D0Ref": Object {
             "Ref": "AssetParametersb7d8a9750f8bfded8ac76be100e3bee1c3d4824df006766110d023f42952f5c2S3VersionKey40FF2C4A",
+          },
+          "referencetoEKSAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3Bucket67AE6179Ref": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3BucketEAC9DD43",
+          },
+          "referencetoEKSAssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKey88FDF63ARef": Object {
+            "Ref": "AssetParametersc691172cdeefa2c91b5a2907f9d81118e47597634943344795f1a844192dd49cS3VersionKeyDD9AE9E7",
+          },
+          "referencetoEKSVpcPrivateSubnet1Subnet47A4B175Ref": Object {
+            "Ref": "VpcPrivateSubnet1Subnet536B997A",
+          },
+          "referencetoEKSVpcPrivateSubnet2SubnetA3850D67Ref": Object {
+            "Ref": "VpcPrivateSubnet2Subnet3788AAA1",
           },
         },
         "TemplateURL": Object {
@@ -6992,7 +7612,7 @@ set -o xtrace
               },
               "/",
               Object {
-                "Ref": "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16S3BucketCD4B136F",
+                "Ref": "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422S3Bucket97D4C77B",
               },
               "/",
               Object {
@@ -7002,7 +7622,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16S3VersionKeyE91F6E85",
+                        "Ref": "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422S3VersionKeyA55AB329",
                       },
                     ],
                   },
@@ -7015,7 +7635,7 @@ set -o xtrace
                     "Fn::Split": Array [
                       "||",
                       Object {
-                        "Ref": "AssetParametersa981ef1551ca08c63216e80a202c9bacde5fbd5e84eab9fc7d127d16b7247d16S3VersionKeyE91F6E85",
+                        "Ref": "AssetParametersbe61b2b7162130a529fbc1a5535e04f329ea6efe2964964b34c48871063f7422S3VersionKeyA55AB329",
                       },
                     ],
                   },
@@ -7073,12 +7693,11 @@ set -o xtrace
       "DependsOn": Array [
         "AlbIngressControllerStackAwsAuthmanifest49810F87",
         "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B4433A66A9C9",
+        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
         "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
         "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
         "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
         "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
         "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
         "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
@@ -7119,6 +7738,8 @@ set -o xtrace
         "AlbIngressControllerStackSpotASG1C672A84",
         "AlbIngressControllerStackSpotInstanceProfile34178E58",
         "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",
@@ -7212,12 +7833,11 @@ set -o xtrace
       "DependsOn": Array [
         "AlbIngressControllerStackAwsAuthmanifest49810F87",
         "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B4433A66A9C9",
+        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
         "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
         "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
         "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
         "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
         "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
         "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
@@ -7258,6 +7878,8 @@ set -o xtrace
         "AlbIngressControllerStackSpotASG1C672A84",
         "AlbIngressControllerStackSpotInstanceProfile34178E58",
         "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",
@@ -7291,12 +7913,11 @@ set -o xtrace
       "DependsOn": Array [
         "AlbIngressControllerStackAwsAuthmanifest49810F87",
         "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackKubectlProviderSecurityGroup4627197B4433A66A9C9",
+        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
         "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
         "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
         "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
         "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlProviderSecurityGroupCCAB8763",
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
         "AlbIngressControllerStackmanifestnamespaceclusterautoscaler36F672B4",
         "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargate49EE6D51",
@@ -7337,6 +7958,8 @@ set -o xtrace
         "AlbIngressControllerStackSpotASG1C672A84",
         "AlbIngressControllerStackSpotInstanceProfile34178E58",
         "AlbIngressControllerStackSpotInstanceRoleE63A024A",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
+        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
         "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",

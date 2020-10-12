@@ -11,3 +11,4 @@ cdk.context.json
 .cdk.staging
 cdk.out
 .idea
+.env

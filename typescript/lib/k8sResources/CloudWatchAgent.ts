@@ -25,15 +25,8 @@ export class CloudWatchAgent extends K8sResourceIRSA {
         const manifests = loadManifestYamlAllWithoutServiceAcount('kubernetes-manifests/amazon-cloudwatch-container-insights');
 
         const cm = manifests.find((manifest) => manifest.kind === 'ConfigMap');
-        /*
-        const config = cm.data["cwagentconfig.json"];
-        const config2 = config.replace('{{cluster_name}}', this.cluster.clusterName);
 
-        cm.data["cwagentconfig.json"] = config2;
-*/
         cm.data["cwagentconfig.json"] = cm.data["cwagentconfig.json"].replace('{{cluster_name}}', this.cluster.clusterName);
-
-
 
         return manifests;
 

@@ -15,16 +15,18 @@ export class BastionHost extends cdk.Stack {
     })
 
     const homeIp = this.node.tryGetContext('home_ip') || undefined
-    if(homeIp) {
-      console.debug("using homeIp "+ homeIp);
+    if (homeIp) {
+      console.debug("using homeIp " + homeIp);
       bas.allowSshAccessFrom(ec2.Peer.ipv4(`${homeIp}/32`))
     }
 
     new cdk.CfnOutput(this, 'instanceId', { value: bas.instanceId })
     new cdk.CfnOutput(this, 'az', { value: bas.instanceAvailabilityZone })
     new cdk.CfnOutput(this, 'publicIp', { value: bas.instancePublicIp })
-    new cdk.CfnOutput(this, 'runCommeks.tesand', { value: 
-      `aws ec2-instance-connect send-ssh-public-key --instance-id ${bas.instanceId} --instance-os-user ec2-user 
-      --ssh-public-key file://{PUBLIC_KEY_PATH} --availability-zone ${bas.instanceAvailabilityZone}` })
+    new cdk.CfnOutput(this, 'runCommand', {
+      value:
+        `aws ec2-instance-connect send-ssh-public-key --instance-id ${bas.instanceId} --instance-os-user ec2-user 
+      --ssh-public-key file://{PUBLIC_KEY_PATH} --availability-zone ${bas.instanceAvailabilityZone}`
+    })
   }
 }
