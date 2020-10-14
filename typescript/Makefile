@@ -13,6 +13,10 @@ include .env
 VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env )
 $(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
 
+
+deploy-vpc:
+	cdk deploy cdkVpc -c enable_stack=cdkVpc
+	
 diff: build
 	 cdk diff $(STACK) -c enable_stack=$(STACK)
 
@@ -27,6 +31,17 @@ destroy:
 
 context:
 	 time cdk context -j $(STACK) -c enable_stack=$(STACK) 
+
+
+#ifeq ($(TEST),TRUE) 
+ifeq ($(filter $(firstword $(MAKECMDGOALS)),test test-update),$(firstword $(MAKECMDGOALS)))
+
+#Include env Var for the tests
+include .env.template
+
+VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env.template )
+$(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
+endif
 
 test: build
 #	export CDK_DEFAULT_ACCOUNT=$(shell aws sts get-caller-identity --output text --query 'Account') ; 
@@ -43,5 +58,8 @@ test-update: build
 	export CDK_DEFAULT_REGION=eu-west-1 ; \
 	npm test -- -u
 
-deploy-vpc:
-	cdk deploy cdkVpc -c enable_stack=cdkVpc
+
+
+
+
+
