@@ -28,11 +28,9 @@
             "Resource": "*"
         },
         {
-            "Action": [
-                "es:ESHttp*"
-            ],
-            "Resource": "arn:aws:es:eu-west-1:382076407153:domain/eks-casskop",
-            "Effect": "Allow"
+            "Effect": "Allow",
+            "Action": "es:ESHttp*",
+            "Resource": "arn:aws:es:::domain/eks-casskop/*"
         }
     ]
 }

@@ -8,10 +8,14 @@ dependences:
 build: dependences
 	yarn build
 
+#For targets diff and deploy we launch .env file
+ifeq ($(filter $(firstword $(MAKECMDGOALS)),diff deploy),$(firstword $(MAKECMDGOALS)))
 include .env
-
 VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env )
 $(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
+endif
+
+
 
 
 deploy-vpc:
@@ -33,19 +37,23 @@ context:
 	 time cdk context -j $(STACK) -c enable_stack=$(STACK) 
 
 
-#ifeq ($(TEST),TRUE) 
+#For test and test-update we include .env.template instead
 ifeq ($(filter $(firstword $(MAKECMDGOALS)),test test-update),$(firstword $(MAKECMDGOALS)))
 
 #Include env Var for the tests
 include .env.template
-
 VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env.template )
 $(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
 endif
 
+.PHONY: test
+
 test: build
 #	export CDK_DEFAULT_ACCOUNT=$(shell aws sts get-caller-identity --output text --query 'Account') ; 
 #	export CDK_DEFAULT_REGION=$(shell  aws configure get region) ; 
+	echo $(use_vpc_id)
+	echo $(TOTO)
+	exit;
 	export CDK_DEFAULT_ACCOUNT=xxxxxxxxxxxx ; \
 	export CDK_DEFAULT_REGION=eu-west-1 ; \
 	npm test

@@ -25,6 +25,7 @@ import { AwsForFluentBit } from './k8sResources/AwsForFluentBit';
 import { CloudWatchAgent } from './k8sResources/CloudWatchAgent';
 import { UpdateType } from '@aws-cdk/aws-autoscaling';
 import { KubeOpsView } from './k8sResources/KubeOpsView';
+import { CassKop } from './k8sResources/CassKop';
 
 
 export class EksStack extends cdk.Stack {
@@ -360,8 +361,29 @@ export class AlbIngressControllerStack extends cdk.Stack {
 }
 
 
-
-export class CassKopCluster extends cdk.Stack {
+/*
+** StatefulCluster (configured using the .env file)
+*
+* This stacks show how you can deploy a stateful application (Cassandra) in EKS
+* We also install lots of addons, such as logging, metrics, ingres, to have a fully functional cluster
+* This stack is for demo purpose 
+*
+* The will create an EKS cluster with 3 managed nodegroups, 1 in each AZ - used to store our stateful application
+* It will add a fargate profile for the `fargate` namespace
+* it will create a Spot nodegroup used to launch stress utility for the Cassandra cluster
+* deploy Addons:
+* - AlbIngressController
+* - ExternalDns controller
+* -  MetricServer (used for cluster autoscaler datas)
+* - EbsCsiDriver used to managed EBS volumes
+* -  EksUtilsAdmin - example of an admin pod in managed NG and in Fargate (with logging enabled in sidecar)
+* - CloudWatchAgent - for enabling CloudWatch Container Insights
+* - AwsForFluentBit - for sending logs to CloudWatch logs and ElasticSearch service
+* - KubeOpsView - used to visualize the instances and pods in the EKS cluster (for demo)
+* - CassKop - It's the Cassandra Operator and it's Cassandra Cluster Demo
+* - ServiceAccountIRSA (argo) - simply create a serviceaccount with role for the Argo service
+*/
+export class StatefulCluster extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps = {}) {
     super(scope, id, props);
 
@@ -446,12 +468,14 @@ export class CassKopCluster extends cdk.Stack {
         maxBatchSize: 1,
       },
       maxCapacity: 5,
-      spotPrice: '0.05',
+      //https://eu-west-1.console.aws.amazon.com/ec2sp/v2/home?region=eu-west-1#/spot
+      spotPrice: '1.728',
       keyName: keyName,
 
     });
+    //allow the Spot Nodegroup to send and receive traffic from our EKS cluster
     spotAsg.connections.allowFrom(ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG", cluster.clusterSecurityGroupId), ec2.Port.allTraffic(), "allow all traffic from cluster security group");
-
+    spotAsg.connections.allowTo(ec2.SecurityGroup.fromSecurityGroupId(this, 'spotAsgEgress', cluster.clusterSecurityGroupId), ec2.Port.allTraffic(), "allow all traffic to the cluster Security group")
 
     // Deploy ALB Ingress Controller
     new AlbIngressController(this, 'alb-ingress-controller', cluster);
@@ -479,17 +503,63 @@ export class CassKopCluster extends cdk.Stack {
       namespace: 'eksutils'
     });
 
+    //Deploy EksUtils admin pod in default namespace (backed by fargate)
+    new EksUtilsAdmin(this, 'eksutils-admin-fargate', cluster, {
+      namespace: 'cassandra',
+      schedulerName: 'fargate'
+    });
+
+
     //Deploy CloudWatch Agent for CloudWatch Container Insight
     new CloudWatchAgent(this, 'cloudWatch-agent', cluster, {});
 
     //Configure FluentBit to forward logs to CloudWatch & ElasticSearch
+    const elasticsearchDomain = this.node.tryGetContext('elasticsearch_domain') || process.env.elasticsearch_domain
     new AwsForFluentBit(this, "aws-for-fluent-bit", cluster, {
       name: "aws-for-fluent-bit",
       namespace: "kube-system",
-      iamPolicyFile: "aws-for-fluent-bit.json"
+      //iamPolicyFile: "aws-for-fluent-bit.json",
+      iamPolicy: ' { \
+    "Version": "2012-10-17", \
+      "Statement": [ \
+        { \
+          "Effect": "Allow", \
+          "Action": [ \
+            "firehose:PutRecordBatch" \
+          ], \
+          "Resource": "*" \
+        }, \
+        { \
+          "Effect": "Allow", \
+          "Action": "logs:PutLogEvents", \
+          "Resource": "arn:aws:logs:*:*:log-group:*:*:*" \
+        }, \
+        { \
+          "Effect": "Allow", \
+          "Action": [ \
+            "logs:CreateLogStream", \
+            "logs:DescribeLogStreams", \
+            "logs:PutLogEvents" \
+          ], \
+          "Resource": "arn:aws:logs:*:*:log-group:*" \
+        }, \
+        { \
+          "Effect": "Allow", \
+          "Action": "logs:CreateLogGroup", \
+          "Resource": "*" \
+        }, \
+        { \
+          "Effect": "Allow", \
+          "Action": "es:ESHttp*", \
+          "Resource": "arn:aws:es:::domain/'+ elasticsearchDomain + '/*" \
+        } \
+      ] \
+    }'
     });
 
     new KubeOpsView(this, 'kube-ops-view', cluster, {});
+
+    new CassKop(this, 'casskop', cluster, {});
 
     new ServiceAccountIRSA(this, 'argo', cluster, {
       iamPolicyFile: "",

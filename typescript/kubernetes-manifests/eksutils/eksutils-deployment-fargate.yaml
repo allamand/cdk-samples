@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  name: eksutils-deployment
+  labels:
+    app: eksutils
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: eksutils
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: eksutils
+    spec:
+      containers:
+        - name: eksutils
+          image: allamand/eksutils:latest
+          imagePullPolicy: Always
+          command:
+            - tail
+            - -f
+            - /dev/null
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+        - name: aws-for-fluentbit
+          image: amazon/aws-for-fluent-bit:latest
+          imagePullPolicy: Always
+          #    ports:
+          #      - containerPort: 2020
+          #    env:
+          #    - name: FLUENTD_HOST
+          #      value: "fluentd"
+          #    - name: FLUENTD_PORT
+          #      value: "24224"
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: aws-for-fluentbit
+              mountPath: /fluent-bit/etc/
+      enableServiceLinks: true
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccountName: eksutils-admin
+      terminationGracePeriodSeconds: 0
+      securityContext:
+        # IRSA projected secret need root ???
+        #fsGroup: 1000
+        #runAsUser: 1000
+        fsGroup: 0
+        runAsUser: 0
+  terminationGracePeriodSeconds: 10
+  volumes:
+    - name: varlog
+      emptyDir: {}
+    - name: aws-for-fluentbit
+      configMap:
+        name: aws-for-fluentbit
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: eksutils-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: eksutils-admin
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-for-fluent-bit
+  namespace: kube-system
+  labels:
+    k8s-app: fluent-bit
+data:
+  # Configuration files: server, input, filters and output
+  # ======================================================
+  fluent-bit.conf: |
+    [SERVICE]
+        Parsers_File /fluent-bit/parsers/parsers.conf
+
+    [INPUT]
+        Name              tail
+        Tag               *.logs
+        Path              /var/log/*.log
+        DB                /var/log/logs.db
+        Mem_Buf_Limit     5MB
+        Skip_Long_Lines   On
+        Refresh_Interval  10
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Kube_URL            https://kubernetes.default.svc.cluster.local:443
+        Merge_Log           On
+        Merge_Log_Key       data
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude On
+    [OUTPUT]
+        Name                  cloudwatch
+        Match                 *
+        region                eu-west-1
+        log_group_name        /aws/eks/CassKop/logs
+        log_stream_name       CassKop
+        log_stream_prefix      fargate-
+        auto_create_group     true
+    [OUTPUT]
+        Name            es
+        Match           *
+        AWS_Region      eu-west-1
+        AWS_Auth        On
+        Host            {{elasticsearch_host}}
+        Port            443
+        TLS             On
+        Retry_Limit     6
+
+

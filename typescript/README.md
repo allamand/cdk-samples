@@ -33,12 +33,14 @@ cdk deploy EksStack -c enable_stack=EksStack
 cdk diff 'Eks*' -c enable_stack=EksStack,EksFargate
 ```
 
-Some Stacks are also using an environnement configuration file, you can copy the sample `cp .env.template .env`and edit the values.
+Some Stacks are also using an environnement configuration file, you can copy the sample `cp .env.template .env` and edit the values.
 
 There is a Makefile that can help launching cdk using the values from the `.env` file:
 
 ```
  make deploy STACK=EksStack  
+ #or
+ make diff STACK=StatefulCluster
 ```
 
 # Deploy in the default VPC or any existing VPC
@@ -52,6 +54,8 @@ cdk deploy EksStack -c enable_stack=EksStack -c use_default_vpc=1
 cdk deploy EksStack -c enable_stack=EksStack -c use_vpc_id=vpc-123456
 ```
 
+> or just put the use_vps_id in the .env file
+
 # Deploy with different AWS_PROFILE
 
 ```bash
@@ -64,6 +68,15 @@ cdk --profile another diff EksStack -c enable_stack=EksStack
 AWS_REGION=ap-northeast-1 cdk diff EksStack -c enable_stack=EksStack
 ```
  
+ # Testing
+
+ The stack had some unitary tests which are configured with the `.env.template` file.
+
+ you can execute them with 
+
+ ```bash
+ make test
+ ```
 
 
 # Available NPM Packages
