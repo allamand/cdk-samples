@@ -1,7 +1,7 @@
 import { Construct } from '@aws-cdk/core';
 import { Cluster, Nodegroup } from '@aws-cdk/aws-eks';
 
-import { K8sResourceIRSA } from './K8sResource';
+import { IrsaProps, K8sManifestIRSA } from './K8sResource';
 import { loadManifestYaml, loadManifestYamlAllWithoutServiceAcount, loadManifestYamlWithoutServiceAcount } from '../utils/manifest_reader';
 import { createPolicy, json2statements } from '../policies/PolicyUtils';
 import { PropagatedTagSource } from '@aws-cdk/aws-ecs';
@@ -12,11 +12,14 @@ import { PropagatedTagSource } from '@aws-cdk/aws-ecs';
 ** By default metrics will be stored in a log group name : 	/aws/containerinsights/<cluster_name>/performance
 **
 */
-export class CloudWatchAgent extends K8sResourceIRSA {
+export class CloudWatchAgent extends K8sManifestIRSA {
     constructor(scope: Construct, id: string, cluster: Cluster, props: { [key: string]: any }) {
-        props.name = 'cloudwatch-agent';
-        props.namespace = 'amazon-cloudwatch';
-        props.iamPolicyFile = 'cloudwatch-agent.json'
+        const irsa: IrsaProps = {
+            name: 'cloudwatch-agent',
+            iamPolicyFile: 'cloudwatch-agent.json',
+            namespace: 'amazon-cloudwatch'
+        }
+        props.irsa = irsa;
         super(scope, id, cluster, props);
     }
 

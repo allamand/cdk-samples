@@ -1,19 +1,20 @@
 import { Construct } from '@aws-cdk/core';
 import { Cluster, Nodegroup } from '@aws-cdk/aws-eks';
 
-import { IrsaProps, K8sManifest, K8sManifestIRSA } from './K8sResource';
+import { K8sManifest, K8sManifestIRSA } from './K8sResource';
 import { loadManifestYaml, loadManifestYamlWithoutServiceAcount } from '../utils/manifest_reader';
 import { createPolicy, json2statements } from '../policies/PolicyUtils';
 import * as YAML from "js-yaml";
 
-export class EksUtilsAdmin extends K8sManifestIRSA {
+export class CassandraNodetoolStatusCheck extends K8sManifestIRSA {
     constructor(scope: Construct, id: string, cluster: Cluster, props: { [key: string]: any }) {
-        const irsa: IrsaProps = {
-            name: 'eksutils-admin',
-            iamPolicyFile: 'eksutils-admin.json',
-            namespace: props.namespace
-        }
-        props.irsa = irsa;
+        props.name = 'eksutils-admin';
+        props.iamPolicyFile = 'eksutils-admin.json';
+        /*
+                if (props.schedulerName == "fargate") {
+                    props.iamPolicyFile = 'eksutils-admin-fargate.json';
+                }
+        */
         super(scope, id, cluster, props);
     }
 
@@ -39,14 +40,12 @@ export class EksUtilsAdmin extends K8sManifestIRSA {
 
         const dep = manifests.find((manifest) => manifest.kind == 'Deployment')
         dep.metadata.namespace = props!["namespace"];
-        if (props!.image){
-            dep.spec.template.spec.containers[0].image = props!.image;
-        }
+        dep.spec.template.spec.containers[0].image = "cassandra";
         if (props!.command) {
-            dep.spec.template.spec.containers[0].command = [props!.command];
+            dep.spec.template.spec.containers[0].command = [props!.command]
         }
         if (props!.args) {
-            dep.spec.template.spec.containers[0].args = props!.args;
+            dep.spec.template.spec.containers[0].args = [props!.args]
         }
 
 

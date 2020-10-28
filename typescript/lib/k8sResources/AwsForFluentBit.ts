@@ -5,7 +5,7 @@ import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 
-import { IrsaProps, K8sHelmChartIRSA, K8sResource } from './K8sResource';
+import { IrsaProps, K8sHelmChartIRSA, K8sManifest } from './K8sResource';
 import { createPolicy } from '../policies/PolicyUtils';
 import { loadManifestYaml } from '../utils/manifest_reader';
 
@@ -13,7 +13,9 @@ import { loadManifestYaml } from '../utils/manifest_reader';
 ** This Construct will create an AWS for FluentBit deployment as a daemonset in your EKS cluster, using IRSA.
 */
 //Policy source: https://github.com/aws-samples/amazon-ecs-fluent-bit-daemon-service/blob/master/eks/eks-fluent-bit-daemonset-policy.json
+//needs this to work properly : https://github.com/aws/eks-charts/pull/283
 export class AwsForFluentBit extends cdk.Stack {
+    public sa: eks.ServiceAccount;
     constructor(scope: Construct, id: string, cluster: Cluster, irsa: IrsaProps = {}) {
         super(scope, id, cluster);
 
@@ -53,8 +55,8 @@ export class AwsForFluentBit extends cdk.Stack {
         }
 
         //TODO: template the IAM roles with env var (equivalent of envsubst)
-        new K8sHelmChartIRSA(scope, id + 'HelmChartIRSA', cluster, irsa, props);
-
+        const irsaResource = new K8sHelmChartIRSA(scope, id + 'HelmChartIRSA', cluster, irsa, props);
+        this.sa = irsaResource.sa
     }
 
 

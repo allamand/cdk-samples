@@ -8,15 +8,18 @@ dependences:
 build: dependences
 	yarn build
 
+ENVFILE?=.env
+
 #For targets diff and deploy we launch .env file
-ifeq ($(filter $(firstword $(MAKECMDGOALS)),diff deploy),$(firstword $(MAKECMDGOALS)))
-include .env
-VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env )
+ifeq ($(filter $(firstword $(MAKECMDGOALS)),diff deploy env synth),$(firstword $(MAKECMDGOALS)))
+include $(ENVFILE)
+VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' $(ENVFILE) )
 $(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
 endif
 
-
-
+env:
+	echo $(ENVFILE)
+	echo $(cluster_name)
 
 deploy-vpc:
 	cdk deploy cdkVpc -c enable_stack=cdkVpc
@@ -24,12 +27,12 @@ deploy-vpc:
 diff: build
 	 cdk diff $(STACK) -c enable_stack=$(STACK)
 
-# make deploy STACK=AlbIngressControllerStack DOMAIN=my.domain.com VPC_ID=vpc-xxxxx
-# make deploy STACK=BastionHost VPC_ID=vpc-xxxxxxx HOME_IP=12.12.12.12
+synth: build
+	 time cdk synth $(STACK)  --require-approval=never -c enable_stack=$(STACK)
+
 deploy: build
 	 time cdk deploy $(STACK)  --require-approval=never -c enable_stack=$(STACK)
 
-# make destroy DOMAIN=my.domain.com STACK=AlbIngressControllerStack VPC_ID=vpc-xxxxxx
 destroy:
 	 time cdk destroy $(STACK) -c enable_stack=$(STACK) 
 
@@ -69,5 +72,17 @@ test-update: build
 
 
 
+#---
 
+
+ifeq ($(filter $(firstword $(MAKECMDGOALS)),diff2 deploy2),$(firstword $(MAKECMDGOALS)))
+include .env.2
+VARS:=$(shell sed -ne 's/ *\#.*$$//; /./ s/=.*$$// p' .env.2 )
+$(foreach v,$(VARS),$(eval $(shell echo export $(v)="$($(v))")))
+endif
+diff2: build
+	 cdk diff $(STACK) -c enable_stack=$(STACK)
+
+deploy2: build
+	 time cdk deploy $(STACK)  --require-approval=never -c enable_stack=$(STACK)
 

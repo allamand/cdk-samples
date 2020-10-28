@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import cdk = require('@aws-cdk/core');
 import {
     ApiGatewayCustomDomainStack, ApiSixStack, AutoscalingGroupStack, BastionHost, EcsEc2Stack,
-    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, VpcStack, StatefulCluster
+    VpcProvider, ClientVpn, SARStack, ServerlessRestApiStack, TranscribeStack, VpcStack, StatefulCluster, StatefulSpotCluster
 } from '../lib';
 // Amaozn EKS
 import { AlbIngressControllerStack, EksStack, EksFargate, Bottlerocket, EksIrsa, EksNginxStack, EksMini, EksSpot } from '../lib';
@@ -45,6 +45,8 @@ var factory = {
     //'LambdaEfsStack': LambdaEfsStack,
     'cdkVpc': VpcStack,
     'StatefulCluster': StatefulCluster,
+    'StatefulCluster2': StatefulCluster,
+    'StatefulSpotCluster': StatefulSpotCluster,
 }
 
 function activateIfEnabled(stackName: string) {

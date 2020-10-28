@@ -1,16 +1,18 @@
-import {Aspects, Construct, Tag} from '@aws-cdk/core';
-import { Cluster } from '@aws-cdk/aws-eks';
+import { Aspects, Construct, Tag } from '@aws-cdk/core';
+import { Cluster, ServiceAccount } from '@aws-cdk/aws-eks';
 import cdk = require('@aws-cdk/core');
 import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 
-import { K8sResource } from './K8sResource';
+import { IrsaProps, K8sManifest, ServiceAccountIRSA } from './K8sResource';
 import { createPolicy } from '../policies/PolicyUtils';
 import { loadManifestYaml } from '../utils/manifest_reader';
 
-export class AlbIngressController extends K8sResource {
+export class AlbIngressController extends K8sManifest {
+    public sa: ServiceAccount;
     constructor(scope: Construct, id: string, cluster: Cluster) {
+       
         super(scope, id, cluster);
 
         this.cluster.vpc.publicSubnets.forEach((subnet) => {
@@ -22,11 +24,6 @@ export class AlbIngressController extends K8sResource {
             Aspects.of(subnet).add(new Tag('kubernetes.io/role/internal-elb', '1', { includeResourceTypes: ['AWS::EC2::Subnet'] }))
         });
 
-        /*
-        const policy = createPolicy(this, 'ALBIngressControllerIAM', 'alb-ingress-controller.json');
-        this.cluster.role.attachInlinePolicy(policy);
-
-         */
     }
 
     protected manifests(): any[] { // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -42,16 +39,16 @@ export class AlbIngressController extends K8sResource {
         const albBaseResourceBaseUrl = `https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/${albIngressControllerVersion}/docs/examples/`;
         const albIngressControllerPolicyUrl = `${albBaseResourceBaseUrl}iam-policy.json`;
 
-        const sa = this.cluster.addServiceAccount('sa-alb-ingress', {
+
+
+        const irsa: IrsaProps = {
             name: 'alb-ingress-controller',
             namespace: albNamespace,
-        })
+            iamPolicyUrl: albIngressControllerPolicyUrl
+        }
+        this.sa = (new ServiceAccountIRSA(this, 'alb-sa', this.cluster, irsa)).sa;
 
         const request = require('sync-request');
-        const policyJson = request('GET', albIngressControllerPolicyUrl).getBody();
-        ((JSON.parse(policyJson))['Statement'] as []).forEach((statement, idx, array) => {
-            sa.addToPolicy(iam.PolicyStatement.fromJson(statement));
-        });
 
         const yaml = require('js-yaml');
         const rbacRoles = yaml.safeLoadAll(request('GET', `${albBaseResourceBaseUrl}rbac-role.yaml`).getBody())

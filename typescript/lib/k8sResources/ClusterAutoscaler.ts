@@ -1,15 +1,18 @@
 import { Construct } from '@aws-cdk/core';
 import { Cluster, Nodegroup } from '@aws-cdk/aws-eks';
 
-import {K8sResourceIRSA} from './K8sResource';
+import {IrsaProps, K8sManifestIRSA} from './K8sResource';
 import {loadManifestYaml, loadManifestYamlWithoutServiceAcount} from '../utils/manifest_reader';
 import {createPolicy, json2statements} from '../policies/PolicyUtils';
 
-export class ClusterAutoscaler extends K8sResourceIRSA {
+export class ClusterAutoscaler extends K8sManifestIRSA {
   constructor(scope: Construct, id: string, cluster: Cluster, props: {[key: string]: any}) {
-    props.iamPolicyFile = 'cluster-autoscaler.json';
-    props.name = 'cluster-autoscaler';
-    props.namespace = 'kube-system';
+    const irsa: IrsaProps = {
+      name: 'cluster-autoscaler',
+      iamPolicyFile: 'cluster-autoscaler.json',
+      namespace: 'kube-system'
+    }
+    props.irsa = irsa;
     super(scope, id, cluster, props);
   }
 

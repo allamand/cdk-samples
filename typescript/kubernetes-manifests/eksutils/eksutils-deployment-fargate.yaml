@@ -21,6 +21,7 @@ spec:
     metadata:
       labels:
         app: eksutils
+        type: fargate
     spec:
       containers:
         - name: eksutils
@@ -39,41 +40,48 @@ spec:
               cpu: 300m
               memory: 512Mi
           volumeMounts:
-            - name: varlog
-              mountPath: /var/log
-        - name: aws-for-fluentbit
+            - name: app-logs
+              mountPath: /var/log/containers
+        - name: logrotate
+          image: realz/logrotate
+          volumeMounts:
+            - mountPath: /var/log/containers
+              name: app-logs
+          env:
+            - name: CRON_EXPR
+              value: "*/15 * * * *"
+            - name: LOGROTATE_LOGFILES
+              value: "/var/log/containers/*.log"
+            - name: LOGROTATE_FILESIZE
+              value: "50M"
+            - name: LOGROTATE_FILENUM
+              value: "5"
+        - name: aws-for-fluent-bit
           image: amazon/aws-for-fluent-bit:latest
           imagePullPolicy: Always
-          #    ports:
-          #      - containerPort: 2020
-          #    env:
-          #    - name: FLUENTD_HOST
-          #      value: "fluentd"
-          #    - name: FLUENTD_PORT
-          #      value: "24224"
           volumeMounts:
-            - name: varlog
-              mountPath: /var/log
-            - name: aws-for-fluentbit
+            - name: app-logs
+              mountPath: /var/log/containers
+            - name: aws-for-fluent-bit
               mountPath: /fluent-bit/etc/
       enableServiceLinks: true
       restartPolicy: Always
-      schedulerName: default-scheduler
+      #Force Fargate scheduler
+      schedulerName: fargate-scheduler
       serviceAccountName: eksutils-admin
       terminationGracePeriodSeconds: 0
       securityContext:
         # IRSA projected secret need root ???
         #fsGroup: 1000
         #runAsUser: 1000
-        fsGroup: 0
-        runAsUser: 0
-  terminationGracePeriodSeconds: 10
-  volumes:
-    - name: varlog
-      emptyDir: {}
-    - name: aws-for-fluentbit
-      configMap:
-        name: aws-for-fluentbit
+        fsGroup: 65534
+        #runAsUser: 0
+      volumes:
+        - name: app-logs
+          emptyDir: {}
+        - name: aws-for-fluent-bit
+          configMap:
+            name: aws-for-fluent-bit
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -86,12 +94,12 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: eksutils-admin
+    namespace: tmp
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: aws-for-fluent-bit
-  namespace: kube-system
   labels:
     k8s-app: fluent-bit
 data:
@@ -104,8 +112,8 @@ data:
     [INPUT]
         Name              tail
         Tag               *.logs
-        Path              /var/log/*.log
-        DB                /var/log/logs.db
+        Path              /var/log/containers/*.log
+        DB                /var/log/containers/logs.db
         Mem_Buf_Limit     5MB
         Skip_Long_Lines   On
         Refresh_Interval  10
@@ -124,7 +132,7 @@ data:
         log_group_name        /aws/eks/CassKop/logs
         log_stream_name       CassKop
         log_stream_prefix      fargate-
-        auto_create_group     true
+        auto_create_group     True
     [OUTPUT]
         Name            es
         Match           *
@@ -134,5 +142,5 @@ data:
         Port            443
         TLS             On
         Retry_Limit     6
-
-
+        Replace_Dots    On
+        Trace_Output    On

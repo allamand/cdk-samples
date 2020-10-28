@@ -1,0 +1,66 @@
+apiVersion: "db.orange.com/v1alpha1"
+kind: "CassandraCluster"
+metadata:
+  name: cassandra-demo
+  namespace: cassandra
+  labels:
+    cluster: cassandra
+spec:
+  cassandraImage: cassandra:3.11
+  bootstrapImage: orangeopensource/cassandra-bootstrap:0.1.4
+  configMapName: cassandra-configmap-v1
+  dataCapacity: "200Gi"
+  #dataStorageClass: "gp2"
+  imagepullpolicy: IfNotPresent
+  imageJolokiaSecret:
+    name: jolokia-auth
+  hardAntiAffinity: true # Do we ensure only 1 cassandra on each node ?
+  deletePVC: true
+  autoPilot: false
+  gcStdout: false
+  autoUpdateSeedList: false
+  maxPodUnavailable: 1
+  runAsUser: 999
+  resources:
+    requests:
+      cpu: "1"
+      memory: 2Gi
+    limits:
+      cpu: "4"
+      memory: 8Gi
+  topology:
+    dc:
+      - name: dc1
+        nodesPerRacks: 4
+        numTokens: 256
+        labels:
+          topology.kubernetes.io/region: eu-west-1
+        rack:
+          - name: rack1
+            labels:
+              #or we could use our custom name
+              #eks.amazonaws.com/nodegroup=CassKop-AZa
+              topology.kubernetes.io/zone: eu-west-1a
+          - name: rack2
+            labels:
+              topology.kubernetes.io/zone: eu-west-1b
+          - name: rack3
+            labels:
+              topology.kubernetes.io/zone: eu-west-1c
+#UNCOMMENT FOR DEMO
+#      - name: dc2
+#        nodesPerRacks: 1
+#        numTokens: 256
+#        labels:
+#          failure-domain.beta.kubernetes.io/region: europe-west1
+#        rack:
+#          - name: rack1
+#            labels:
+#              failure-domain.beta.kubernetes.io/zone: europe-west1-b
+#          - name: rack2
+#            labels:
+#              failure-domain.beta.kubernetes.io/zone: europe-west1-c
+#          - name: rack3
+#            labels:
+#              failure-domain.beta.kubernetes.io/zone: europe-west1-d
+#

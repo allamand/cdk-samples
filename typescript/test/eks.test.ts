@@ -51,6 +51,8 @@ test('Test Multi-AZ Stateful', () => {
 
     // THEN
 
+    //expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+
     expect(stack).toHaveResource('AWS::EC2::VPC', {
         EnableDnsSupport: true,
         CidrBlock: "10.0.0.0/16",
@@ -143,7 +145,7 @@ test('Test Multi-AZ Stateful', () => {
                 [
                     "{\"serviceAccount\":{\"create\":false,\"name\":\"aws-for-fluent-bit\"},\"cloudWatch\":{\"enabled\":true,\"region\":\"eu-west-1\",\"logStreamName\":\"CassKop\",\"logGroupName\":\"/aws/eks/",
                     {
-                        "Ref": "CassKopCluster5683FE9F"
+                        "Ref": "StatefulClusterF2661197"
                     },
                     "/logs\"},\"elasticsearch\":{\"enabled\":true,\"awsRegion\":\"eu-west-1\"},\"firehose\":{\"enabled\":false},\"kinesis\":{\"enabled\":false}}"
                 ]
@@ -171,12 +173,28 @@ test('Test Multi-AZ Stateful', () => {
         "Wait": true,
     });
 
+    /*
+        expect(stack).toHaveResource('Custom::AWSCDK-EKS-KubernetesResource', {
+            "ClusterName": {
+                "Ref": "StatefulClusterF2661197",
+            },
+            "Manifest": "[{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"deployment.kubernetes.io/revision\":\"1\"},\"name\":\"eksutils-deployment\",\"labels\":{\"app\":\"eksutils\"},\"namespace\":\"cassandra\"},\"spec\":{\"replicas\":1,\"revisionHistoryLimit\":10,\"selector\":{\"matchLabels\":{\"app\":\"eksutils\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":\"25%\",\"maxUnavailable\":\"25%\"},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"labels\":{\"app\":\"eksutils\"}},\"spec\":{\"containers\":[{\"name\":\"eksutils\",\"image\":\"allamand/eksutils:latest\",\"imagePullPolicy\":\"Always\",\"command\":[\"tail\",\"-f\",\"/dev/null\"],\"ports\":[{\"containerPort\":8080,\"name\":\"http\",\"protocol\":\"TCP\"}],\"resources\":{\"requests\":{\"cpu\":\"300m\",\"memory\":\"512Mi\"}},\"volumeMounts\":[{\"name\":\"varlog\",\"mountPath\":\"/var/log\"}]},{\"name\":\"aws-for-fluentbit\",\"image\":\"amazon/aws-for-fluent-bit:latest\",\"imagePullPolicy\":\"Always\",\"volumeMounts\":[{\"name\":\"varlog\",\"mountPath\":\"/var/log\"},{\"name\":\"aws-for-fluentbit\",\"mountPath\":\"/fluent-bit/etc/\"}]}],\"enableServiceLinks\":true,\"restartPolicy\":\"Always\",\"schedulerName\":\"default-scheduler\",\"serviceAccountName\":\"eksutils-admin\",\"terminationGracePeriodSeconds\":0,\"securityContext\":{\"fsGroup\":0,\"runAsUser\":0}}},\"terminationGracePeriodSeconds\":10,\"volumes\":[{\"name\":\"varlog\",\"emptyDir\":{}},{\"name\":\"aws-for-fluentbit\",\"configMap\":{\"name\":\"aws-for-fluentbit\"}}]}},{\"apiVersion\":\"rbac.authorization.k8s.io/v1beta1\",\"kind\":\"ClusterRoleBinding\",\"metadata\":{\"name\":\"eksutils-admin-cassandra\"},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"ClusterRole\",\"name\":\"cluster-admin\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"eksutils-admin\",\"namespace\":\"cassandra\"}]},{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-for-fluent-bit\",\"namespace\":\"kube-system\",\"labels\":{\"k8s-app\":\"fluent-bit\"}},\"data\":{\"fluent-bit.conf\":\"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/*.log\\n    DB                /var/log/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     true\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n\"}}]",
+        });
+        
+        */
+        expect(stack).toHaveResource('Custom::AWSCDK-EKS-KubernetesResource', {
+             "Manifest": "[{\"kind\":\"ClusterRoleBinding\",\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"metadata\":{\"name\":\"cloudwatch-agent-role-binding\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"cloudwatch-agent\",\"namespace\":\"amazon-cloudwatch\"}],\"roleRef\":{\"kind\":\"ClusterRole\",\"name\":\"cloudwatch-agent-role\",\"apiGroup\":\"rbac.authorization.k8s.io\"}}]",
+            "ClusterName": {
+              "Ref": "StatefulClusterF2661197"
+            },
+            "RoleArn": {
+              "Fn::GetAtt": [
+                "StatefulClusterCreationRoleDDC50F64",
+                "Arn"
+              ]
+            },
+        });
 
-    expect(stack).toHaveResource('Custom::AWSCDK-EKS-KubernetesResource', {
-        "ClusterName": {
-            "Ref": "CassKopCluster5683FE9F",
-        },
-        "Manifest": "[{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"deployment.kubernetes.io/revision\":\"1\"},\"name\":\"eksutils-deployment\",\"labels\":{\"app\":\"eksutils\"},\"namespace\":\"cassandra\"},\"spec\":{\"replicas\":1,\"revisionHistoryLimit\":10,\"selector\":{\"matchLabels\":{\"app\":\"eksutils\"}},\"strategy\":{\"rollingUpdate\":{\"maxSurge\":\"25%\",\"maxUnavailable\":\"25%\"},\"type\":\"RollingUpdate\"},\"template\":{\"metadata\":{\"labels\":{\"app\":\"eksutils\"}},\"spec\":{\"containers\":[{\"name\":\"eksutils\",\"image\":\"allamand/eksutils:latest\",\"imagePullPolicy\":\"Always\",\"command\":[\"tail\",\"-f\",\"/dev/null\"],\"ports\":[{\"containerPort\":8080,\"name\":\"http\",\"protocol\":\"TCP\"}],\"resources\":{\"requests\":{\"cpu\":\"300m\",\"memory\":\"512Mi\"}},\"volumeMounts\":[{\"name\":\"varlog\",\"mountPath\":\"/var/log\"}]},{\"name\":\"aws-for-fluentbit\",\"image\":\"amazon/aws-for-fluent-bit:latest\",\"imagePullPolicy\":\"Always\",\"volumeMounts\":[{\"name\":\"varlog\",\"mountPath\":\"/var/log\"},{\"name\":\"aws-for-fluentbit\",\"mountPath\":\"/fluent-bit/etc/\"}]}],\"enableServiceLinks\":true,\"restartPolicy\":\"Always\",\"schedulerName\":\"default-scheduler\",\"serviceAccountName\":\"eksutils-admin\",\"terminationGracePeriodSeconds\":0,\"securityContext\":{\"fsGroup\":0,\"runAsUser\":0}}},\"terminationGracePeriodSeconds\":10,\"volumes\":[{\"name\":\"varlog\",\"emptyDir\":{}},{\"name\":\"aws-for-fluentbit\",\"configMap\":{\"name\":\"aws-for-fluentbit\"}}]}},{\"apiVersion\":\"rbac.authorization.k8s.io/v1beta1\",\"kind\":\"ClusterRoleBinding\",\"metadata\":{\"name\":\"eksutils-admin-cassandra\"},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"ClusterRole\",\"name\":\"cluster-admin\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"eksutils-admin\",\"namespace\":\"cassandra\"}]},{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-for-fluent-bit\",\"namespace\":\"kube-system\",\"labels\":{\"k8s-app\":\"fluent-bit\"}},\"data\":{\"fluent-bit.conf\":\"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/*.log\\n    DB                /var/log/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     true\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n\"}}]",
-    });
+    //Finally Check Snapshot
     expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 });
