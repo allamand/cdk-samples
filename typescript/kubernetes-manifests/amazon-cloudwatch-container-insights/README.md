@@ -1,6 +1,6 @@
 # Amazon CloudWatch Container Insights
 
-The files of this directory was downloaded from the following repository:
+The files of this directory was downloaded from the following repository:eks.
 
 https://github.com/aws-samples/amazon-cloudwatch-container-insights/blob/master/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/
 

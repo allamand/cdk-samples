@@ -6,7 +6,7 @@ import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 import * as YAML from 'js-yaml';
 
-import { DEFAULT_CLUSTER_VERSION, DEFAULT_DOMAIN_ZONE } from '../defaults';
+import { DEFAULT_CLUSTER_VERSION, DEFAULT_HOSTED_ZONE } from '../defaults';
 import { K8sHelmChartIRSA } from './K8sResource';
 import { loadManifestYaml, loadManifestYamlAll } from '../utils/manifest_reader';
 import { setTimeout } from 'timers';

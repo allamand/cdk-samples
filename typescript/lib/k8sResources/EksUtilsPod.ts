@@ -11,7 +11,8 @@ export class EksUtilsAdmin extends K8sManifestIRSA {
         const irsa: IrsaProps = {
             name: 'eksutils-admin',
             iamPolicyFile: 'eksutils-admin.json',
-            namespace: props.namespace
+            namespace: props.namespace,
+            createNamespace: props.createNamespace
         }
         props.irsa = irsa;
         super(scope, id, cluster, props);

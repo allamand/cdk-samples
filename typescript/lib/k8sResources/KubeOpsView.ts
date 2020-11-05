@@ -5,7 +5,7 @@ import eks = require('@aws-cdk/aws-eks');
 import ec2 = require('@aws-cdk/aws-ec2');
 import iam = require('@aws-cdk/aws-iam');
 
-import { DEFAULT_DOMAIN_ZONE } from '../defaults';
+import { DEFAULT_HOSTED_ZONE } from '../defaults';
 import { K8sHelmChartIRSA } from './K8sResource';
 
 /*
@@ -17,7 +17,7 @@ export class KubeOpsView extends Construct {
     constructor(scope: Construct, id: string, cluster: Cluster, props: { [key: string]: any }) {
         super(scope, id);
 
-        const appDomain = this.node.tryGetContext('app_domain') || process.env.app_domain || DEFAULT_DOMAIN_ZONE
+        const appDomain = this.node.tryGetContext('app_domain') || process.env.app_domain || DEFAULT_HOSTED_ZONE
         const certificateArn = this.node.tryGetContext('certificate_arn') || process.env.certificate_arn
 
         this.cluster = cluster;

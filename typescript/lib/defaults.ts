@@ -1,7 +1,7 @@
 export const DEFAULT_CLUSTER_VERSION = '1.17'
 export const DEFAULT_CLUSTER_NAME = 'CdkEksCluster'
 export const DEFAULT_EXTERNAL_DNS_POLICY = 'sync'
-export const DEFAULT_DOMAIN_ZONE = 'demo3.allamand.com'
+export const DEFAULT_HOSTED_ZONE = 'demo3.allamand.com'
 export const DEFAULT_KEY_NAME = 'sallaman'
 export const DEFAULT_SSH_SOURCE_IP_RANGE = '0.0.0.0/0'
 export const DEFAULT_VPC_IP_RANGE = '10.0.0.0/16'

@@ -2,6 +2,7 @@ import cdk = require("@aws-cdk/core");
 import eks = require("@aws-cdk/aws-eks");
 import ec2 = require("@aws-cdk/aws-ec2");
 import iam = require("@aws-cdk/aws-iam");
+import es = require("@aws-cdk/aws-elasticsearch");
 import { Stack } from "@aws-cdk/core";
 import { VpcProvider } from "./vpc";
 import { ExternalDns } from "./k8sResources/ExternalDns";
@@ -10,7 +11,7 @@ import { MetricsServer } from "./k8sResources/MetricsServer";
 import {
   DEFAULT_CLUSTER_NAME,
   DEFAULT_CLUSTER_VERSION,
-  DEFAULT_DOMAIN_ZONE,
+  DEFAULT_HOSTED_ZONE,
   DEFAULT_EXTERNAL_DNS_POLICY,
   DEFAULT_KEY_NAME,
   DEFAULT_SSH_SOURCE_IP_RANGE,
@@ -23,12 +24,13 @@ import { SubnetType } from "@aws-cdk/aws-ec2";
 import { K8sHelmChartIRSA, ServiceAccountIRSA } from "./k8sResources/K8sResource";
 import { AwsForFluentBit } from "./k8sResources/AwsForFluentBit";
 import { CloudWatchAgent } from "./k8sResources/CloudWatchAgent";
-import { Monitoring, UpdateType } from "@aws-cdk/aws-autoscaling";
+import { AutoScalingGroup, Monitoring, UpdateType } from "@aws-cdk/aws-autoscaling";
 import { KubeOpsView } from "./k8sResources/KubeOpsView";
 import { CassKop } from "./k8sResources/CassKop";
 import { CassKopCassandraCluster } from "./k8sResources/CassKopCassandraCluster";
 import { AwsLoadBalancerController } from "./k8sResources/AwsLoadBalancerController";
 import { K8sAddsOns } from "./k8sResources/K8sAddsOns";
+import { PolicyStatement } from "@aws-cdk/aws-iam";
 
 export class EksStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -320,9 +322,9 @@ export class AlbIngressControllerStack extends cdk.Stack {
     // Deploy External-DNS Controller
     const externalDNSPolicy =
       this.node.tryGetContext("EXTERNAL_DNS_POLICY") || process.env.external_dns_policy || DEFAULT_EXTERNAL_DNS_POLICY;
-    const appDomain = this.node.tryGetContext("app_domain") || process.env.app_domain || DEFAULT_DOMAIN_ZONE;
+    const hostedZone = this.node.tryGetContext("hosted_zone") || process.env.hosted_zone || DEFAULT_HOSTED_ZONE;
     new ExternalDns(this, "extrernal-dns", cluster, {
-      domain: appDomain,
+      domain: hostedZone,
       policy: externalDNSPolicy,
       owner: clusterName,
     });
@@ -487,6 +489,54 @@ export class StatefulCluster extends cdk.Stack {
       "allow all traffic to the cluster Security group"
     );
 
+    //Create ElasticSearch
+    const elasticsearchDomain = this.node.tryGetContext("elasticsearch_domain") || process.env.elasticsearch_domain;
+    const policy = new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      //resources: ["*"],
+      actions: ["es:*"],
+      resources: ["arn:aws:es:eu-west-1:" + this.account + ":domain/" + elasticsearchDomain + "/*"],
+      //principals: [new iam.AccountRootPrincipal()],
+      principals: [new iam.AnyPrincipal()],
+    });
+    const esDomain = new es.Domain(this, "Domain", {
+      version: es.ElasticsearchVersion.V7_7,
+      domainName: elasticsearchDomain,
+      accessPolicies: [policy],
+      capacity: {
+        masterNodes: 5,
+        dataNodes: 20,
+      },
+      ebs: {
+        volumeSize: 20,
+      },
+      zoneAwareness: {
+        availabilityZoneCount: 3,
+      },
+      logging: {
+        slowSearchLogEnabled: true,
+        appLogEnabled: true,
+        slowIndexLogEnabled: true,
+      },
+      //encryption
+      enforceHttps: true,
+      nodeToNodeEncryption: true,
+      encryptionAtRest: {
+        enabled: true,
+      },
+      fineGrainedAccessControl: {
+        masterUserName: "casskop",
+      },
+    });
+    const masterUserPassword = esDomain.masterUserPassword;
+    new cdk.CfnOutput(this, "EsDomainEndpoint", { value: esDomain.domainEndpoint });
+    new cdk.CfnOutput(this, "EsDomainName", { value: esDomain.domainName });
+    new cdk.CfnOutput(this, "EsMasterUserPassword", { value: masterUserPassword!.toString() });
+    process.env["elasticsearch_host"] = esDomain.domainEndpoint;
+
+    // Grant write access to the app-search index
+    //domain.grantIndexWrite("app-search", lambda);
+
     // ADD Ads-Ons
 
     new K8sAddsOns(this, "k8sAddOns", cluster, props);
@@ -548,9 +598,15 @@ export class StatefulSpotCluster extends cdk.Stack {
 
     let AZs = ["AZa", "AZb", "AZc"];
 
+    //github.com/aws-samples/amazon-k8s-node-drainer
+
     //az will have value 0, 1, 2
+    let asgAZs: AutoScalingGroup[] = [];
     for (let az in AZs) {
+      //docs.aws.amazon.com/cdk/api/latest/docs/aws-eks-readme.html#self-managed-nodes
+
       //Add SPot nodegroup with big instances to launch or cassandra stress tool
+      //https://ec2spotworkshops.com/using_ec2_spot_instances_with_eks/spotworkers/workers_eksctl.html
       const spotAsg = cluster.addAutoScalingGroupCapacity("Spot-" + AZs[az], {
         instanceType: new ec2.InstanceType(instanceType),
         //maxInstanceLifetime: cdk.Duration.days(7),
@@ -570,49 +626,45 @@ export class StatefulSpotCluster extends cdk.Stack {
         keyName: keyName,
         instanceMonitoring: Monitoring.DETAILED,
 
+        allowAllOutbound: true,
+
+        autoScalingGroupName : cluster.clusterName + "-AZ-" + AZs[az],
+
+        //TODO add tags to allow scaling to and from 0
+        //https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-scale-a-node-group-to-0
+        //https://ec2spotworkshops.com/using_ec2_spot_instances_with_eks/spotworkers/workers_eksctl.html
         //  autoScalingGroupName
       });
-      //allow the Spot Nodegroup to send and receive traffic from our EKS cluster
-      spotAsg.connections.allowFrom(
-        ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgIngress" + AZs[az], cluster.clusterSecurityGroupId),
-        ec2.Port.allTraffic(),
-        "allow all traffic from cluster security group"
-      );
-      spotAsg.connections.allowTo(
-        ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgEgress" + AZs[az], cluster.clusterSecurityGroupId),
-        ec2.Port.allTraffic(),
-        "allow all traffic to the cluster Security group"
-      );
+      //Add Cluster Security Group to the Spot ASG
+      //https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1594
+      //  spotAsg.addSecurityGroup(
+      //    ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG" + AZs[az], cluster.clusterSecurityGroupId)
+      //  );
 
-      /*
-            cluster.addNodegroupCapacity('nodegroup-' + AZs[az], {
-              instanceType: new ec2.InstanceType(instanceType),
-              minSize: 1,
-              desiredSize: desiredSize,
-              maxSize: 10,
-              forceUpdate: false,
-              //releaseVersion: "1.16-202007101208",
-              //nodegroupName: clusterName+nid+uid+"-AZa",
-              subnets: vpc.selectSubnets({
-                subnetType: SubnetType.PRIVATE,
-                availabilityZones: [
-                  vpc.availabilityZones[az],
-                ],
-              }),
-              labels: {
-                "cdk-nodegroup": AZs[az],
-              },
-              tags: {
-                "cdk-nodegroup": AZs[az],
-              },
-              remoteAccess: {
-                sshKeyName: keyName,
-              },
-              //specify Launch template
-        
-            });
-            */
+      //allow the Spot Nodegroup to send and receive traffic from our EKS cluster
+      // Workaddound to the fact I can't assign directly the cluster security group to the spot ASG
+      //spotAsg.connections.allowFromAnyIpv4(ec2.Port.allTraffic(), "Allow ALL");
+      // spotAsg.connections.allowFrom(
+      //   ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgIngress" + AZs[az], cluster.clusterSecurityGroupId),
+      //   ec2.Port.allTraffic(),
+      //   "allow all traffic from cluster security group"
+      // );
+      //spotAsg.connections.allowToAnyIpv4(ec2.Port.allTraffic(), "Allow ALL");
+      // spotAsg.connections.allowTo(
+      //   ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgEgress" + AZs[az], cluster.clusterSecurityGroupId),
+      //   ec2.Port.allTraffic(),
+      //   "allow all traffic to the cluster Security group"
+      // );
+      asgAZs![az] = spotAsg;
     }
+
+    // for (let az in AZs) {
+    //   asgAZs![az].connections.allowFrom(
+    //     ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgIngress" + AZs[az] + "-from-0", asgAZs![az].securityGroup),
+    //     ec2.Port.allTraffic(),
+    //     "allow all traffic from cluster security group"
+    //   );
+    // }
 
     //Add Fargate profile
     // For pod to monitor the rolling upgrad of the nodegroup pods
@@ -627,6 +679,54 @@ export class StatefulSpotCluster extends cdk.Stack {
         },
       ],
     });
+
+    //Create ElasticSearch
+    const elasticsearchDomain = this.node.tryGetContext("elasticsearch_domain") || process.env.elasticsearch_domain;
+    const policy = new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      //resources: ["*"],
+      actions: ["es:*"],
+      resources: ["arn:aws:es:eu-west-1:" + this.account + ":domain/" + elasticsearchDomain + "/*"],
+      //principals: [new iam.AccountRootPrincipal()],
+      principals: [new iam.AnyPrincipal()],
+    });
+    const esDomain = new es.Domain(this, "Domain", {
+      version: es.ElasticsearchVersion.V7_7,
+      domainName: elasticsearchDomain,
+      accessPolicies: [policy],
+      capacity: {
+        masterNodes: 5,
+        dataNodes: 20,
+      },
+      ebs: {
+        volumeSize: 20,
+      },
+      zoneAwareness: {
+        availabilityZoneCount: 3,
+      },
+      logging: {
+        slowSearchLogEnabled: true,
+        appLogEnabled: true,
+        slowIndexLogEnabled: true,
+      },
+      //encryption
+      enforceHttps: true,
+      nodeToNodeEncryption: true,
+      encryptionAtRest: {
+        enabled: true,
+      },
+      fineGrainedAccessControl: {
+        masterUserName: "master-user",
+      },
+    });
+    const masterUserPassword = esDomain.masterUserPassword;
+    new cdk.CfnOutput(this, "EsDomainEndpoint", { value: esDomain.domainEndpoint });
+    new cdk.CfnOutput(this, "EsDomainName", { value: esDomain.domainName });
+    new cdk.CfnOutput(this, "EsMasterUserPassword", { value: masterUserPassword!.toString() });
+    process.env["elasticsearch_host"] = esDomain.domainEndpoint;
+
+    // Grant write access to the app-search index
+    //domain.grantIndexWrite("app-search", lambda);
 
     // ADD Ads-Ons
     new K8sAddsOns(this, "k8sAddOns", cluster, props);

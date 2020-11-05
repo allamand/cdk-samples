@@ -4,6 +4,7 @@ import { ServiceAccount } from "@aws-cdk/aws-eks/lib/service-account";
 import { json2statements } from "../policies/PolicyUtils";
 import { PolicyStatement } from "@aws-cdk/aws-iam";
 import { exit } from "process";
+import { truncate } from "fs";
 
 export interface IrsaProps {
   /**
@@ -18,6 +19,12 @@ export interface IrsaProps {
    * @experimental
    */
   readonly namespace?: string;
+  /**
+   * (experimental) Do we need to create the Namespace ?
+   *
+   * @experimental
+   */
+  createNamespace?: boolean;
   /**
    * (experimental) Optional: name of the policy file in the lib/policies/statements directory
    *
@@ -49,20 +56,24 @@ export class ServiceAccountIRSA extends Construct {
     this.cluster = cluster;
 
     //Create namespace
-    this.ns = cluster.addManifest("namespace" + id, {
-      apiVersion: "v1",
-      kind: "Namespace",
-      metadata: {
-        name: props.namespace,
-      },
-    });
+    if (props.createNamespace) {
+      this.ns = cluster.addManifest("namespace" + id, {
+        apiVersion: "v1",
+        kind: "Namespace",
+        metadata: {
+          name: props.namespace,
+        },
+      });
+    }
     //Create ServiceAccount
     this.sa = cluster.addServiceAccount("sa" + id, {
       name: props.name,
       namespace: props.namespace,
     });
     const sa = this.sa;
-    this.sa.node.addDependency(this.ns);
+    if (props.createNamespace) {
+      this.sa.node.addDependency(this.ns);
+    }
 
     //Retrieve IAM Policy
     let policyStatements: PolicyStatement[] = [];
@@ -126,7 +137,9 @@ export abstract class K8sManifestIRSA extends Construct {
     if (!irsa.namespace) {
       console.error("no namespace in ressource " + id);
     }
-
+    if (!irsa.createNamespace) {
+      irsa["createNamespace"] = true;
+    }
     const irsaResource = new ServiceAccountIRSA(this, id + "-irsa", cluster, irsa);
     this.sa = irsaResource.sa;
 

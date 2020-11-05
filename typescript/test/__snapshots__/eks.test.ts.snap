@@ -1765,6 +1765,687 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
+    "StatefulClustermanifestcloudWatchagent0CAD82C5B": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespacecloudWatchagentirsa321A5544",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"v1\\",\\"data\\":{\\"cwagentconfig.json\\":\\"{\\\\n  \\\\\\"logs\\\\\\": {\\\\n    \\\\\\"metrics_collected\\\\\\": {\\\\n      \\\\\\"kubernetes\\\\\\": {\\\\n        \\\\\\"cluster_name\\\\\\": \\\\\\"",
+              Object {
+                "Ref": "StatefulClusterF2661197",
+              },
+              "\\\\\\",\\\\n        \\\\\\"metrics_collection_interval\\\\\\": 60\\\\n      }\\\\n    },\\\\n    \\\\\\"force_flush_interval\\\\\\": 5\\\\n  }\\\\n}\\\\n\\"},\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"cwagentconfig\\",\\"namespace\\":\\"amazon-cloudwatch\\"}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestcloudWatchagent1AF08034F": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespacecloudWatchagentirsa321A5544",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"cloudwatch-agent\\",\\"image\\":\\"amazon/cloudwatch-agent:1.247345.36b249270\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"},\\"requests\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"}},\\"env\\":[{\\"name\\":\\"HOST_IP\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"status.hostIP\\"}}},{\\"name\\":\\"HOST_NAME\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"spec.nodeName\\"}}},{\\"name\\":\\"K8S_NAMESPACE\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"metadata.namespace\\"}}},{\\"name\\":\\"CI_VERSION\\",\\"value\\":\\"k8s/1.2.2\\"}],\\"volumeMounts\\":[{\\"name\\":\\"cwagentconfig\\",\\"mountPath\\":\\"/etc/cwagentconfig\\"},{\\"name\\":\\"rootfs\\",\\"mountPath\\":\\"/rootfs\\",\\"readOnly\\":true},{\\"name\\":\\"dockersock\\",\\"mountPath\\":\\"/var/run/docker.sock\\",\\"readOnly\\":true},{\\"name\\":\\"varlibdocker\\",\\"mountPath\\":\\"/var/lib/docker\\",\\"readOnly\\":true},{\\"name\\":\\"sys\\",\\"mountPath\\":\\"/sys\\",\\"readOnly\\":true},{\\"name\\":\\"devdisk\\",\\"mountPath\\":\\"/dev/disk\\",\\"readOnly\\":true}]}],\\"volumes\\":[{\\"name\\":\\"cwagentconfig\\",\\"configMap\\":{\\"name\\":\\"cwagentconfig\\"}},{\\"name\\":\\"rootfs\\",\\"hostPath\\":{\\"path\\":\\"/\\"}},{\\"name\\":\\"dockersock\\",\\"hostPath\\":{\\"path\\":\\"/var/run/docker.sock\\"}},{\\"name\\":\\"varlibdocker\\",\\"hostPath\\":{\\"path\\":\\"/var/lib/docker\\"}},{\\"name\\":\\"sys\\",\\"hostPath\\":{\\"path\\":\\"/sys\\"}},{\\"name\\":\\"devdisk\\",\\"hostPath\\":{\\"path\\":\\"/dev/disk/\\"}}],\\"terminationGracePeriodSeconds\\":60,\\"serviceAccountName\\":\\"cloudwatch-agent\\"}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestcloudWatchagent2F35B8F5B": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespacecloudWatchagentirsa321A5544",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"kind\\":\\"ClusterRole\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"nodes\\",\\"endpoints\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"replicasets\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"batch\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/proxy\\"],\\"verbs\\":[\\"get\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/stats\\",\\"configmaps\\",\\"events\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cwagent-clusterleader\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestcloudWatchagent32FBE7748": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespacecloudWatchagentirsa321A5544",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"kind\\":\\"ClusterRoleBinding\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role-binding\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"}],\\"roleRef\\":{\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cloudwatch-agent-role\\",\\"apiGroup\\":\\"rbac.authorization.k8s.io\\"}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestclusterautoscaler0D91562EC": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\",\\"endpoints\\"],\\"verbs\\":[\\"create\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/eviction\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/status\\"],\\"verbs\\":[\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"endpoints\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"verbs\\":[\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"services\\",\\"replicationcontrollers\\",\\"persistentvolumeclaims\\",\\"persistentvolumes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"policy\\"],\\"resources\\":[\\"poddisruptionbudgets\\"],\\"verbs\\":[\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"statefulsets\\",\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\",\\"csinodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"batch\\",\\"extensions\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestclusterautoscaler1817F3D0B": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"Role\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"verbs\\":[\\"create\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cluster-autoscaler-status\\",\\"cluster-autoscaler-priority-expander\\"],\\"verbs\\":[\\"delete\\",\\"get\\",\\"update\\",\\"watch\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestclusterautoscaler2B2686AA0": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestclusterautoscaler3294C8AAA": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestclusterautoscaler4B5B1B6BD": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"cluster-autoscaler.kubernetes.io/safe-to-evict\\":\\"false\\"}},\\"spec\\":{\\"replicas\\":1,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"cluster-autoscaler\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"prometheus.io/scrape\\":\\"true\\",\\"prometheus.io/port\\":\\"8085\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"cluster-autoscaler\\",\\"containers\\":[{\\"image\\":\\"eu.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.18.2\\",\\"name\\":\\"cluster-autoscaler\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"},\\"requests\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"}},\\"command\\":[\\"./cluster-autoscaler\\",\\"--v=4\\",\\"--stderrthreshold=info\\",\\"--cloud-provider=aws\\",\\"--skip-nodes-with-local-storage=false\\",\\"--expander=least-waste\\",\\"--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/",
+              Object {
+                "Ref": "StatefulClusterF2661197",
+              },
+              "\\",\\"--balance-similar-node-groups\\",\\"--skip-nodes-with-system-pods=false\\"],\\"volumeMounts\\":[{\\"name\\":\\"ssl-certs\\",\\"mountPath\\":\\"/etc/ssl/certs/ca-certificates.crt\\",\\"readOnly\\":true}],\\"imagePullPolicy\\":\\"Always\\"}],\\"volumes\\":[{\\"name\\":\\"ssl-certs\\",\\"hostPath\\":{\\"path\\":\\"/etc/ssl/certs/ca-bundle.crt\\"}}]}}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver06080831C": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-attacher-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"csi.storage.k8s.io\\"],\\"resources\\":[\\"csinodeinfos\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"volumeattachments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver1966EA5C7": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-provisioner-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumeclaims\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\"],\\"verbs\\":[\\"list\\",\\"watch\\",\\"create\\",\\"update\\",\\"patch\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshots\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshotcontents\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"csinodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\",\\"delete\\",\\"update\\",\\"create\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver21C8BBE54": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-attacher-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-attacher-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver33E5E8FE2": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-provisioner-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-provisioner-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver449713699": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"replicas\\":2,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"containers\\":[{\\"args\\":[\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:///var/lib/csi/sockets/pluginproxy/csi.sock\\"},{\\"name\\":\\"AWS_ACCESS_KEY_ID\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"key_id\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}},{\\"name\\":\\"AWS_SECRET_ACCESS_KEY\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"access_key\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"imagePullPolicy\\":\\"IfNotPresent\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--feature-gates=Topology=true\\",\\"--enable-leader-election\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-provisioner:v1.3.0\\",\\"name\\":\\"csi-provisioner\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--leader-election=true\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-attacher:v1.2.0\\",\\"name\\":\\"csi-attacher\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"socket-dir\\"}]}],\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-cluster-critical\\",\\"serviceAccountName\\":\\"ebs-csi-controller-sa\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"emptyDir\\":{},\\"name\\":\\"socket-dir\\"}]}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver58FF536FA": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-node\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"affinity\\":{\\"nodeAffinity\\":{\\"requiredDuringSchedulingIgnoredDuringExecution\\":{\\"nodeSelectorTerms\\":[{\\"matchExpressions\\":[{\\"key\\":\\"eks.amazonaws.com/compute-type\\",\\"operator\\":\\"NotIn\\",\\"values\\":[\\"fargate\\"]}]}]}}},\\"containers\\":[{\\"args\\":[\\"node\\",\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:/csi/csi.sock\\"}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"securityContext\\":{\\"privileged\\":true},\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/kubelet\\",\\"mountPropagation\\":\\"Bidirectional\\",\\"name\\":\\"kubelet-dir\\"},{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/dev\\",\\"name\\":\\"device-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/csi/csi.sock\\"},{\\"name\\":\\"DRIVER_REG_SOCK_PATH\\",\\"value\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-node-driver-registrar:v1.1.0\\",\\"lifecycle\\":{\\"preStop\\":{\\"exec\\":{\\"command\\":[\\"/bin/sh\\",\\"-c\\",\\"rm -rf /registration/ebs.csi.aws.com-reg.sock /csi/csi.sock\\"]}}},\\"name\\":\\"node-driver-registrar\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/registration\\",\\"name\\":\\"registration-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"}]}],\\"hostNetwork\\":true,\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-node-critical\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"kubelet-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/\\",\\"type\\":\\"DirectoryOrCreate\\"},\\"name\\":\\"plugin-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins_registry/\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"registration-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/dev\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"device-dir\\"}]}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestebscsidriver6E5F0BB3A": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"storage.k8s.io/v1beta1\\",\\"kind\\":\\"CSIDriver\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs.csi.aws.com\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"attachRequired\\":true,\\"podInfoOnMount\\":false}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifesteksutilsadmin0C35CC4A0": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceeksutilsadminirsa6740DCFD",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"eksutils\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifesteksutilsadmin11C299F2C": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceeksutilsadminirsa6740DCFD",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-eksutils\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifesteksutilsadminfargate0EDC6B846": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceeksutilsadminfargateirsa8DAF3921",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"cassandra\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\",\\"type\\":\\"fargate\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"cassandra\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"/bin/sh\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}},\\"volumeMounts\\":[{\\"name\\":\\"app-logs\\",\\"mountPath\\":\\"/var/log/containers\\"}],\\"args\\":[\\"-c\\",\\"while true; do echo -n \\\\\\"[$(date)] Number of Cassandra Pods Down in the cluster (Allowed by PDB: 1): \\\\\\" | tee -a /var/log/containers/nodetool.log ; nodetool -h cassandra-demo.cassandra status | grep DN | wc -l | tee -a /var/log/containers/nodetool.log ; sleep 5 ; done\\"]},{\\"name\\":\\"logrotate\\",\\"image\\":\\"realz/logrotate\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/log/containers\\",\\"name\\":\\"app-logs\\"}],\\"env\\":[{\\"name\\":\\"CRON_EXPR\\",\\"value\\":\\"*/15 * * * *\\"},{\\"name\\":\\"LOGROTATE_LOGFILES\\",\\"value\\":\\"/var/log/containers/*.log\\"},{\\"name\\":\\"LOGROTATE_FILESIZE\\",\\"value\\":\\"50M\\"},{\\"name\\":\\"LOGROTATE_FILENUM\\",\\"value\\":\\"5\\"}]},{\\"name\\":\\"aws-for-fluent-bit\\",\\"image\\":\\"amazon/aws-for-fluent-bit:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"volumeMounts\\":[{\\"name\\":\\"app-logs\\",\\"mountPath\\":\\"/var/log/containers\\"},{\\"name\\":\\"aws-for-fluent-bit\\",\\"mountPath\\":\\"/fluent-bit/etc/\\"}]}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"fargate-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":65534},\\"volumes\\":[{\\"name\\":\\"app-logs\\",\\"emptyDir\\":{}},{\\"name\\":\\"aws-for-fluent-bit\\",\\"configMap\\":{\\"name\\":\\"aws-for-fluent-bit\\"}}]}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifesteksutilsadminfargate1BFF88121": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceeksutilsadminfargateirsa8DAF3921",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-cassandra\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"cassandra\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifesteksutilsadminfargate2B658324E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceeksutilsadminfargateirsa8DAF3921",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"aws-for-fluent-bit\\",\\"labels\\":{\\"k8s-app\\":\\"fluent-bit\\"},\\"namespace\\":\\"cassandra\\"},\\"data\\":{\\"fluent-bit.conf\\":\\"[SERVICE]\\\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\\\n\\\\n[INPUT]\\\\n    Name              tail\\\\n    Tag               *.logs\\\\n    Path              /var/log/containers/*.log\\\\n    DB                /var/log/containers/logs.db\\\\n    Mem_Buf_Limit     5MB\\\\n    Skip_Long_Lines   On\\\\n    Refresh_Interval  10\\\\n[FILTER]\\\\n    Name                kubernetes\\\\n    Match               kube.*\\\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\\\n    Merge_Log           On\\\\n    Merge_Log_Key       data\\\\n    K8S-Logging.Parser  On\\\\n    K8S-Logging.Exclude On\\\\n[OUTPUT]\\\\n    Name                  cloudwatch\\\\n    Match                 *\\\\n    region                eu-west-1\\\\n    log_group_name        /aws/eks/CassKop/logs\\\\n    log_stream_name       CassKop\\\\n    log_stream_prefix      fargate-\\\\n    auto_create_group     True\\\\n[OUTPUT]\\\\n    Name            es\\\\n    Match           *\\\\n    AWS_Region      eu-west-1\\\\n    AWS_Auth        On\\\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\\\n    Port            443\\\\n    TLS             On\\\\n    Retry_Limit     6\\\\n    Replace_Dots    On\\\\n    Trace_Output    On\\\\n\\"}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestextrernaldns044296168": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceextrernaldnsirsaA60276F6",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestextrernaldns1C6D003AA": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceextrernaldnsirsaA60276F6",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StatefulClustermanifestextrernaldns2CD681D8E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "StatefulClusterKubectlReadyBarrierADAD548F",
+        "StatefulClustermanifestnamespaceextrernaldnsirsaA60276F6",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "StatefulClusterF2661197",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=",
+              Object {
+                "Ref": "StatefulClusterF2661197",
+              },
+              "\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "StatefulClusterCreationRoleDDC50F64",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
     "StatefulClustermanifestnamespacealbsaAA3048E0": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -2239,8 +2920,9 @@ set -o xtrace
               },
               "Effect": "Allow",
               "Resource": Array [
-                "arn:aws:elasticloadbalancing:*:*:loadbalancer/*",
-                "arn:aws:elasticloadbalancing:*:*:targetgroup/*",
+                "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*",
+                "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+                "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*",
               ],
             },
             Object {
@@ -4526,10 +5208,6 @@ set -o xtrace
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaConditionJson9CA7643D",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsamanifestsaawsforfluentbitHelmChartIRSAirsaServiceAccountResourceCD7F106B",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaRoleDefaultPolicyF7D1202B",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaRole04D134D1",
       ],
       "Properties": Object {
         "Chart": "aws-for-fluent-bit",
@@ -4560,7 +5238,7 @@ set -o xtrace
               Object {
                 "Ref": "StatefulClusterF2661197",
               },
-              "/logs\\"},\\"elasticsearch\\":{\\"enabled\\":true,\\"awsRegion\\":\\"eu-west-1\\"},\\"firehose\\":{\\"enabled\\":false},\\"kinesis\\":{\\"enabled\\":false}}",
+              "/logs\\"},\\"elasticsearch\\":{\\"enabled\\":true,\\"awsRegion\\":\\"eu-west-1\\",\\"host\\":\\"search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\"},\\"firehose\\":{\\"enabled\\":false},\\"kinesis\\":{\\"enabled\\":false}}",
             ],
           ],
         },
@@ -4674,219 +5352,6 @@ set -o xtrace
       "Type": "Custom::AWSCDK-EKS-KubernetesResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "k8sAddOnscloudWatchagentK8sResourceIRSAEB3E0F4D": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersacloudWatchagentirsaConditionJson8DEA1AFB",
-        "StatefulClustersacloudWatchagentirsamanifestsacloudWatchagentirsaServiceAccountResource75862B2C",
-        "StatefulClustersacloudWatchagentirsaRoleDefaultPolicyDA982F63",
-        "StatefulClustersacloudWatchagentirsaRoleD850F7BC",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "[{\\"apiVersion\\":\\"v1\\",\\"data\\":{\\"cwagentconfig.json\\":\\"{\\\\n  \\\\\\"logs\\\\\\": {\\\\n    \\\\\\"metrics_collected\\\\\\": {\\\\n      \\\\\\"kubernetes\\\\\\": {\\\\n        \\\\\\"cluster_name\\\\\\": \\\\\\"",
-              Object {
-                "Ref": "StatefulClusterF2661197",
-              },
-              "\\\\\\",\\\\n        \\\\\\"metrics_collection_interval\\\\\\": 60\\\\n      }\\\\n    },\\\\n    \\\\\\"force_flush_interval\\\\\\": 5\\\\n  }\\\\n}\\\\n\\"},\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"cwagentconfig\\",\\"namespace\\":\\"amazon-cloudwatch\\"}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"name\\":\\"cloudwatch-agent\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"cloudwatch-agent\\",\\"image\\":\\"amazon/cloudwatch-agent:1.247345.36b249270\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"},\\"requests\\":{\\"cpu\\":\\"200m\\",\\"memory\\":\\"200Mi\\"}},\\"env\\":[{\\"name\\":\\"HOST_IP\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"status.hostIP\\"}}},{\\"name\\":\\"HOST_NAME\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"spec.nodeName\\"}}},{\\"name\\":\\"K8S_NAMESPACE\\",\\"valueFrom\\":{\\"fieldRef\\":{\\"fieldPath\\":\\"metadata.namespace\\"}}},{\\"name\\":\\"CI_VERSION\\",\\"value\\":\\"k8s/1.2.2\\"}],\\"volumeMounts\\":[{\\"name\\":\\"cwagentconfig\\",\\"mountPath\\":\\"/etc/cwagentconfig\\"},{\\"name\\":\\"rootfs\\",\\"mountPath\\":\\"/rootfs\\",\\"readOnly\\":true},{\\"name\\":\\"dockersock\\",\\"mountPath\\":\\"/var/run/docker.sock\\",\\"readOnly\\":true},{\\"name\\":\\"varlibdocker\\",\\"mountPath\\":\\"/var/lib/docker\\",\\"readOnly\\":true},{\\"name\\":\\"sys\\",\\"mountPath\\":\\"/sys\\",\\"readOnly\\":true},{\\"name\\":\\"devdisk\\",\\"mountPath\\":\\"/dev/disk\\",\\"readOnly\\":true}]}],\\"volumes\\":[{\\"name\\":\\"cwagentconfig\\",\\"configMap\\":{\\"name\\":\\"cwagentconfig\\"}},{\\"name\\":\\"rootfs\\",\\"hostPath\\":{\\"path\\":\\"/\\"}},{\\"name\\":\\"dockersock\\",\\"hostPath\\":{\\"path\\":\\"/var/run/docker.sock\\"}},{\\"name\\":\\"varlibdocker\\",\\"hostPath\\":{\\"path\\":\\"/var/lib/docker\\"}},{\\"name\\":\\"sys\\",\\"hostPath\\":{\\"path\\":\\"/sys\\"}},{\\"name\\":\\"devdisk\\",\\"hostPath\\":{\\"path\\":\\"/dev/disk/\\"}}],\\"terminationGracePeriodSeconds\\":60,\\"serviceAccountName\\":\\"cloudwatch-agent\\"}}}},{\\"kind\\":\\"ClusterRole\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"nodes\\",\\"endpoints\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"replicasets\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"batch\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/proxy\\"],\\"verbs\\":[\\"get\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes/stats\\",\\"configmaps\\",\\"events\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cwagent-clusterleader\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]},{\\"kind\\":\\"ClusterRoleBinding\\",\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"metadata\\":{\\"name\\":\\"cloudwatch-agent-role-binding\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cloudwatch-agent\\",\\"namespace\\":\\"amazon-cloudwatch\\"}],\\"roleRef\\":{\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cloudwatch-agent-role\\",\\"apiGroup\\":\\"rbac.authorization.k8s.io\\"}}]",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "k8sAddOnsclusterautoscalerK8sResourceIRSA786A4BCD": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaclusterautoscalerirsaConditionJson477F8B6E",
-        "StatefulClustersaclusterautoscalerirsamanifestsaclusterautoscalerirsaServiceAccountResource0A4CAAAD",
-        "StatefulClustersaclusterautoscalerirsaRoleDefaultPolicy804FC631",
-        "StatefulClustersaclusterautoscalerirsaRoleA3D4222D",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\",\\"endpoints\\"],\\"verbs\\":[\\"create\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/eviction\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/status\\"],\\"verbs\\":[\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"endpoints\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"verbs\\":[\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"services\\",\\"replicationcontrollers\\",\\"persistentvolumeclaims\\",\\"persistentvolumes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"policy\\"],\\"resources\\":[\\"poddisruptionbudgets\\"],\\"verbs\\":[\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"statefulsets\\",\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\",\\"csinodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"batch\\",\\"extensions\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"Role\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"verbs\\":[\\"create\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cluster-autoscaler-status\\",\\"cluster-autoscaler-priority-expander\\"],\\"verbs\\":[\\"delete\\",\\"get\\",\\"update\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"cluster-autoscaler.kubernetes.io/safe-to-evict\\":\\"false\\"}},\\"spec\\":{\\"replicas\\":1,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"cluster-autoscaler\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"prometheus.io/scrape\\":\\"true\\",\\"prometheus.io/port\\":\\"8085\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"cluster-autoscaler\\",\\"containers\\":[{\\"image\\":\\"eu.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.18.2\\",\\"name\\":\\"cluster-autoscaler\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"},\\"requests\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"}},\\"command\\":[\\"./cluster-autoscaler\\",\\"--v=4\\",\\"--stderrthreshold=info\\",\\"--cloud-provider=aws\\",\\"--skip-nodes-with-local-storage=false\\",\\"--expander=least-waste\\",\\"--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/",
-              Object {
-                "Ref": "StatefulClusterF2661197",
-              },
-              "\\",\\"--balance-similar-node-groups\\",\\"--skip-nodes-with-system-pods=false\\"],\\"volumeMounts\\":[{\\"name\\":\\"ssl-certs\\",\\"mountPath\\":\\"/etc/ssl/certs/ca-certificates.crt\\",\\"readOnly\\":true}],\\"imagePullPolicy\\":\\"Always\\"}],\\"volumes\\":[{\\"name\\":\\"ssl-certs\\",\\"hostPath\\":{\\"path\\":\\"/etc/ssl/certs/ca-bundle.crt\\"}}]}}}}]",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "k8sAddOnsebscsidriverK8sResourceIRSABEA7C353": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaebscsidriverirsaConditionJsonC3BD9B11",
-        "StatefulClustersaebscsidriverirsamanifestsaebscsidriverirsaServiceAccountResourceCB8FF5E2",
-        "StatefulClustersaebscsidriverirsaRoleDefaultPolicyB396DFD2",
-        "StatefulClustersaebscsidriverirsaRole6AC8122C",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-attacher-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"csi.storage.k8s.io\\"],\\"resources\\":[\\"csinodeinfos\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"volumeattachments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-provisioner-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumeclaims\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\"],\\"verbs\\":[\\"list\\",\\"watch\\",\\"create\\",\\"update\\",\\"patch\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshots\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshotcontents\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"csinodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\",\\"delete\\",\\"update\\",\\"create\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-attacher-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-attacher-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-provisioner-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-provisioner-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"replicas\\":2,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"containers\\":[{\\"args\\":[\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:///var/lib/csi/sockets/pluginproxy/csi.sock\\"},{\\"name\\":\\"AWS_ACCESS_KEY_ID\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"key_id\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}},{\\"name\\":\\"AWS_SECRET_ACCESS_KEY\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"access_key\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"imagePullPolicy\\":\\"IfNotPresent\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--feature-gates=Topology=true\\",\\"--enable-leader-election\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-provisioner:v1.3.0\\",\\"name\\":\\"csi-provisioner\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--leader-election=true\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-attacher:v1.2.0\\",\\"name\\":\\"csi-attacher\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"socket-dir\\"}]}],\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-cluster-critical\\",\\"serviceAccountName\\":\\"ebs-csi-controller-sa\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"emptyDir\\":{},\\"name\\":\\"socket-dir\\"}]}}}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-node\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"affinity\\":{\\"nodeAffinity\\":{\\"requiredDuringSchedulingIgnoredDuringExecution\\":{\\"nodeSelectorTerms\\":[{\\"matchExpressions\\":[{\\"key\\":\\"eks.amazonaws.com/compute-type\\",\\"operator\\":\\"NotIn\\",\\"values\\":[\\"fargate\\"]}]}]}}},\\"containers\\":[{\\"args\\":[\\"node\\",\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:/csi/csi.sock\\"}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"securityContext\\":{\\"privileged\\":true},\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/kubelet\\",\\"mountPropagation\\":\\"Bidirectional\\",\\"name\\":\\"kubelet-dir\\"},{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/dev\\",\\"name\\":\\"device-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/csi/csi.sock\\"},{\\"name\\":\\"DRIVER_REG_SOCK_PATH\\",\\"value\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-node-driver-registrar:v1.1.0\\",\\"lifecycle\\":{\\"preStop\\":{\\"exec\\":{\\"command\\":[\\"/bin/sh\\",\\"-c\\",\\"rm -rf /registration/ebs.csi.aws.com-reg.sock /csi/csi.sock\\"]}}},\\"name\\":\\"node-driver-registrar\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/registration\\",\\"name\\":\\"registration-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"}]}],\\"hostNetwork\\":true,\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-node-critical\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"kubelet-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/\\",\\"type\\":\\"DirectoryOrCreate\\"},\\"name\\":\\"plugin-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins_registry/\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"registration-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/dev\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"device-dir\\"}]}}}},{\\"apiVersion\\":\\"storage.k8s.io/v1beta1\\",\\"kind\\":\\"CSIDriver\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs.csi.aws.com\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"attachRequired\\":true,\\"podInfoOnMount\\":false}}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "k8sAddOnseksutilsadminK8sResourceIRSAC31F7D5C": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaeksutilsadminirsaConditionJson910CFA31",
-        "StatefulClustersaeksutilsadminirsamanifestsaeksutilsadminirsaServiceAccountResourceECE7210D",
-        "StatefulClustersaeksutilsadminirsaRoleDefaultPolicy1CBD1515",
-        "StatefulClustersaeksutilsadminirsaRole743C875B",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"eksutils\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-eksutils\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\"}]}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "k8sAddOnseksutilsadminfargateK8sResourceIRSAC2E526CC": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaeksutilsadminfargateirsaConditionJson3218D80D",
-        "StatefulClustersaeksutilsadminfargateirsamanifestsaeksutilsadminfargateirsaServiceAccountResourceF3F0D3EF",
-        "StatefulClustersaeksutilsadminfargateirsaRoleDefaultPolicyEE4759FE",
-        "StatefulClustersaeksutilsadminfargateirsaRoleF7DBBD10",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"cassandra\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\",\\"type\\":\\"fargate\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"cassandra\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"/bin/sh\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}},\\"volumeMounts\\":[{\\"name\\":\\"app-logs\\",\\"mountPath\\":\\"/var/log/containers\\"}],\\"args\\":[\\"-c\\",\\"while true; do echo -n \\\\\\"[$(date)] Number of Cassandra Pods Down in the cluster (Allowed by PDB: 1): \\\\\\" | tee -a /var/log/containers/nodetool.log ; nodetool -h cassandra-demo.cassandra status | grep DN | wc -l | tee -a /var/log/containers/nodetool.log ; sleep 5 ; done\\"]},{\\"name\\":\\"logrotate\\",\\"image\\":\\"realz/logrotate\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/log/containers\\",\\"name\\":\\"app-logs\\"}],\\"env\\":[{\\"name\\":\\"CRON_EXPR\\",\\"value\\":\\"*/15 * * * *\\"},{\\"name\\":\\"LOGROTATE_LOGFILES\\",\\"value\\":\\"/var/log/containers/*.log\\"},{\\"name\\":\\"LOGROTATE_FILESIZE\\",\\"value\\":\\"50M\\"},{\\"name\\":\\"LOGROTATE_FILENUM\\",\\"value\\":\\"5\\"}]},{\\"name\\":\\"aws-for-fluent-bit\\",\\"image\\":\\"amazon/aws-for-fluent-bit:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"volumeMounts\\":[{\\"name\\":\\"app-logs\\",\\"mountPath\\":\\"/var/log/containers\\"},{\\"name\\":\\"aws-for-fluent-bit\\",\\"mountPath\\":\\"/fluent-bit/etc/\\"}]}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"fargate-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":65534},\\"volumes\\":[{\\"name\\":\\"app-logs\\",\\"emptyDir\\":{}},{\\"name\\":\\"aws-for-fluent-bit\\",\\"configMap\\":{\\"name\\":\\"aws-for-fluent-bit\\"}}]}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-cassandra\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"cassandra\\"}]},{\\"apiVersion\\":\\"v1\\",\\"kind\\":\\"ConfigMap\\",\\"metadata\\":{\\"name\\":\\"aws-for-fluent-bit\\",\\"labels\\":{\\"k8s-app\\":\\"fluent-bit\\"},\\"namespace\\":\\"cassandra\\"},\\"data\\":{\\"fluent-bit.conf\\":\\"[SERVICE]\\\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\\\n\\\\n[INPUT]\\\\n    Name              tail\\\\n    Tag               *.logs\\\\n    Path              /var/log/containers/*.log\\\\n    DB                /var/log/containers/logs.db\\\\n    Mem_Buf_Limit     5MB\\\\n    Skip_Long_Lines   On\\\\n    Refresh_Interval  10\\\\n[FILTER]\\\\n    Name                kubernetes\\\\n    Match               kube.*\\\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\\\n    Merge_Log           On\\\\n    Merge_Log_Key       data\\\\n    K8S-Logging.Parser  On\\\\n    K8S-Logging.Exclude On\\\\n[OUTPUT]\\\\n    Name                  cloudwatch\\\\n    Match                 *\\\\n    region                eu-west-1\\\\n    log_group_name        /aws/eks/CassKop/logs\\\\n    log_stream_name       CassKop\\\\n    log_stream_prefix      fargate-\\\\n    auto_create_group     True\\\\n[OUTPUT]\\\\n    Name            es\\\\n    Match           *\\\\n    AWS_Region      eu-west-1\\\\n    AWS_Auth        On\\\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\\\n    Port            443\\\\n    TLS             On\\\\n    Retry_Limit     6\\\\n    Replace_Dots    On\\\\n    Trace_Output    On\\\\n\\"}}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "k8sAddOnsextrernaldnsK8sResourceIRSA3873B298": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustersaextrernaldnsirsaConditionJson2AC56600",
-        "StatefulClustersaextrernaldnsirsamanifestsaextrernaldnsirsaServiceAccountResourceD7D358B2",
-        "StatefulClustersaextrernaldnsirsaRoleDefaultPolicy7A8FEA0B",
-        "StatefulClustersaextrernaldnsirsaRoleA0545501",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "StatefulClusterF2661197",
-        },
-        "Manifest": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo.domain.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=",
-              Object {
-                "Ref": "StatefulClusterF2661197",
-              },
-              "\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "StatefulClusterCreationRoleDDC50F64",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
     "k8sAddOnskubeopsviewkubeopsviewHelmChartD40154F9": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -4913,99 +5378,16 @@ set -o xtrace
             "Outputs.CasskopawscdkawseksKubectlProviderframeworkonEventC1BEF049Arn",
           ],
         },
-        "Values": "{\\"service\\":{\\"type\\":\\"ClusterIP\\"},\\"redis\\":{\\"enabled\\":false},\\"rbac\\":{\\"create\\":true},\\"ingress\\":{\\"enabled\\":true,\\"path\\":\\"/*\\",\\"hostname\\":\\"kube-ops-view.eu-west-1.demo.domain.com\\",\\"annotations\\":{\\"kubernetes.io/ingress.class\\":\\"alb\\",\\"alb.ingress.kubernetes.io/scheme\\":\\"internet-facing\\",\\"alb.ingress.kubernetes.io/target-type\\":\\"ip\\",\\"alb.ingress.kubernetes.io/actions.ssl-redirect\\":\\"{\\\\\\"Type\\\\\\": \\\\\\"redirect\\\\\\", \\\\\\"RedirectConfig\\\\\\": { \\\\\\"Protocol\\\\\\": \\\\\\"HTTPS\\\\\\", \\\\\\"Port\\\\\\": \\\\\\"443\\\\\\", \\\\\\"StatusCode\\\\\\": \\\\\\"HTTP_301\\\\\\"}}\\",\\"alb.ingress.kubernetes.io/listen-ports\\":\\"[{\\\\\\"HTTP\\\\\\": 80}, {\\\\\\"HTTPS\\\\\\":443}]\\",\\"alb.ingress.kubernetes.io/certificate-arn\\":\\"arn:aws:acm:eu-west-1:xxxxxxxxxxx:certificate/aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee\\",\\"force\\":\\"update\\"}}}",
+        "Values": "{\\"service\\":{\\"type\\":\\"ClusterIP\\"},\\"redis\\":{\\"enabled\\":false},\\"rbac\\":{\\"create\\":true},\\"ingress\\":{\\"enabled\\":true,\\"path\\":\\"/*\\",\\"hostname\\":\\"kube-ops-view.eu-west-1.subdomain.demo.domain.com\\",\\"annotations\\":{\\"kubernetes.io/ingress.class\\":\\"alb\\",\\"alb.ingress.kubernetes.io/scheme\\":\\"internet-facing\\",\\"alb.ingress.kubernetes.io/target-type\\":\\"ip\\",\\"alb.ingress.kubernetes.io/actions.ssl-redirect\\":\\"{\\\\\\"Type\\\\\\": \\\\\\"redirect\\\\\\", \\\\\\"RedirectConfig\\\\\\": { \\\\\\"Protocol\\\\\\": \\\\\\"HTTPS\\\\\\", \\\\\\"Port\\\\\\": \\\\\\"443\\\\\\", \\\\\\"StatusCode\\\\\\": \\\\\\"HTTP_301\\\\\\"}}\\",\\"alb.ingress.kubernetes.io/listen-ports\\":\\"[{\\\\\\"HTTP\\\\\\": 80}, {\\\\\\"HTTPS\\\\\\":443}]\\",\\"alb.ingress.kubernetes.io/certificate-arn\\":\\"arn:aws:acm:eu-west-1:xxxxxxxxxxx:certificate/aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee\\",\\"force\\":\\"update\\"}}}",
         "Wait": true,
       },
       "Type": "Custom::AWSCDK-EKS-HelmChart",
       "UpdateReplacePolicy": "Delete",
     },
-    "k8sAddOnsmetricsserverK8sResourceAD125954": Object {
+    "k8sAddOnsmetricsservermetricsserverK8sManifest992AB4CD": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "StatefulClusterAwsAuthmanifest8CE09EF4",
-        "StatefulClusterchartspotinterrupthandlerC53EC76C",
-        "StatefulClusterClusterSecurityGroupfromCasskopStatefulClusterSpotInstanceSecurityGroup90CB6609443F8BCD273",
-        "StatefulClusterControlPlaneSecurityGroupfromCasskopStatefulClusterSpotInstanceSecurityGroup90CB6609443FCDC9C7B",
-        "StatefulClusterControlPlaneSecurityGroup3F4ADB7C",
-        "StatefulClusterfargateprofileFargateProfilePodExecutionRoleD86B44ED",
-        "StatefulClusterfargateprofileFargateProfile51887F14",
         "StatefulClusterKubectlReadyBarrierADAD548F",
-        "StatefulClustermanifestalbCrdawsloadbalancercontroller21E383E5",
-        "StatefulClustermanifestcasskopcrdbackup9001FEEC",
-        "StatefulClustermanifestcasskopcrdrestoreBBCCADA0",
-        "StatefulClustermanifestcasskopcrd924A4C9C",
-        "StatefulClustermanifestnamespacealbsaAA3048E0",
-        "StatefulClustermanifestnamespaceargoF56283FF",
-        "StatefulClustermanifestnamespaceawsforfluentbitHelmChartIRSAirsaBF84AED7",
-        "StatefulClustermanifestnamespacecloudWatchagentirsa321A5544",
-        "StatefulClustermanifestnamespaceclusterautoscalerirsaCB144A48",
-        "StatefulClustermanifestnamespaceebscsidriverirsa3C003438",
-        "StatefulClustermanifestnamespaceeksutilsadminfargateirsa8DAF3921",
-        "StatefulClustermanifestnamespaceeksutilsadminirsa6740DCFD",
-        "StatefulClustermanifestnamespaceextrernaldnsirsaA60276F6",
-        "StatefulClustermanifestnamespacek8s101role83F89A39",
-        "StatefulClusterNodegroupnodegroupAZaNodeGroupRole6FF61D03",
-        "StatefulClusterNodegroupnodegroupAZa9FD1645A",
-        "StatefulClusterNodegroupnodegroupAZbNodeGroupRoleED18FA36",
-        "StatefulClusterNodegroupnodegroupAZbA5B83584",
-        "StatefulClusterNodegroupnodegroupAZcNodeGroupRole3EF8B417",
-        "StatefulClusterNodegroupnodegroupAZc3FC6F664",
-        "StatefulClusterOpenIdConnectProviderD77EC2F5",
-        "StatefulClusterCreationRoleDefaultPolicyF5424CAB",
-        "StatefulClusterCreationRoleDDC50F64",
-        "StatefulClusterF2661197",
-        "StatefulClusterRole812D5B55",
-        "StatefulClustersaalbsaConditionJsonE3E2BC35",
-        "StatefulClustersaalbsamanifestsaalbsaServiceAccountResourceC8E24BC2",
-        "StatefulClustersaalbsaRoleDefaultPolicy1A8979F3",
-        "StatefulClustersaalbsaRole1A8907F0",
-        "StatefulClustersaargoConditionJson4C2F98D5",
-        "StatefulClustersaargomanifestsaargoServiceAccountResource67EA8595",
-        "StatefulClustersaargoRoleDefaultPolicy00BC44FD",
-        "StatefulClustersaargoRoleD8B7B51D",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaConditionJson9CA7643D",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsamanifestsaawsforfluentbitHelmChartIRSAirsaServiceAccountResourceCD7F106B",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaRoleDefaultPolicyF7D1202B",
-        "StatefulClustersaawsforfluentbitHelmChartIRSAirsaRole04D134D1",
-        "StatefulClustersacloudWatchagentirsaConditionJson8DEA1AFB",
-        "StatefulClustersacloudWatchagentirsamanifestsacloudWatchagentirsaServiceAccountResource75862B2C",
-        "StatefulClustersacloudWatchagentirsaRoleDefaultPolicyDA982F63",
-        "StatefulClustersacloudWatchagentirsaRoleD850F7BC",
-        "StatefulClustersaclusterautoscalerirsaConditionJson477F8B6E",
-        "StatefulClustersaclusterautoscalerirsamanifestsaclusterautoscalerirsaServiceAccountResource0A4CAAAD",
-        "StatefulClustersaclusterautoscalerirsaRoleDefaultPolicy804FC631",
-        "StatefulClustersaclusterautoscalerirsaRoleA3D4222D",
-        "StatefulClustersaebscsidriverirsaConditionJsonC3BD9B11",
-        "StatefulClustersaebscsidriverirsamanifestsaebscsidriverirsaServiceAccountResourceCB8FF5E2",
-        "StatefulClustersaebscsidriverirsaRoleDefaultPolicyB396DFD2",
-        "StatefulClustersaebscsidriverirsaRole6AC8122C",
-        "StatefulClustersaeksutilsadminfargateirsaConditionJson3218D80D",
-        "StatefulClustersaeksutilsadminfargateirsamanifestsaeksutilsadminfargateirsaServiceAccountResourceF3F0D3EF",
-        "StatefulClustersaeksutilsadminfargateirsaRoleDefaultPolicyEE4759FE",
-        "StatefulClustersaeksutilsadminfargateirsaRoleF7DBBD10",
-        "StatefulClustersaeksutilsadminirsaConditionJson910CFA31",
-        "StatefulClustersaeksutilsadminirsamanifestsaeksutilsadminirsaServiceAccountResourceECE7210D",
-        "StatefulClustersaeksutilsadminirsaRoleDefaultPolicy1CBD1515",
-        "StatefulClustersaeksutilsadminirsaRole743C875B",
-        "StatefulClustersaextrernaldnsirsaConditionJson2AC56600",
-        "StatefulClustersaextrernaldnsirsamanifestsaextrernaldnsirsaServiceAccountResourceD7D358B2",
-        "StatefulClustersaextrernaldnsirsaRoleDefaultPolicy7A8FEA0B",
-        "StatefulClustersaextrernaldnsirsaRoleA0545501",
-        "StatefulClustersak8s101roleConditionJsonDADC8C60",
-        "StatefulClustersak8s101rolemanifestsak8s101roleServiceAccountResource15DB392F",
-        "StatefulClustersak8s101roleRoleDefaultPolicy8E5666C7",
-        "StatefulClustersak8s101roleRole23CE9689",
-        "StatefulClusterSpotASG433ED63D",
-        "StatefulClusterSpotInstanceProfileAAEB46D6",
-        "StatefulClusterSpotInstanceRoleC8E9511A",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopclusterSG0E6F36F6ALLTRAFFICF6C4EA3A",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopStatefulClusterClusterSecurityGroup92D7517110256553518E2EE08",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopStatefulClusterClusterSecurityGroup92D751714430F1E5F3F",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopStatefulClusterControlPlaneSecurityGroupD2E223D510256553563F68E6B",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopStatefulClusterControlPlaneSecurityGroupD2E223D5443F41E5A3C",
-        "StatefulClusterSpotInstanceSecurityGroupfromCasskopStatefulClusterSpotInstanceSecurityGroup90CB6609ALLTRAFFICADC89837",
-        "StatefulClusterSpotInstanceSecurityGroup7B75C1B4",
-        "StatefulClusterSpotLaunchConfig276FDF99",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -6481,6 +6863,530 @@ set -o xtrace
         ],
       },
       "Type": "AWS::IAM::Role",
+    },
+    "AlbIngressControllerStackmanifestclusterautoscaler0F2C58954": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\",\\"endpoints\\"],\\"verbs\\":[\\"create\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/eviction\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/status\\"],\\"verbs\\":[\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"endpoints\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"verbs\\":[\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"services\\",\\"replicationcontrollers\\",\\"persistentvolumeclaims\\",\\"persistentvolumes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"policy\\"],\\"resources\\":[\\"poddisruptionbudgets\\"],\\"verbs\\":[\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"statefulsets\\",\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\",\\"csinodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"batch\\",\\"extensions\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestclusterautoscaler12375B4BF": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"Role\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"verbs\\":[\\"create\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cluster-autoscaler-status\\",\\"cluster-autoscaler-priority-expander\\"],\\"verbs\\":[\\"delete\\",\\"get\\",\\"update\\",\\"watch\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestclusterautoscaler29453ECE2": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestclusterautoscaler3D63842A3": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestclusterautoscaler473E96D84": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"cluster-autoscaler.kubernetes.io/safe-to-evict\\":\\"false\\"}},\\"spec\\":{\\"replicas\\":1,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"cluster-autoscaler\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"prometheus.io/scrape\\":\\"true\\",\\"prometheus.io/port\\":\\"8085\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"cluster-autoscaler\\",\\"containers\\":[{\\"image\\":\\"eu.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.18.2\\",\\"name\\":\\"cluster-autoscaler\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"},\\"requests\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"}},\\"command\\":[\\"./cluster-autoscaler\\",\\"--v=4\\",\\"--stderrthreshold=info\\",\\"--cloud-provider=aws\\",\\"--skip-nodes-with-local-storage=false\\",\\"--expander=least-waste\\",\\"--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/",
+              Object {
+                "Ref": "AlbIngressControllerStackD72562D9",
+              },
+              "\\",\\"--balance-similar-node-groups\\",\\"--skip-nodes-with-system-pods=false\\"],\\"volumeMounts\\":[{\\"name\\":\\"ssl-certs\\",\\"mountPath\\":\\"/etc/ssl/certs/ca-certificates.crt\\",\\"readOnly\\":true}],\\"imagePullPolicy\\":\\"Always\\"}],\\"volumes\\":[{\\"name\\":\\"ssl-certs\\",\\"hostPath\\":{\\"path\\":\\"/etc/ssl/certs/ca-bundle.crt\\"}}]}}}}]",
+            ],
+          ],
+        },
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver05DE7FBA2": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-attacher-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"csi.storage.k8s.io\\"],\\"resources\\":[\\"csinodeinfos\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"volumeattachments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver19DC282F5": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-provisioner-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumeclaims\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\"],\\"verbs\\":[\\"list\\",\\"watch\\",\\"create\\",\\"update\\",\\"patch\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshots\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshotcontents\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"csinodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\",\\"delete\\",\\"update\\",\\"create\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver2776F3634": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-attacher-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-attacher-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver352450E77": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-provisioner-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-provisioner-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver4B2F69AF3": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"replicas\\":2,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"containers\\":[{\\"args\\":[\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:///var/lib/csi/sockets/pluginproxy/csi.sock\\"},{\\"name\\":\\"AWS_ACCESS_KEY_ID\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"key_id\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}},{\\"name\\":\\"AWS_SECRET_ACCESS_KEY\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"access_key\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"imagePullPolicy\\":\\"IfNotPresent\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--feature-gates=Topology=true\\",\\"--enable-leader-election\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-provisioner:v1.3.0\\",\\"name\\":\\"csi-provisioner\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--leader-election=true\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-attacher:v1.2.0\\",\\"name\\":\\"csi-attacher\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"socket-dir\\"}]}],\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-cluster-critical\\",\\"serviceAccountName\\":\\"ebs-csi-controller-sa\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"emptyDir\\":{},\\"name\\":\\"socket-dir\\"}]}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver507D33AE9": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-node\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"affinity\\":{\\"nodeAffinity\\":{\\"requiredDuringSchedulingIgnoredDuringExecution\\":{\\"nodeSelectorTerms\\":[{\\"matchExpressions\\":[{\\"key\\":\\"eks.amazonaws.com/compute-type\\",\\"operator\\":\\"NotIn\\",\\"values\\":[\\"fargate\\"]}]}]}}},\\"containers\\":[{\\"args\\":[\\"node\\",\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:/csi/csi.sock\\"}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"securityContext\\":{\\"privileged\\":true},\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/kubelet\\",\\"mountPropagation\\":\\"Bidirectional\\",\\"name\\":\\"kubelet-dir\\"},{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/dev\\",\\"name\\":\\"device-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/csi/csi.sock\\"},{\\"name\\":\\"DRIVER_REG_SOCK_PATH\\",\\"value\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-node-driver-registrar:v1.1.0\\",\\"lifecycle\\":{\\"preStop\\":{\\"exec\\":{\\"command\\":[\\"/bin/sh\\",\\"-c\\",\\"rm -rf /registration/ebs.csi.aws.com-reg.sock /csi/csi.sock\\"]}}},\\"name\\":\\"node-driver-registrar\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/registration\\",\\"name\\":\\"registration-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"}]}],\\"hostNetwork\\":true,\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-node-critical\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"kubelet-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/\\",\\"type\\":\\"DirectoryOrCreate\\"},\\"name\\":\\"plugin-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins_registry/\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"registration-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/dev\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"device-dir\\"}]}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestebscsidriver6FCA11397": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"storage.k8s.io/v1beta1\\",\\"kind\\":\\"CSIDriver\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs.csi.aws.com\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"attachRequired\\":true,\\"podInfoOnMount\\":false}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifesteksutilsadmin0B5073540": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceeksutilsadminirsaEFE4677F",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"eksutils\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifesteksutilsadmin183BC1985": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceeksutilsadminirsaEFE4677F",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-eksutils\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifesteksutilsadminfargate023F7C3CF": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargateirsaAE028610",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"fargate\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifesteksutilsadminfargate12050587E": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargateirsaAE028610",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-fargate\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestextrernaldns0E1DDF914": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceextrernaldnsirsa5FE533B4",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestextrernaldns1F6B73BCB": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceextrernaldnsirsa5FE533B4",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "AlbIngressControllerStackmanifestextrernaldns2B1A75EFA": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
+        "AlbIngressControllerStackmanifestnamespaceextrernaldnsirsa5FE533B4",
+      ],
+      "Properties": Object {
+        "ClusterName": Object {
+          "Ref": "AlbIngressControllerStackD72562D9",
+        },
+        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo.allamand.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CassKopTest\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
+        "RoleArn": Object {
+          "Fn::GetAtt": Array [
+            "AlbIngressControllerStackCreationRoleB9419435",
+            "Arn",
+          ],
+        },
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
+          ],
+        },
+      },
+      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+      "UpdateReplacePolicy": "Delete",
     },
     "AlbIngressControllerStackmanifestnamespacealbsa540004AB": Object {
       "DeletionPolicy": "Delete",
@@ -8347,67 +9253,10 @@ set -o xtrace
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
-    "albingresscontrollerK8sResource87829C97": Object {
+    "albingresscontrolleralbingresscontrollerK8sManifestB85D3DF0": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespacealbsa540004AB",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
-        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargateirsaAE028610",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminirsaEFE4677F",
-        "AlbIngressControllerStackmanifestnamespaceextrernaldnsirsa5FE533B4",
-        "AlbIngressControllerStackNodegroupDefaultCapacityNodeGroupRoleF5ABD21E",
-        "AlbIngressControllerStackNodegroupDefaultCapacity292A30F4",
-        "AlbIngressControllerStackNodegroupnodegroupNodeGroupRoleDF35181F",
-        "AlbIngressControllerStackNodegroupnodegroup64293F7C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbsaConditionJsonDA625AF3",
-        "AlbIngressControllerStacksaalbsamanifestsaalbsaServiceAccountResourceD3AE43CB",
-        "AlbIngressControllerStacksaalbsaRoleDefaultPolicyA8FEC8C7",
-        "AlbIngressControllerStacksaalbsaRole03AF01E8",
-        "AlbIngressControllerStacksaclusterautoscalerirsaConditionJsonCA326C04",
-        "AlbIngressControllerStacksaclusterautoscalerirsamanifestsaclusterautoscalerirsaServiceAccountResourceF64B2FF8",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRoleDefaultPolicy52D4D72C",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRole8C4D8C82",
-        "AlbIngressControllerStacksaebscsidriverirsaConditionJson73079C2A",
-        "AlbIngressControllerStacksaebscsidriverirsamanifestsaebscsidriverirsaServiceAccountResource5C957088",
-        "AlbIngressControllerStacksaebscsidriverirsaRoleDefaultPolicy75E0CCB9",
-        "AlbIngressControllerStacksaebscsidriverirsaRole20826C70",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaConditionJson1FABBA0C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsamanifestsaeksutilsadminfargateirsaServiceAccountResourceA2B60DE0",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleDefaultPolicy01172F1C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleA379531D",
-        "AlbIngressControllerStacksaeksutilsadminirsaConditionJson6822BA87",
-        "AlbIngressControllerStacksaeksutilsadminirsamanifestsaeksutilsadminirsaServiceAccountResource0BB22224",
-        "AlbIngressControllerStacksaeksutilsadminirsaRoleDefaultPolicyBC4A16E8",
-        "AlbIngressControllerStacksaeksutilsadminirsaRole600AFF16",
-        "AlbIngressControllerStacksaextrernaldnsirsaConditionJson09F48FDB",
-        "AlbIngressControllerStacksaextrernaldnsirsamanifestsaextrernaldnsirsaServiceAccountResource850474CF",
-        "AlbIngressControllerStacksaextrernaldnsirsaRoleDefaultPolicy0822B269",
-        "AlbIngressControllerStacksaextrernaldnsirsaRole49ED19CF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSclusterSG5F573986ALLTRAFFICA710ADAB",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
       ],
       "Properties": Object {
         "ClusterName": Object {
@@ -8609,228 +9458,10 @@ set -o xtrace
       },
       "Type": "AWS::CloudFormation::Stack",
     },
-    "clusterautoscalerK8sResourceIRSAECFBF5A7": Object {
+    "metricsservermetricsserverK8sManifest3853E96C": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStacksaclusterautoscalerirsaConditionJsonCA326C04",
-        "AlbIngressControllerStacksaclusterautoscalerirsamanifestsaclusterautoscalerirsaServiceAccountResourceF64B2FF8",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRoleDefaultPolicy52D4D72C",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRole8C4D8C82",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
-        },
-        "Manifest": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\",\\"endpoints\\"],\\"verbs\\":[\\"create\\",\\"patch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/eviction\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods/status\\"],\\"verbs\\":[\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"endpoints\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"verbs\\":[\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\",\\"services\\",\\"replicationcontrollers\\",\\"persistentvolumeclaims\\",\\"persistentvolumes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"policy\\"],\\"resources\\":[\\"poddisruptionbudgets\\"],\\"verbs\\":[\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"apps\\"],\\"resources\\":[\\"statefulsets\\",\\"replicasets\\",\\"daemonsets\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\",\\"csinodes\\"],\\"verbs\\":[\\"watch\\",\\"list\\",\\"get\\"]},{\\"apiGroups\\":[\\"batch\\",\\"extensions\\"],\\"resources\\":[\\"jobs\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"patch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"create\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resourceNames\\":[\\"cluster-autoscaler\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"Role\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"verbs\\":[\\"create\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"configmaps\\"],\\"resourceNames\\":[\\"cluster-autoscaler-status\\",\\"cluster-autoscaler-priority-expander\\"],\\"verbs\\":[\\"delete\\",\\"get\\",\\"update\\",\\"watch\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"RoleBinding\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"k8s-addon\\":\\"cluster-autoscaler.addons.k8s.io\\",\\"k8s-app\\":\\"cluster-autoscaler\\"}},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"Role\\",\\"name\\":\\"cluster-autoscaler\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"cluster-autoscaler\\",\\"namespace\\":\\"kube-system\\",\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"cluster-autoscaler.kubernetes.io/safe-to-evict\\":\\"false\\"}},\\"spec\\":{\\"replicas\\":1,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"cluster-autoscaler\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"cluster-autoscaler\\"},\\"annotations\\":{\\"prometheus.io/scrape\\":\\"true\\",\\"prometheus.io/port\\":\\"8085\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"cluster-autoscaler\\",\\"containers\\":[{\\"image\\":\\"eu.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.18.2\\",\\"name\\":\\"cluster-autoscaler\\",\\"resources\\":{\\"limits\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"},\\"requests\\":{\\"cpu\\":\\"100m\\",\\"memory\\":\\"300Mi\\"}},\\"command\\":[\\"./cluster-autoscaler\\",\\"--v=4\\",\\"--stderrthreshold=info\\",\\"--cloud-provider=aws\\",\\"--skip-nodes-with-local-storage=false\\",\\"--expander=least-waste\\",\\"--node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/",
-              Object {
-                "Ref": "AlbIngressControllerStackD72562D9",
-              },
-              "\\",\\"--balance-similar-node-groups\\",\\"--skip-nodes-with-system-pods=false\\"],\\"volumeMounts\\":[{\\"name\\":\\"ssl-certs\\",\\"mountPath\\":\\"/etc/ssl/certs/ca-certificates.crt\\",\\"readOnly\\":true}],\\"imagePullPolicy\\":\\"Always\\"}],\\"volumes\\":[{\\"name\\":\\"ssl-certs\\",\\"hostPath\\":{\\"path\\":\\"/etc/ssl/certs/ca-bundle.crt\\"}}]}}}}]",
-            ],
-          ],
-        },
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "ebscsidriverK8sResourceIRSAFCFCAB05": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStacksaebscsidriverirsaConditionJson73079C2A",
-        "AlbIngressControllerStacksaebscsidriverirsamanifestsaebscsidriverirsaServiceAccountResource5C957088",
-        "AlbIngressControllerStacksaebscsidriverirsaRoleDefaultPolicy75E0CCB9",
-        "AlbIngressControllerStacksaebscsidriverirsaRole20826C70",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-attacher-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"csi.storage.k8s.io\\"],\\"resources\\":[\\"csinodeinfos\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"volumeattachments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-external-provisioner-role\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"persistentvolumeclaims\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"update\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"storageclasses\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"events\\"],\\"verbs\\":[\\"list\\",\\"watch\\",\\"create\\",\\"update\\",\\"patch\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshots\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"snapshot.storage.k8s.io\\"],\\"resources\\":[\\"volumesnapshotcontents\\"],\\"verbs\\":[\\"get\\",\\"list\\"]},{\\"apiGroups\\":[\\"storage.k8s.io\\"],\\"resources\\":[\\"csinodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\"]},{\\"apiGroups\\":[\\"coordination.k8s.io\\"],\\"resources\\":[\\"leases\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\",\\"delete\\",\\"update\\",\\"create\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-attacher-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-attacher-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-provisioner-binding\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"ebs-external-provisioner-role\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"ebs-csi-controller-sa\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-controller\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"replicas\\":2,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-controller\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"containers\\":[{\\"args\\":[\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:///var/lib/csi/sockets/pluginproxy/csi.sock\\"},{\\"name\\":\\"AWS_ACCESS_KEY_ID\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"key_id\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}},{\\"name\\":\\"AWS_SECRET_ACCESS_KEY\\",\\"valueFrom\\":{\\"secretKeyRef\\":{\\"key\\":\\"access_key\\",\\"name\\":\\"aws-secret\\",\\"optional\\":true}}}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"imagePullPolicy\\":\\"IfNotPresent\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--feature-gates=Topology=true\\",\\"--enable-leader-election\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-provisioner:v1.3.0\\",\\"name\\":\\"csi-provisioner\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--v=5\\",\\"--leader-election=true\\",\\"--leader-election-type=leases\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/var/lib/csi/sockets/pluginproxy/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-attacher:v1.2.0\\",\\"name\\":\\"csi-attacher\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/csi/sockets/pluginproxy/\\",\\"name\\":\\"socket-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"socket-dir\\"}]}],\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-cluster-critical\\",\\"serviceAccountName\\":\\"ebs-csi-controller-sa\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"emptyDir\\":{},\\"name\\":\\"socket-dir\\"}]}}}},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"DaemonSet\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs-csi-node\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"ebs-csi-node\\",\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"}},\\"spec\\":{\\"affinity\\":{\\"nodeAffinity\\":{\\"requiredDuringSchedulingIgnoredDuringExecution\\":{\\"nodeSelectorTerms\\":[{\\"matchExpressions\\":[{\\"key\\":\\"eks.amazonaws.com/compute-type\\",\\"operator\\":\\"NotIn\\",\\"values\\":[\\"fargate\\"]}]}]}}},\\"containers\\":[{\\"args\\":[\\"node\\",\\"--endpoint=$(CSI_ENDPOINT)\\",\\"--logtostderr\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"CSI_ENDPOINT\\",\\"value\\":\\"unix:/csi/csi.sock\\"}],\\"image\\":\\"amazon/aws-ebs-csi-driver:v0.5.0\\",\\"livenessProbe\\":{\\"failureThreshold\\":5,\\"httpGet\\":{\\"path\\":\\"/healthz\\",\\"port\\":\\"healthz\\"},\\"initialDelaySeconds\\":10,\\"periodSeconds\\":10,\\"timeoutSeconds\\":3},\\"name\\":\\"ebs-plugin\\",\\"ports\\":[{\\"containerPort\\":9808,\\"name\\":\\"healthz\\",\\"protocol\\":\\"TCP\\"}],\\"securityContext\\":{\\"privileged\\":true},\\"volumeMounts\\":[{\\"mountPath\\":\\"/var/lib/kubelet\\",\\"mountPropagation\\":\\"Bidirectional\\",\\"name\\":\\"kubelet-dir\\"},{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/dev\\",\\"name\\":\\"device-dir\\"}]},{\\"args\\":[\\"--csi-address=$(ADDRESS)\\",\\"--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)\\",\\"--v=5\\"],\\"env\\":[{\\"name\\":\\"ADDRESS\\",\\"value\\":\\"/csi/csi.sock\\"},{\\"name\\":\\"DRIVER_REG_SOCK_PATH\\",\\"value\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/csi.sock\\"}],\\"image\\":\\"quay.io/k8scsi/csi-node-driver-registrar:v1.1.0\\",\\"lifecycle\\":{\\"preStop\\":{\\"exec\\":{\\"command\\":[\\"/bin/sh\\",\\"-c\\",\\"rm -rf /registration/ebs.csi.aws.com-reg.sock /csi/csi.sock\\"]}}},\\"name\\":\\"node-driver-registrar\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"},{\\"mountPath\\":\\"/registration\\",\\"name\\":\\"registration-dir\\"}]},{\\"args\\":[\\"--csi-address=/csi/csi.sock\\"],\\"image\\":\\"quay.io/k8scsi/livenessprobe:v1.1.0\\",\\"name\\":\\"liveness-probe\\",\\"volumeMounts\\":[{\\"mountPath\\":\\"/csi\\",\\"name\\":\\"plugin-dir\\"}]}],\\"hostNetwork\\":true,\\"nodeSelector\\":{\\"kubernetes.io/arch\\":\\"amd64\\",\\"kubernetes.io/os\\":\\"linux\\"},\\"priorityClassName\\":\\"system-node-critical\\",\\"tolerations\\":[{\\"operator\\":\\"Exists\\"}],\\"volumes\\":[{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"kubelet-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins/ebs.csi.aws.com/\\",\\"type\\":\\"DirectoryOrCreate\\"},\\"name\\":\\"plugin-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/var/lib/kubelet/plugins_registry/\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"registration-dir\\"},{\\"hostPath\\":{\\"path\\":\\"/dev\\",\\"type\\":\\"Directory\\"},\\"name\\":\\"device-dir\\"}]}}}},{\\"apiVersion\\":\\"storage.k8s.io/v1beta1\\",\\"kind\\":\\"CSIDriver\\",\\"metadata\\":{\\"labels\\":{\\"app.kubernetes.io/name\\":\\"aws-ebs-csi-driver\\"},\\"name\\":\\"ebs.csi.aws.com\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"attachRequired\\":true,\\"podInfoOnMount\\":false}}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "eksutilsadminK8sResourceIRSA0A8791C8": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStacksaeksutilsadminirsaConditionJson6822BA87",
-        "AlbIngressControllerStacksaeksutilsadminirsamanifestsaeksutilsadminirsaServiceAccountResource0BB22224",
-        "AlbIngressControllerStacksaeksutilsadminirsaRoleDefaultPolicyBC4A16E8",
-        "AlbIngressControllerStacksaeksutilsadminirsaRole600AFF16",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"eksutils\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-eksutils\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"eksutils\\"}]}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "eksutilsadminfargateK8sResourceIRSA651BECE8": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaConditionJson1FABBA0C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsamanifestsaeksutilsadminfargateirsaServiceAccountResourceA2B60DE0",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleDefaultPolicy01172F1C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleA379531D",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"annotations\\":{\\"deployment.kubernetes.io/revision\\":\\"1\\"},\\"name\\":\\"eksutils-deployment\\",\\"labels\\":{\\"app\\":\\"eksutils\\"},\\"namespace\\":\\"fargate\\"},\\"spec\\":{\\"replicas\\":1,\\"revisionHistoryLimit\\":10,\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"eksutils\\"}},\\"strategy\\":{\\"rollingUpdate\\":{\\"maxSurge\\":\\"25%\\",\\"maxUnavailable\\":\\"25%\\"},\\"type\\":\\"RollingUpdate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"eksutils\\"}},\\"spec\\":{\\"containers\\":[{\\"name\\":\\"eksutils\\",\\"image\\":\\"allamand/eksutils:latest\\",\\"imagePullPolicy\\":\\"Always\\",\\"command\\":[\\"tail\\",\\"-f\\",\\"/dev/null\\"],\\"ports\\":[{\\"containerPort\\":8080,\\"name\\":\\"http\\",\\"protocol\\":\\"TCP\\"}],\\"resources\\":{\\"requests\\":{\\"cpu\\":\\"300m\\",\\"memory\\":\\"512Mi\\"}}}],\\"enableServiceLinks\\":true,\\"restartPolicy\\":\\"Always\\",\\"schedulerName\\":\\"default-scheduler\\",\\"serviceAccountName\\":\\"eksutils-admin\\",\\"terminationGracePeriodSeconds\\":0,\\"securityContext\\":{\\"fsGroup\\":0,\\"runAsUser\\":0}}}}},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"eksutils-admin-fargate\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"cluster-admin\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"eksutils-admin\\",\\"namespace\\":\\"fargate\\"}]}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "extrernaldnsK8sResourceIRSAB95CEB97": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStacksaextrernaldnsirsaConditionJson09F48FDB",
-        "AlbIngressControllerStacksaextrernaldnsirsamanifestsaextrernaldnsirsaServiceAccountResource850474CF",
-        "AlbIngressControllerStacksaextrernaldnsirsaRoleDefaultPolicy0822B269",
-        "AlbIngressControllerStacksaextrernaldnsirsaRole49ED19CF",
-      ],
-      "Properties": Object {
-        "ClusterName": Object {
-          "Ref": "AlbIngressControllerStackD72562D9",
-        },
-        "Manifest": "[{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRole\\",\\"metadata\\":{\\"name\\":\\"external-dns\\"},\\"rules\\":[{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"services\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"pods\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"extensions\\"],\\"resources\\":[\\"ingresses\\"],\\"verbs\\":[\\"get\\",\\"watch\\",\\"list\\"]},{\\"apiGroups\\":[\\"\\"],\\"resources\\":[\\"nodes\\"],\\"verbs\\":[\\"list\\"]}]},{\\"apiVersion\\":\\"rbac.authorization.k8s.io/v1beta1\\",\\"kind\\":\\"ClusterRoleBinding\\",\\"metadata\\":{\\"name\\":\\"external-dns-viewer\\"},\\"roleRef\\":{\\"apiGroup\\":\\"rbac.authorization.k8s.io\\",\\"kind\\":\\"ClusterRole\\",\\"name\\":\\"external-dns\\"},\\"subjects\\":[{\\"kind\\":\\"ServiceAccount\\",\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"}]},{\\"apiVersion\\":\\"apps/v1\\",\\"kind\\":\\"Deployment\\",\\"metadata\\":{\\"name\\":\\"external-dns\\",\\"namespace\\":\\"kube-system\\"},\\"spec\\":{\\"selector\\":{\\"matchLabels\\":{\\"app\\":\\"external-dns\\"}},\\"strategy\\":{\\"type\\":\\"Recreate\\"},\\"template\\":{\\"metadata\\":{\\"labels\\":{\\"app\\":\\"external-dns\\"}},\\"spec\\":{\\"serviceAccountName\\":\\"external-dns\\",\\"containers\\":[{\\"name\\":\\"external-dns\\",\\"image\\":\\"registry.opensource.zalan.do/teapot/external-dns:v0.7.1\\",\\"args\\":[\\"--source=service\\",\\"--source=ingress\\",\\"--domain-filter=demo.domain.com\\",\\"--provider=aws\\",\\"--policy=sync\\",\\"--aws-zone-type=public\\",\\"--registry=txt\\",\\"--txt-owner-id=CassKopTest\\",\\"--log-level=debug\\"]}],\\"securityContext\\":{\\"fsGroup\\":65534}}}}}]",
-        "RoleArn": Object {
-          "Fn::GetAtt": Array [
-            "AlbIngressControllerStackCreationRoleB9419435",
-            "Arn",
-          ],
-        },
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
-            "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
-            "Outputs.EKSawscdkawseksKubectlProviderframeworkonEvent4C260864Arn",
-          ],
-        },
-      },
-      "Type": "Custom::AWSCDK-EKS-KubernetesResource",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "metricsserverK8sResourceBB4DF557": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AlbIngressControllerStackAwsAuthmanifest49810F87",
-        "AlbIngressControllerStackchartspotinterrupthandler255CE428",
-        "AlbIngressControllerStackClusterSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443698121CA",
-        "AlbIngressControllerStackControlPlaneSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496443CBC6BD12",
-        "AlbIngressControllerStackControlPlaneSecurityGroupAB680602",
-        "AlbIngressControllerStackfargateprofileFargateProfilePodExecutionRole32B0685D",
-        "AlbIngressControllerStackfargateprofileFargateProfile0604A12E",
-        "AlbIngressControllerStackKubectlReadyBarrier32C3D398",
-        "AlbIngressControllerStackmanifestnamespacealbsa540004AB",
-        "AlbIngressControllerStackmanifestnamespaceclusterautoscalerirsaCA92E4BC",
-        "AlbIngressControllerStackmanifestnamespaceebscsidriverirsa05D39001",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminfargateirsaAE028610",
-        "AlbIngressControllerStackmanifestnamespaceeksutilsadminirsaEFE4677F",
-        "AlbIngressControllerStackmanifestnamespaceextrernaldnsirsa5FE533B4",
-        "AlbIngressControllerStackNodegroupDefaultCapacityNodeGroupRoleF5ABD21E",
-        "AlbIngressControllerStackNodegroupDefaultCapacity292A30F4",
-        "AlbIngressControllerStackNodegroupnodegroupNodeGroupRoleDF35181F",
-        "AlbIngressControllerStackNodegroupnodegroup64293F7C",
-        "AlbIngressControllerStackOpenIdConnectProvider142642B9",
-        "AlbIngressControllerStackCreationRoleDefaultPolicyDB9E551D",
-        "AlbIngressControllerStackCreationRoleB9419435",
-        "AlbIngressControllerStackD72562D9",
-        "AlbIngressControllerStackRoleC72527C3",
-        "AlbIngressControllerStacksaalbsaConditionJsonDA625AF3",
-        "AlbIngressControllerStacksaalbsamanifestsaalbsaServiceAccountResourceD3AE43CB",
-        "AlbIngressControllerStacksaalbsaRoleDefaultPolicyA8FEC8C7",
-        "AlbIngressControllerStacksaalbsaRole03AF01E8",
-        "AlbIngressControllerStacksaclusterautoscalerirsaConditionJsonCA326C04",
-        "AlbIngressControllerStacksaclusterautoscalerirsamanifestsaclusterautoscalerirsaServiceAccountResourceF64B2FF8",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRoleDefaultPolicy52D4D72C",
-        "AlbIngressControllerStacksaclusterautoscalerirsaRole8C4D8C82",
-        "AlbIngressControllerStacksaebscsidriverirsaConditionJson73079C2A",
-        "AlbIngressControllerStacksaebscsidriverirsamanifestsaebscsidriverirsaServiceAccountResource5C957088",
-        "AlbIngressControllerStacksaebscsidriverirsaRoleDefaultPolicy75E0CCB9",
-        "AlbIngressControllerStacksaebscsidriverirsaRole20826C70",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaConditionJson1FABBA0C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsamanifestsaeksutilsadminfargateirsaServiceAccountResourceA2B60DE0",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleDefaultPolicy01172F1C",
-        "AlbIngressControllerStacksaeksutilsadminfargateirsaRoleA379531D",
-        "AlbIngressControllerStacksaeksutilsadminirsaConditionJson6822BA87",
-        "AlbIngressControllerStacksaeksutilsadminirsamanifestsaeksutilsadminirsaServiceAccountResource0BB22224",
-        "AlbIngressControllerStacksaeksutilsadminirsaRoleDefaultPolicyBC4A16E8",
-        "AlbIngressControllerStacksaeksutilsadminirsaRole600AFF16",
-        "AlbIngressControllerStacksaextrernaldnsirsaConditionJson09F48FDB",
-        "AlbIngressControllerStacksaextrernaldnsirsamanifestsaextrernaldnsirsaServiceAccountResource850474CF",
-        "AlbIngressControllerStacksaextrernaldnsirsaRoleDefaultPolicy0822B269",
-        "AlbIngressControllerStacksaextrernaldnsirsaRole49ED19CF",
-        "AlbIngressControllerStackSpotASG1C672A84",
-        "AlbIngressControllerStackSpotInstanceProfile34178E58",
-        "AlbIngressControllerStackSpotInstanceRoleE63A024A",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F51025655358B74180E",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackClusterSecurityGroup6C2DB6F54439A7B47C9",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F1025655353C6A514E",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackControlPlaneSecurityGroup43FD685F443FD5E4919",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSAlbIngressControllerStackSpotInstanceSecurityGroupAA311496ALLTRAFFIC156531A1",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupfromEKSclusterSG5F573986ALLTRAFFICA710ADAB",
-        "AlbIngressControllerStackSpotInstanceSecurityGroupCB789725",
-        "AlbIngressControllerStackSpotLaunchConfig1FB3F831",
       ],
       "Properties": Object {
         "ClusterName": Object {

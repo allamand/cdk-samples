@@ -74,7 +74,7 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["configmaps"]
-    verbs: ["create","list","watch"]
+    verbs: ["create", "list", "watch"]
   - apiGroups: [""]
     resources: ["configmaps"]
     resourceNames: ["cluster-autoscaler-status", "cluster-autoscaler-priority-expander"]
@@ -124,7 +124,7 @@ metadata:
   labels:
     app: cluster-autoscaler
   annotations:
-    cluster-autoscaler.kubernetes.io/safe-to-evict: 'false'
+    cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
 spec:
   replicas: 1
   selector:
@@ -135,8 +135,8 @@ spec:
       labels:
         app: cluster-autoscaler
       annotations:
-        prometheus.io/scrape: 'true'
-        prometheus.io/port: '8085'
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8085"
     spec:
       serviceAccountName: cluster-autoscaler
       containers:
@@ -156,7 +156,8 @@ spec:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=least-waste
-            - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>
+            #- --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<YOUR CLUSTER NAME>
+            - --node-group-auto-discovery=asg:tag=kubernetes.io/cluster/<YOUR CLUSTER NAME>
           volumeMounts:
             - name: ssl-certs
               mountPath: /etc/ssl/certs/ca-certificates.crt
