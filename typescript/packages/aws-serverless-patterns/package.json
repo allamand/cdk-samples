@@ -28,8 +28,8 @@
   "author": "Pahud Hsieh <pahudnet@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.21.1",
-    "@aws-cdk/aws-events": "^1.21.1",
-    "@aws-cdk/aws-lambda": "^1.21.1"
+    "@aws-cdk/aws-apigateway": "^1.76.0",
+    "@aws-cdk/aws-events": "^1.76.0",
+    "@aws-cdk/aws-lambda": "^1.76.0"
   }
 }
