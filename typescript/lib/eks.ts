@@ -3,7 +3,7 @@ import eks = require("@aws-cdk/aws-eks");
 import ec2 = require("@aws-cdk/aws-ec2");
 import iam = require("@aws-cdk/aws-iam");
 import es = require("@aws-cdk/aws-elasticsearch");
-import { Stack } from "@aws-cdk/core";
+import { Duration, Stack, Tags } from "@aws-cdk/core";
 import { VpcProvider } from "./vpc";
 import { ExternalDns } from "./k8sResources/ExternalDns";
 import { AlbIngressController } from "./k8sResources/AlbIngressController";
@@ -24,7 +24,7 @@ import { SubnetType } from "@aws-cdk/aws-ec2";
 import { K8sHelmChartIRSA, ServiceAccountIRSA } from "./k8sResources/K8sResource";
 import { AwsForFluentBit } from "./k8sResources/AwsForFluentBit";
 import { CloudWatchAgent } from "./k8sResources/CloudWatchAgent";
-import { AutoScalingGroup, Monitoring, UpdateType } from "@aws-cdk/aws-autoscaling";
+import { AutoScalingGroup, Monitoring, UpdatePolicy, UpdateType } from "@aws-cdk/aws-autoscaling";
 import { KubeOpsView } from "./k8sResources/KubeOpsView";
 import { CassKop } from "./k8sResources/CassKop";
 import { CassKopCassandraCluster } from "./k8sResources/CassKopCassandraCluster";
@@ -411,6 +411,7 @@ export class StatefulCluster extends cdk.Stack {
       clusterName: clusterName,
       version: eks.KubernetesVersion.of(clusterVersion),
       defaultCapacity: 0,
+      outputMastersRoleArn: true,
     });
 
     let AZs = ["AZa", "AZb", "AZc"];
@@ -488,6 +489,42 @@ export class StatefulCluster extends cdk.Stack {
       ec2.Port.allTraffic(),
       "allow all traffic to the cluster Security group"
     );
+
+    /*
+     ** add additional managed nodegroup
+     */
+    cluster.addNodegroupCapacity("nodegroup", {
+      nodegroupName: clusterName + "-addNodegroupCapacity1",
+      instanceType: new ec2.InstanceType("r5.xlarge"),
+      minSize: 1,
+      maxSize: 1,
+      labels: {
+        "cdk-nodegroup": "addNodegroupCapacity1",
+      },
+      tags: {
+        "cdk-nodegroup": "addNodegroupCapacity1",
+      },
+      remoteAccess: {
+        sshKeyName: keyName,
+      },
+    });
+
+    //How to have multiple instance-type in an ASG ?
+    cluster.addNodegroupCapacity("graviton", {
+      nodegroupName: clusterName + "-nodegroup-graviton",
+      instanceType: new ec2.InstanceType("m6g.xlarge"),
+      minSize: 1,
+      maxSize: 10,
+      labels: {
+        "cdk-nodegroup": "graviton",
+      },
+      tags: {
+        "cdk-nodegroup": "graviton",
+      },
+      remoteAccess: {
+        sshKeyName: keyName,
+      },
+    });
 
     //Create ElasticSearch
     const elasticsearchDomain = this.node.tryGetContext("elasticsearch_domain") || process.env.elasticsearch_domain;
@@ -597,25 +634,30 @@ export class StatefulSpotCluster extends cdk.Stack {
     });
 
     let AZs = ["AZa", "AZb", "AZc"];
-
     //github.com/aws-samples/amazon-k8s-node-drainer
+    //https://ec2spotworkshops.com/using_ec2_spot_instances_with_eks/spotworkers/workers_eksctl.html
+    //docs.aws.amazon.com/cdk/api/latest/docs/aws-eks-readme.html#self-managed-nodes
 
-    //az will have value 0, 1, 2
     let asgAZs: AutoScalingGroup[] = [];
+    const cassandraNodesPerRacks =
+      this.node.tryGetContext("cassandra_nodes_per_racks") || process.env.cassandra_nodes_per_racks;
     for (let az in AZs) {
-      //docs.aws.amazon.com/cdk/api/latest/docs/aws-eks-readme.html#self-managed-nodes
+      const asgName = cluster.clusterName + "-" + AZs[az];
 
-      //Add SPot nodegroup with big instances to launch or cassandra stress tool
-      //https://ec2spotworkshops.com/using_ec2_spot_instances_with_eks/spotworkers/workers_eksctl.html
-      const spotAsg = cluster.addAutoScalingGroupCapacity("Spot-" + AZs[az], {
+      const spotAsg = cluster.addAutoScalingGroupCapacity("ASG-" + AZs[az], {
         instanceType: new ec2.InstanceType(instanceType),
         //maxInstanceLifetime: cdk.Duration.days(7),
         minCapacity: 1,
         //desiredCapacity: 1,
-        updateType: UpdateType.ROLLING_UPDATE,
-        rollingUpdateConfiguration: {
+
+        updatePolicy: UpdatePolicy.rollingUpdate({
           maxBatchSize: 1,
-        },
+          //Autoscaling rolling updates cannot be performed because the current launch configuration is using spot instances and MinInstancesInService is greater than zero.
+          //minInstancesInService: cassandraNodesPerRacks-1, //allow 1 instance down
+          pauseTime: Duration.minutes(3),
+          minSuccessPercentage: 100,
+        }),
+
         vpcSubnets: vpc.selectSubnets({
           subnetType: SubnetType.PRIVATE,
           availabilityZones: [vpc.availabilityZones[az]],
@@ -628,18 +670,29 @@ export class StatefulSpotCluster extends cdk.Stack {
 
         allowAllOutbound: true,
 
-        autoScalingGroupName : cluster.clusterName + "-AZ-" + AZs[az],
+        autoScalingGroupName: asgName,
 
-        //TODO add tags to allow scaling to and from 0
-        //https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-scale-a-node-group-to-0
-        //https://ec2spotworkshops.com/using_ec2_spot_instances_with_eks/spotworkers/workers_eksctl.html
-        //  autoScalingGroupName
+        //How to have differente versions of k8s for each az ?
+
+        bootstrapOptions: {
+          kubeletExtraArgs: "--node-labels ASG=" + asgName,
+        },
       });
+
+      //Tag asg for cluster-autoscaler
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/node-template/label/lifecycle", "Ec2Spot");
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/node-template/label/intent", "apps");
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/node-template/label/aws.amazon.com/spot", "true");
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/node-template/taint/spotInstance", "true:PreferNoSchedule");
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/enabled", "true");
+      //owned vs shared ?
+      Tags.of(spotAsg).add("k8s.io/cluster-autoscaler/" + cluster.clusterName, "owned");
+
       //Add Cluster Security Group to the Spot ASG
       //https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1594
-      //  spotAsg.addSecurityGroup(
-      //    ec2.SecurityGroup.fromSecurityGroupId(this, "clusterSG" + AZs[az], cluster.clusterSecurityGroupId)
-      //  );
+      spotAsg.addSecurityGroup(
+        ec2.SecurityGroup.fromSecurityGroupId(this, "SG-" + AZs[az], cluster.clusterSecurityGroupId)
+      );
 
       //allow the Spot Nodegroup to send and receive traffic from our EKS cluster
       // Workaddound to the fact I can't assign directly the cluster security group to the spot ASG
@@ -657,14 +710,6 @@ export class StatefulSpotCluster extends cdk.Stack {
       // );
       asgAZs![az] = spotAsg;
     }
-
-    // for (let az in AZs) {
-    //   asgAZs![az].connections.allowFrom(
-    //     ec2.SecurityGroup.fromSecurityGroupId(this, "spotAsgIngress" + AZs[az] + "-from-0", asgAZs![az].securityGroup),
-    //     ec2.Port.allTraffic(),
-    //     "allow all traffic from cluster security group"
-    //   );
-    // }
 
     //Add Fargate profile
     // For pod to monitor the rolling upgrad of the nodegroup pods

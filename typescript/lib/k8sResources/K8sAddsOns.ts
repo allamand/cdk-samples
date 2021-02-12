@@ -20,6 +20,7 @@ import { KubeOpsView } from "./KubeOpsView";
 import { CassKop } from "./CassKop";
 import { CassKopCassandraCluster } from "./CassKopCassandraCluster";
 import { DEFAULT_HOSTED_ZONE, DEFAULT_EXTERNAL_DNS_POLICY } from "../defaults";
+import { AlbIngressController } from "./AlbIngressController";
 
 export class K8sAddsOns extends Construct {
   public sa: ServiceAccount;
@@ -27,7 +28,7 @@ export class K8sAddsOns extends Construct {
     super(scope, id);
 
     // Deploy ALB Ingress Controller
-    //new AlbIngressController(this, 'alb-ingress-controller', cluster);
+    // new AlbIngressController(this, 'alb-ingress-controller', cluster);
     const awsLoadBalancerController = new AwsLoadBalancerController(this, "aws-load-balancer-controller", cluster);
     new cdk.CfnOutput(this, "AwsLoadBalancerControllerRoleOutput", {
       value: awsLoadBalancerController.sa.role.roleName,
@@ -116,14 +117,16 @@ export class K8sAddsOns extends Construct {
               { \
                 "Effect": "Allow", \
                 "Action": "es:ESHttp*", \
-                "Resource": "arn:aws:es:::domain/' + elasticsearchDomain + '/*" \
+                "Resource": "arn:aws:es:::domain/' +
+        elasticsearchDomain +
+        '/*" \
               } \
             ] \
           }',
     });
     new cdk.CfnOutput(this, "AwsForFluentBitOutput", { value: awsForFluentBit.sa.role.roleArn });
 
-    new KubeOpsView(this, "kube-ops-view", cluster, {});
+    //new KubeOpsView(this, "kube-ops-view", cluster, {});
 
     const casskop = new CassKop(this, "casskop", cluster, {});
     const cassandracluster = new CassKopCassandraCluster(this, "casskop-cluster", cluster, {});
@@ -169,6 +172,7 @@ export class K8sAddsOns extends Construct {
           }',
       name: "argo",
       namespace: "argo",
+      createNamespace: true,
     });
     new cdk.CfnOutput(this, "argoRoleOutput", { value: argoRole.sa.role.roleArn });
 

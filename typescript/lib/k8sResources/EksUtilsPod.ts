@@ -21,6 +21,7 @@ export class EksUtilsAdmin extends K8sManifestIRSA {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, class-methods-use-this
     protected manifests(props?: { [key: string]: any }): any[] { // eslint-disable-line @typescript-eslint/no-explicit-any
 
+
         if (props && !props.namespace) {
             props.namespace = "default"
         }

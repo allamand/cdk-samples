@@ -28,7 +28,8 @@ export class CassKopCassandraCluster extends Construct {
         //console.debug(YAML.safeDump(manifests))
 
         const CassandraCluster = manifests.find((manifest) => manifest.kind === 'CassandraCluster');
-        const cassandraNodesPerRacks = this.node.tryGetContext('cassandra_nodes_per_racks') || process.env.cassandra_nodes_per_racks
+        const cassandraNodesPerRacks =
+          this.node.tryGetContext("cassandra_nodes_per_racks") || process.env.cassandra_nodes_per_racks;
         CassandraCluster.spec.topology.dc[0].nodesPerRacks = Number(cassandraNodesPerRacks);
 
         const resource = new KubernetesManifest(this, 'CassKopCassandraCluster', {

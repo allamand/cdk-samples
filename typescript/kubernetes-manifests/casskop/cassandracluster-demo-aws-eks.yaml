@@ -7,7 +7,7 @@ metadata:
     cluster: cassandra
 spec:
   cassandraImage: cassandra:3.11
-  bootstrapImage: orangeopensource/cassandra-bootstrap:0.1.4
+  bootstrapImage: orangeopensource/cassandra-bootstrap:0.1.7
   configMapName: cassandra-configmap-v1
   dataCapacity: "200Gi"
   #dataStorageClass: "gp2"
@@ -35,6 +35,7 @@ spec:
         numTokens: 256
         labels:
           topology.kubernetes.io/region: eu-west-1
+          beta.kubernetes.io/arch: amd64
         rack:
           - name: rack1
             labels:

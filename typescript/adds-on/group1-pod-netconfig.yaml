@@ -1,0 +1,29 @@
+# az 1b ip-10-0-78-11.eu-west-1.compute.internal 
+apiVersion: crd.k8s.amazonaws.com/v1alpha1
+kind: ENIConfig
+metadata:
+ name: eu-west-1b
+spec:
+ subnet: subnet-0000bac7fbbb5945e
+ securityGroups:
+ - sg-0f95413599d47b3a2
+---
+# az 1a  ip-10-0-48-92.eu-west-1.compute.internal
+apiVersion: crd.k8s.amazonaws.com/v1alpha1
+kind: ENIConfig
+metadata:
+ name: eu-west-1a
+spec:
+ subnet: subnet-0f4dfbdb9309a4f97
+ securityGroups:
+ - sg-0f95413599d47b3a2
+---
+# az 1c ip-10-0-83-246.eu-west-1.compute.internal 
+apiVersion: crd.k8s.amazonaws.com/v1alpha1
+kind: ENIConfig
+metadata:
+ name: eu-west-1c
+spec:
+ subnet: subnet-05913f0f325faf416
+ securityGroups:
+ - sg-0f95413599d47b3a2

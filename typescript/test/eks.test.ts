@@ -123,18 +123,26 @@ test("Test Multi-AZ Stateful", () => {
   expect(stack).toHaveResource("Custom::AWSCDK-EKS-HelmChart", {
     Release: "aws-for-fluent-bit",
     Repository: "https://aws.github.io/eks-charts",
-    Values: {
-      "Fn::Join": [
-        "",
-        [
-          '{"serviceAccount":{"create":false,"name":"aws-for-fluent-bit"},"cloudWatch":{"enabled":true,"region":"eu-west-1","logStreamName":"CassKop","logGroupName":"/aws/eks/',
-          {
-            Ref: "StatefulClusterF2661197",
-          },
-          '/logs"},"elasticsearch":{"enabled":true,"awsRegion":"eu-west-1","host":"search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com"},"firehose":{"enabled":false},"kinesis":{"enabled":false}}',
-        ],
-      ],
-    },
+
+            Values: {
+              "Fn::Join": [
+                "",
+                [
+                  "{\"serviceAccount\":{\"create\":false,\"name\":\"aws-for-fluent-bit\"},\"cloudWatch\":{\"enabled\":true,\"region\":\"eu-west-1\",\"logStreamName\":\"CassKop\",\"logGroupName\":\"/aws/eks/",
+                  {
+                    "Ref": "StatefulClusterF2661197"
+                  },
+                  "/logs\"},\"elasticsearch\":{\"enabled\":true,\"awsRegion\":\"eu-west-1\",\"host\":\"",
+                  {
+                    "Fn::GetAtt": [
+                      "Domain66AC69E0",
+                      "DomainEndpoint"
+                    ]
+                  },
+                  "\"},\"firehose\":{\"enabled\":false},\"kinesis\":{\"enabled\":false}}"
+                ]
+              ]
+            },
   });
 
   //Test Aws-lozd-balancer-controller Helm Chart
@@ -181,8 +189,18 @@ test("Test Multi-AZ Stateful", () => {
     ClusterName: {
       Ref: "StatefulClusterF2661197",
     },
-    Manifest:
-      '[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-for-fluent-bit","labels":{"k8s-app":"fluent-bit"},"namespace":"cassandra"},"data":{"fluent-bit.conf":"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/containers/*.log\\n    DB                /var/log/containers/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     True\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n    Replace_Dots    On\\n    Trace_Output    On\\n"}}]',
+    Manifest: {
+      "Fn::Join": [
+        "",
+        [
+          '[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-for-fluent-bit","labels":{"k8s-app":"fluent-bit"},"namespace":"cassandra"},"data":{"fluent-bit.conf":"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/containers/*.log\\n    DB                /var/log/containers/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[PARSER]\\n    Name   nodetool\\n    Format regex\\n    Regex  ^count=(?<count>[^=]*)$\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     True\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            ',
+          {
+            "Fn::GetAtt": ["Domain66AC69E0", "DomainEndpoint"],
+          },
+          '\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n    Replace_Dots    On\\n    Trace_Output    On\\n"}}]',
+        ],
+      ],
+    },
   });
 
   //eksutils-cassandra fargate deployment
@@ -198,8 +216,18 @@ test("Test Multi-AZ Stateful", () => {
     ClusterName: {
       Ref: "StatefulClusterF2661197",
     },
-    Manifest:
-      '[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-for-fluent-bit","labels":{"k8s-app":"fluent-bit"},"namespace":"cassandra"},"data":{"fluent-bit.conf":"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/containers/*.log\\n    DB                /var/log/containers/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     True\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            search-eks-casskop-xxxxxxxxxxxxxxxxxx.eu-west-1.es.amazonaws.com\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n    Replace_Dots    On\\n    Trace_Output    On\\n"}}]',
+    Manifest: {
+      "Fn::Join": [
+        "",
+        [
+          '[{"apiVersion":"v1","kind":"ConfigMap","metadata":{"name":"aws-for-fluent-bit","labels":{"k8s-app":"fluent-bit"},"namespace":"cassandra"},"data":{"fluent-bit.conf":"[SERVICE]\\n    Parsers_File /fluent-bit/parsers/parsers.conf\\n\\n[INPUT]\\n    Name              tail\\n    Tag               *.logs\\n    Path              /var/log/containers/*.log\\n    DB                /var/log/containers/logs.db\\n    Mem_Buf_Limit     5MB\\n    Skip_Long_Lines   On\\n    Refresh_Interval  10\\n[FILTER]\\n    Name                kubernetes\\n    Match               kube.*\\n    Kube_URL            https://kubernetes.default.svc.cluster.local:443\\n    Merge_Log           On\\n    Merge_Log_Key       data\\n    K8S-Logging.Parser  On\\n    K8S-Logging.Exclude On\\n[PARSER]\\n    Name   nodetool\\n    Format regex\\n    Regex  ^count=(?<count>[^=]*)$\\n[OUTPUT]\\n    Name                  cloudwatch\\n    Match                 *\\n    region                eu-west-1\\n    log_group_name        /aws/eks/CassKop/logs\\n    log_stream_name       CassKop\\n    log_stream_prefix      fargate-\\n    auto_create_group     True\\n[OUTPUT]\\n    Name            es\\n    Match           *\\n    AWS_Region      eu-west-1\\n    AWS_Auth        On\\n    Host            ',
+          {
+            "Fn::GetAtt": ["Domain66AC69E0", "DomainEndpoint"],
+          },
+          '\\n    Port            443\\n    TLS             On\\n    Retry_Limit     6\\n    Replace_Dots    On\\n    Trace_Output    On\\n"}}]',
+        ],
+      ],
+    },
   });
 
   //eksutils deployment
